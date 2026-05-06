@@ -1,8 +1,10 @@
 // Middleware-side Supabase client. Refreshes the auth session on every request
 // so server components see fresh user state, and redirects unauthenticated users
 // away from protected routes.
-import { createServerClient } from '@supabase/ssr';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
+
+type CookieToSet = { name: string; value: string; options: CookieOptions };
 
 const PROTECTED_PREFIX = '/app';
 const AUTH_PAGES = new Set(['/sign-in', '/sign-up']);
@@ -18,7 +20,7 @@ export async function updateSession(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: CookieToSet[]) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           response = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
