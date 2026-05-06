@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:copy-images": "tsx scripts/copy-images.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
+    "dotenv": "^16.6.1",
+    "drizzle-orm": "^0.36.4",
     "next": "^15.0.3",
+    "postgres": "^3.4.5",
     "react": "^19.0.0-rc-66855b96-20241106",
     "react-dom": "^19.0.0-rc-66855b96-20241106"
   },
@@ -21,10 +26,12 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.20",
+    "drizzle-kit": "^0.28.1",
     "eslint": "^9.14.0",
     "eslint-config-next": "^15.0.3",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.14",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }
 }
