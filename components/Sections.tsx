@@ -56,7 +56,7 @@ export function Features() {
           <h2 className="section-title">Built for how you actually study</h2>
           <p className="section-sub">
             The UCAT isn&apos;t won by grinding through 10,000 questions. It&apos;s won by spotting your weaknesses early
-            and drilling them. PraxAM helps you do exactly that.
+            and drilling them. PracXAM helps you do exactly that.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
@@ -107,7 +107,7 @@ export function Pricing() {
           <div className="tier">
             <div className="text-[14px] font-semibold uppercase tracking-wider text-ink-muted mb-3.5">Starter</div>
             <div className="text-[2.6rem] font-extrabold tracking-tight leading-none text-navy">£0<span className="text-[0.95rem] font-medium text-ink-muted"> / forever</span></div>
-            <p className="text-[14.5px] text-ink-soft mt-3 mb-7 min-h-[40px]">Enough to know if PraxAM clicks for you.</p>
+            <p className="text-[14.5px] text-ink-soft mt-3 mb-7 min-h-[40px]">Enough to know if PracXAM clicks for you.</p>
             <ul className="flex-grow mb-7 list-none">
               {['50 practice questions across all subtests', 'Worked explanations on every question', 'Basic progress tracking', 'One free mock exam'].map((t) => (
                 <li key={t} className="flex gap-2.5 items-start py-2 text-[14.5px] text-ink-soft">
@@ -140,11 +140,11 @@ export function Pricing() {
 }
 
 const faqs = [
-  { q: 'When should I start UCAT prep?', a: 'Most successful candidates start 8-12 weeks before their test date. You don’t need 6 months — you need consistent, focused practice. PraxAM is designed for short daily sessions on your phone, which works far better than weekend cramming.' },
+  { q: 'When should I start UCAT prep?', a: 'Most successful candidates start 8-12 weeks before their test date. You don’t need 6 months — you need consistent, focused practice. PracXAM is designed for short daily sessions on your phone, which works far better than weekend cramming.' },
   { q: 'How is this different from Medify or MedEntry?', a: 'Two things. First, our explanations actually teach you the underlying pattern, not just confirm the answer. Second, our analytics are honest — we tell you exactly which sub-topics you’re weak in, not a single useless overall score. The library size is comparable; the difference is what you do with it.' },
   { q: 'Can I cancel anytime?', a: 'Yes. You can cancel from your account settings in two clicks, and you’ll keep Pro access until the end of your billing month. We don’t lock you into annual plans or anything that requires a phone call to cancel.' },
   { q: 'Do you cover Situational Judgement?', a: 'Yes — SJT is fully covered with 200+ scenarios and detailed reasoning for each appropriateness rating. SJT is the most under-prepared subtest, which makes it the easiest place to gain marks.' },
-  { q: 'Can I use this on my phone?', a: 'Yes. PraxAM is mobile-first, not "responsive as an afterthought" — you’ll do most of your practice on the bus or between lessons.' },
+  { q: 'Can I use this on my phone?', a: 'Yes. PracXAM is mobile-first, not "responsive as an afterthought" — you’ll do most of your practice on the bus or between lessons.' },
   { q: 'What if my test is in 2 weeks?', a: 'Use it. Our crash-course mode prioritises the highest-yield questions and the topics where most candidates lose the most marks. It won’t fix months of avoidance — but it will materially improve your score in 14 days.' },
 ];
 
@@ -198,9 +198,9 @@ export function Footer() {
           <Link href="#pricing" className="hover:text-navy">Pricing</Link>
           <Link href="/privacy" className="hover:text-navy">Privacy</Link>
           <Link href="/terms" className="hover:text-navy">Terms</Link>
-          <a href="mailto:hello@praxam.com" className="hover:text-navy">Contact</a>
+          <a href="mailto:hello@pracxam.com" className="hover:text-navy">Contact</a>
         </div>
-        <div className="text-[13px] text-ink-muted">© 2026 PraxAM Ltd. Practice Smart. Crush Exams.</div>
+        <div className="text-[13px] text-ink-muted">© 2026 PracXAM Ltd. Practice Smart. Crush Exams.</div>
       </div>
     </footer>
   );

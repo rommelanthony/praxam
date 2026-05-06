@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 
-export const metadata = { title: 'Dashboard — PraxAM' };
+export const metadata = { title: 'Dashboard — PracXAM' };
 
 export default async function DashboardPage({
   searchParams,
@@ -17,7 +17,7 @@ export default async function DashboardPage({
     <div className="container-px py-12">
       {isWelcome && (
         <div className="rounded-md p-4 mb-8" style={{ background: 'var(--teal-soft)', color: 'var(--teal-deep)', border: '1px solid var(--teal)' }}>
-          <strong>Welcome to PraxAM.</strong> Check your inbox for a confirmation email if Supabase email confirmation is on.
+          <strong>Welcome to PracXAM.</strong> Check your inbox for a confirmation email if Supabase email confirmation is on.
         </div>
       )}
 

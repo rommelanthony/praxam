@@ -18,14 +18,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'PraxAM — Practice Smart. Crush Exams.',
+  title: 'PracXAM — Practice Smart. Crush Exams.',
   description: 'The UCAT prep platform built for how you actually study. 2,500+ practice questions, expert explanations, and progress tracking that actually helps.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   openGraph: {
-    title: 'PraxAM — Practice Smart. Crush Exams.',
+    title: 'PracXAM — Practice Smart. Crush Exams.',
     description: 'The UCAT prep platform built by people who have already done it.',
     type: 'website',
-    siteName: 'PraxAM',
+    siteName: 'PracXAM',
   },
 };
 

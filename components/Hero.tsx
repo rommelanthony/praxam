@@ -14,7 +14,7 @@ export default function Hero() {
             <span className="accent">Crush exams.</span>
           </h1>
           <p className="hero-sub">
-            PraxAM is the UCAT prep platform built for how you actually study — bite-sized,
+            PracXAM is the UCAT prep platform built for how you actually study — bite-sized,
             mobile-first, and honest about where you need to improve. Built by people who
             have already done it.
           </p>

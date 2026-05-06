@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Logo from '@/components/Logo';
 import AuthForm from '@/components/AuthForm';
 
-export const metadata = { title: 'Sign up — PraxAM' };
+export const metadata = { title: 'Sign up — PracXAM' };
 
 export default function SignUpPage() {
   return (
