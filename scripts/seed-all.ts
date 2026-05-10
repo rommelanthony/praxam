@@ -86,6 +86,31 @@ async function seed() {
   for (const q of all) deduped.set(q.id, q);
   const final = Array.from(deduped.values());
 
+  // Within-group passage propagation. Source JSONs carry passage text only on
+  // the first question of each passageId group; siblings have passage:null.
+  // Without this pass, siblings land in Postgres with empty passages and the
+  // audit flags them needs_passage. Build a passageId -> {passage, title} map
+  // from rows that DO have text, then back-fill any sibling that's missing it.
+  const passageByPid: Record<string, { passage: string; title: string | null }> = {};
+  for (const q of final) {
+    if (!q.passageId || !q.passage || q.passage.length === 0) continue;
+    const cur = passageByPid[q.passageId];
+    if (!cur || q.passage.length > cur.passage.length) {
+      passageByPid[q.passageId] = { passage: q.passage, title: q.passageTitle ?? null };
+    }
+  }
+  let propagated = 0;
+  for (const q of final) {
+    if (q.passage && q.passage.length > 0) continue;
+    if (!q.passageId) continue;
+    const donor = passageByPid[q.passageId];
+    if (!donor) continue;
+    q.passage = donor.passage;
+    if (!q.passageTitle) q.passageTitle = donor.title;
+    propagated++;
+  }
+  if (propagated > 0) console.log(`  ↻  Propagated passage to ${propagated} sibling rows.`);
+
   console.log('──────────────────────────────────────────');
   const bySubtest: Record<string, number> = {};
   for (const q of final) bySubtest[q.subtest] = (bySubtest[q.subtest] ?? 0) + 1;

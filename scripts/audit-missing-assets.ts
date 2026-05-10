@@ -192,7 +192,12 @@ function detect(q: any): Finding[] {
   }
 
   // Rule 5 — orphaned_reference (only if not already flagged)
-  if (!asset && found.length === 0 && RX.orphan.test(stem)) {
+  // Known false positives: the orphan regex matches "the (image|picture|...)" anywhere
+  // in the stem, but in these rows the phrase is a quoted noun being critiqued for word
+  // choice, not a reference to a missing visual asset. The passage is explicitly about
+  // non-visual content (perfume/scent). Skip to avoid re-tagging on re-runs.
+  const KNOWN_FP_ORPHANS = new Set(['bryon-700-vr-0027', 'bryon-750-vr-0024']);
+  if (!asset && found.length === 0 && !KNOWN_FP_ORPHANS.has(q.id) && RX.orphan.test(stem)) {
     found.push({
       id: q.id,
       subtest,

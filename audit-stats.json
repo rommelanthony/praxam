@@ -8,9 +8,6 @@
     "abstract_reasoning": 130
   },
   "issuesBySubtest": {
-    "verbal_reasoning": {
-      "missing_passage": 77
-    },
     "decision_making": {
       "missing_table": 21,
       "missing_chart": 1,
@@ -20,8 +17,11 @@
       "missing_table": 27,
       "missing_chart": 20,
       "missing_diagram": 20
+    },
+    "verbal_reasoning": {
+      "missing_passage": 2
     }
   },
-  "totalIssues": 169,
+  "totalIssues": 94,
   "note": "No exclusion mechanism exists in source JSON, schema, or API. Closest filter is seed-all.ts:56 dropping null-correctAnswer rows before insert; those are not present in the DB and thus not auditable here."
 }
