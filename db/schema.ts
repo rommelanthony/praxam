@@ -15,6 +15,15 @@ export const profiles = pgTable('profiles', {
   stripeCustomerId: text('stripe_customer_id'),
   stripeSubscriptionId: text('stripe_subscription_id'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  // Gamification fields
+  xp: integer('xp').notNull().default(0),
+  username: text('username'),
+  weeklyXp: integer('weekly_xp').notNull().default(0),
+  weeklyQuestions: integer('weekly_questions').notNull().default(0),
+  weeklyGoal: integer('weekly_goal').notNull().default(50),
+  weeklyResetAt: date('weekly_reset_at'),
+  longestStreak: integer('longest_streak').notNull().default(0),
+  qotdLastCompleted: date('qotd_last_completed'),
 });
 
 // The master question bank.
@@ -65,8 +74,62 @@ export const answers = pgTable('answers', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Question of the Day — one row per calendar date.
+export const qotd = pgTable('qotd', {
+  date: date('date').primaryKey().notNull(),
+  questionId: text('question_id').notNull().references(() => questions.id),
+});
+
+// Achievement definitions (static, seeded).
+export const achievements = pgTable('achievements', {
+  id: text('id').primaryKey().notNull(),
+  name: text('name').notNull(),
+  description: text('description').notNull(),
+  icon: text('icon').notNull(),
+  xpReward: integer('xp_reward').notNull().default(0),
+  category: text('category').notNull(),
+});
+
+// Per-user achievement unlocks.
+export const userAchievements = pgTable('user_achievements', {
+  userId: uuid('user_id').notNull(),
+  achievementId: text('achievement_id').notNull().references(() => achievements.id),
+  unlockedAt: timestamp('unlocked_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => ({
+  pk: primaryKey({ columns: [t.userId, t.achievementId] }),
+}));
+
+// XP event log — every XP grant gets a row.
+export const xpEvents = pgTable('xp_events', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull(),
+  amount: integer('amount').notNull(),
+  reason: text('reason').notNull(),
+  meta: jsonb('meta').$type<Record<string, unknown>>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// Daily/timed challenges — one row per attempt.
+export const challenges = pgTable('challenges', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull(),
+  subtest: text('subtest').notNull(),
+  questionIds: text('question_ids').array().notNull(),
+  answers: jsonb('answers').$type<Array<{ questionId: string; pickedLetter: string | null; isCorrect: boolean | null }>>().default(sql`'[]'::jsonb`),
+  score: integer('score'),
+  timeTakenMs: integer('time_taken_ms'),
+  completedAt: timestamp('completed_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export type Question = typeof questions.$inferSelect;
 export type NewQuestion = typeof questions.$inferInsert;
 export type Profile = typeof profiles.$inferSelect;
 export type Session = typeof sessions.$inferSelect;
 export type Answer = typeof answers.$inferSelect;
+export type Qotd = typeof qotd.$inferSelect;
+export type Achievement = typeof achievements.$inferSelect;
+export type UserAchievement = typeof userAchievements.$inferSelect;
+export type XpEvent = typeof xpEvents.$inferSelect;
+export type NewXpEvent = typeof xpEvents.$inferInsert;
+export type Challenge = typeof challenges.$inferSelect;
