@@ -2,6 +2,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import type { Question } from '@/db/schema';
+import ChartPassage from '@/components/practice/ChartPassage';
 
 const SUBTEST_LABELS: Record<string, string> = {
   'verbal-reasoning': 'Verbal Reasoning',
@@ -110,7 +111,7 @@ export default function SubtestPage() {
         <div className="bg-teal-deep h-1 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
 
-      {/* Passage */}
+      {/* Passage — ChartPassage renders __chart__ JSON specs as SVG, plain text otherwise */}
       {current.passage && (
         <div className="bg-surface border border-line rounded-lg p-5 mb-6 text-[15px] text-ink leading-relaxed">
           {current.passageTitle && (
@@ -118,7 +119,7 @@ export default function SubtestPage() {
               {current.passageTitle}
             </p>
           )}
-          <p className="whitespace-pre-line">{current.passage}</p>
+          <ChartPassage passage={current.passage} />
         </div>
       )}
 

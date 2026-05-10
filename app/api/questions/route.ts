@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { questions } from '@/db/schema';
-import { eq, sql } from 'drizzle-orm';
+import { sql } from 'drizzle-orm';
 
 export async function GET(req: NextRequest) {
   const subtest = req.nextUrl.searchParams.get('subtest');
@@ -14,7 +14,13 @@ export async function GET(req: NextRequest) {
   const rows = await db
     .select()
     .from(questions)
-    .where(eq(questions.subtest, subtest as any))
+    .where(
+      sql`${questions.subtest} = ${subtest}
+        AND NOT (
+          COALESCE(${questions.flags}, '[]'::jsonb) @> '["needs_asset"]'::jsonb
+          OR COALESCE(${questions.flags}, '[]'::jsonb) @> '["needs_passage"]'::jsonb
+        )`
+    )
     .orderBy(sql`random()`)
     .limit(limit);
 

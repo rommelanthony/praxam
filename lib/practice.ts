@@ -1,7 +1,7 @@
 // Server-side practice helpers: pick questions, log answers, update profile stats.
 import 'server-only';
 import { db, schema } from '@/db';
-import { sql, eq, and, desc, inArray } from 'drizzle-orm';
+import { sql, eq, and, desc } from 'drizzle-orm';
 
 const SUBTEST_BY_SLUG: Record<string, string> = {
   'verbal-reasoning': 'verbal_reasoning',
@@ -50,6 +50,11 @@ export async function pickNextQuestion(opts: {
   }
   // Must have a correct answer captured
   conditions.push(sql`${schema.questions.correctAnswer} is not null`);
+  // Skip questions tagged for repair: missing assets or missing passages.
+  conditions.push(sql`NOT (
+    COALESCE(${schema.questions.flags}, '[]'::jsonb) @> '["needs_asset"]'::jsonb
+    OR COALESCE(${schema.questions.flags}, '[]'::jsonb) @> '["needs_passage"]'::jsonb
+  )`);
 
   const candidates = await db
     .select()

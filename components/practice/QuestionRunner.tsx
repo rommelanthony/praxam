@@ -4,6 +4,7 @@
 import { useState, useTransition, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { answerAndNext } from '@/app/app/practice/[subtest]/actions';
+import ChartPassage from '@/components/practice/ChartPassage';
 
 interface Question {
   id: string;
@@ -107,13 +108,13 @@ export default function QuestionRunner({
 
       <div className="bg-surface border border-line rounded-xl p-6 md:p-8">
         {question.passage && (
-          <div className="bg-surface-cool border-l-4 border-teal rounded-md p-4 mb-5 max-h-72 overflow-auto text-[14.5px] text-ink-soft leading-relaxed">
+          <div className="bg-surface-cool border-l-4 border-teal rounded-md p-4 mb-5 max-h-[28rem] overflow-auto text-[14.5px] text-ink-soft leading-relaxed">
             {question.passageTitle && (
               <div className="text-[12px] font-bold uppercase tracking-wider text-teal-deep mb-2">
                 Passage: {question.passageTitle}
               </div>
             )}
-            {question.passage}
+            <ChartPassage passage={question.passage} />
           </div>
         )}
 
