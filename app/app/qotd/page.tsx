@@ -4,6 +4,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import type { Question } from "@/db/schema";
 import { XP } from "@/lib/gamification-shared";
+import ChartPassage from "@/components/practice/ChartPassage";
 export default function QotdPage() {
   const [question, setQuestion] = useState<Question | null>(null);
   const [completedToday, setCompletedToday] = useState(false);
@@ -42,7 +43,7 @@ export default function QotdPage() {
         </div>
       ) : (
         <div className="bg-surface border border-line rounded-2xl p-7">
-          {question.passage && (<div className="bg-surface-cool border border-line rounded-xl p-5 mb-6 text-[15px] text-ink leading-relaxed">{question.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{question.passageTitle}</p>}<p className="whitespace-pre-line">{question.passage}</p></div>)}
+          {question.passage && (<div className="bg-surface-cool border border-line rounded-xl p-5 mb-6 text-[15px] text-ink leading-relaxed">{question.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{question.passageTitle}</p>}<ChartPassage passage={question.passage} /></div>)}
           <p className="text-[17px] font-semibold text-navy leading-snug mb-6">{question.stem}</p>
           <div className="flex flex-col gap-2.5 mb-6">
             {choices.map(c => {
