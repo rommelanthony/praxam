@@ -20,17 +20,14 @@ export async function processAnswer(opts: {
 }): Promise<{ xpAwarded: number; newAchievements: string[] }> {
   const { userId, isCorrect, timeTakenMs, subtest, sessionCorrect, sessionTotal, isSessionEnd, isQotd } = opts;
   const { calcSpeedBonus, XP } = await import("@/lib/gamification-shared");
-  const t0 = performance.now();
 
   await resetWeeklyStatsIfNeeded(userId);
-  const tReset = performance.now();
 
   const [prof] = await db.select({
     lastPracticeDate: schema.profiles.lastPracticeDate,
     streakDays:       schema.profiles.streakDays,
     longestStreak:    schema.profiles.longestStreak,
   }).from(schema.profiles).where(eq(schema.profiles.id, userId)).limit(1);
-  const tSnapshot = performance.now();
 
   const today     = new Date().toISOString().slice(0, 10);
   const yesterday = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
@@ -48,7 +45,6 @@ export async function processAnswer(opts: {
     longestStreak:          newLongest,
     lastPracticeDate:       sql`current_date`,
   }).where(eq(schema.profiles.id, userId));
-  const tCounters = performance.now();
 
   let total = 0;
   await awardXp(userId, XP.ANSWER, "answer"); total += XP.ANSWER;
@@ -62,19 +58,8 @@ export async function processAnswer(opts: {
     await awardXp(userId, XP.QOTD, "qotd"); total += XP.QOTD;
     await db.update(schema.profiles).set({ qotdLastCompleted: sql`current_date` }).where(eq(schema.profiles.id, userId));
   }
-  const tXp = performance.now();
 
   const newAchievements = await checkAchievements(userId, { isSessionEnd, sessionCorrect, sessionTotal, isCorrect, isQotd });
-  const tAchievements = performance.now();
-
-  console.log('[processAnswer]', {
-    reset:        Math.round(tReset - t0),
-    snapshot:     Math.round(tSnapshot - tReset),
-    xp:           Math.round(tXp - tCounters),
-    counters:     Math.round(tCounters - tSnapshot),
-    achievements: Math.round(tAchievements - tXp),
-    total:        Math.round(tAchievements - t0),
-  });
 
   return { xpAwarded: total, newAchievements };
 }
