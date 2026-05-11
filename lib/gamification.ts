@@ -106,9 +106,11 @@ export async function checkAchievements(userId: string, ctx: {
   }
   const [stRow] = await db.execute(sql`select count(distinct q.subtest) as cnt from answers a join questions q on q.id = a.question_id where a.user_id = ${userId}`);
   maybe("all_subtests", Number((stRow as any)?.cnt ?? 0) >= 5);
-  const percentile = await getUserPercentile(userId);
-  maybe("top_50", percentile>=50); maybe("top_25", percentile>=75);
-  maybe("top_10", percentile>=90); maybe("top_5", percentile>=95); maybe("top_1", percentile>=99);
+  if ((profile.questionsAnsweredTotal ?? 0) >= 50) {
+    const percentile = await getUserPercentile(userId);
+    maybe("top_50", percentile>=50); maybe("top_25", percentile>=75);
+    maybe("top_10", percentile>=90); maybe("top_5", percentile>=95); maybe("top_1", percentile>=99);
+  }
   if (toUnlock.length > 0) {
     await db.insert(schema.userAchievements).values(toUnlock.map(id => ({ userId, achievementId: id }))).onConflictDoNothing();
     for (const id of toUnlock) {
@@ -137,8 +139,20 @@ export async function getLeaderboard(limit = 50) {
 }
 
 export async function getUserPercentile(userId: string): Promise<number> {
-  const [result] = await db.execute(sql`select round(100.0 * (select count(*) from profiles p2 where p2.xp <= p1.xp and p2.username is not null) / nullif((select count(*) from profiles where username is not null), 0)) as pct from profiles p1 where p1.id = ${userId}`);
-  return Math.min(99, Number((result as any)?.pct ?? 0));
+  const [result] = await db.execute(sql`
+    with target as (select xp, username from profiles where id = ${userId}),
+         cohort as (select xp from profiles where username is not null and xp > 0)
+    select
+      (select username from target) as username,
+      (select count(*) from cohort) as cohort_size,
+      (select count(*) from cohort where xp < (select xp from target)) as below_count
+  `);
+  const row = result as any;
+  if (!row?.username) return 0;
+  const cohortSize = Number(row.cohort_size ?? 0);
+  if (cohortSize < 20) return 0;
+  const below = Number(row.below_count ?? 0);
+  return Math.min(99, Math.round((100 * below) / cohortSize));
 }
 
 export async function isFirstAnswerToday(userId: string): Promise<boolean> {
