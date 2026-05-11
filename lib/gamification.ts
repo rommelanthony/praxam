@@ -15,11 +15,37 @@ export async function awardXp(userId: string, amount: number, reason: string, me
 
 export async function processAnswer(opts: {
   userId: string; isCorrect: boolean; timeTakenMs: number; subtest: string;
-  isFirstAnswerToday?: boolean; sessionCorrect?: number; sessionTotal?: number;
+  sessionCorrect?: number; sessionTotal?: number;
   isSessionEnd?: boolean; isQotd?: boolean;
 }): Promise<{ xpAwarded: number; newAchievements: string[] }> {
-  const { userId, isCorrect, timeTakenMs, subtest, isFirstAnswerToday, sessionCorrect, sessionTotal, isSessionEnd, isQotd } = opts;
+  const { userId, isCorrect, timeTakenMs, subtest, sessionCorrect, sessionTotal, isSessionEnd, isQotd } = opts;
   const { calcSpeedBonus, XP } = await import("@/lib/gamification-shared");
+
+  await resetWeeklyStatsIfNeeded(userId);
+
+  const [prof] = await db.select({
+    lastPracticeDate: schema.profiles.lastPracticeDate,
+    streakDays:       schema.profiles.streakDays,
+    longestStreak:    schema.profiles.longestStreak,
+  }).from(schema.profiles).where(eq(schema.profiles.id, userId)).limit(1);
+
+  const today     = new Date().toISOString().slice(0, 10);
+  const yesterday = new Date(Date.now() - 86_400_000).toISOString().slice(0, 10);
+  const last = prof?.lastPracticeDate ? String(prof.lastPracticeDate) : null;
+  const firstToday = last !== today;
+
+  let newStreak = prof?.streakDays ?? 0;
+  if (firstToday) newStreak = last === yesterday ? newStreak + 1 : 1;
+  const newLongest = Math.max(prof?.longestStreak ?? 0, newStreak);
+
+  await db.update(schema.profiles).set({
+    questionsAnsweredTotal: sql`${schema.profiles.questionsAnsweredTotal} + 1`,
+    weeklyQuestions:        sql`${schema.profiles.weeklyQuestions} + 1`,
+    streakDays:             newStreak,
+    longestStreak:          newLongest,
+    lastPracticeDate:       sql`current_date`,
+  }).where(eq(schema.profiles.id, userId));
+
   let total = 0;
   await awardXp(userId, XP.ANSWER, "answer"); total += XP.ANSWER;
   if (isCorrect) {
@@ -27,7 +53,7 @@ export async function processAnswer(opts: {
     const sb = calcSpeedBonus(timeTakenMs, subtest);
     if (sb > 0) { await awardXp(userId, sb, "speed_bonus", { timeTakenMs, subtest }); total += sb; }
   }
-  if (isFirstAnswerToday) { await awardXp(userId, XP.STREAK_BONUS, "streak_bonus"); total += XP.STREAK_BONUS; }
+  if (firstToday) { await awardXp(userId, XP.STREAK_BONUS, "streak_bonus"); total += XP.STREAK_BONUS; }
   if (isQotd) {
     await awardXp(userId, XP.QOTD, "qotd"); total += XP.QOTD;
     await db.update(schema.profiles).set({ qotdLastCompleted: sql`current_date` }).where(eq(schema.profiles.id, userId));

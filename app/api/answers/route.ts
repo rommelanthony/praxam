@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
-import { answers, sessions } from '@/db/schema';
+import { answers, sessions, profiles, questions } from '@/db/schema';
+import { eq } from 'drizzle-orm';
 import { createClient } from '@/lib/supabase/server';
+import { processAnswer } from '@/lib/gamification';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,6 +12,18 @@ export async function POST(req: NextRequest) {
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const body = await req.json();
+    const today = new Date().toISOString().slice(0, 10);
+
+    if (body.isQotd) {
+      const [prof] = await db
+        .select({ qotdLastCompleted: profiles.qotdLastCompleted })
+        .from(profiles)
+        .where(eq(profiles.id, user.id))
+        .limit(1);
+      if (String(prof?.qotdLastCompleted) === today) {
+        return NextResponse.json({ ok: true, xpAwarded: 0, newAchievements: [], alreadyCompleted: true });
+      }
+    }
 
     let sessionId: string = body.sessionId;
     if (body.isQotd || !sessionId) {
@@ -34,7 +48,32 @@ export async function POST(req: NextRequest) {
       timeTakenMs: body.timeTakenMs,
     });
 
-    return NextResponse.json({ ok: true, xpAwarded: 0, newAchievements: [] });
+    let subtest: string | undefined = body.subtest;
+    if (!subtest) {
+      const [q] = await db
+        .select({ subtest: questions.subtest })
+        .from(questions)
+        .where(eq(questions.id, body.questionId))
+        .limit(1);
+      subtest = q?.subtest ?? 'unknown';
+    }
+
+    try {
+      const { xpAwarded, newAchievements } = await processAnswer({
+        userId: user.id,
+        isCorrect: !!body.isCorrect,
+        timeTakenMs: Number(body.timeTakenMs ?? 0),
+        subtest,
+        isSessionEnd: !!body.isSessionEnd,
+        sessionCorrect: body.sessionCorrect,
+        sessionTotal: body.sessionTotal,
+        isQotd: !!body.isQotd,
+      });
+      return NextResponse.json({ ok: true, xpAwarded, newAchievements });
+    } catch (gamErr) {
+      console.error('[api/answers] gamification failed (answer row preserved):', gamErr);
+      return NextResponse.json({ ok: true, xpAwarded: 0, newAchievements: [] });
+    }
   } catch (err) {
     console.error('[api/answers] error:', err);
     return NextResponse.json(
