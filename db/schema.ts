@@ -14,6 +14,8 @@ export const profiles = pgTable('profiles', {
   lastPracticeDate: date('last_practice_date'),
   stripeCustomerId: text('stripe_customer_id'),
   stripeSubscriptionId: text('stripe_subscription_id'),
+  ucatRegion: text('ucat_region', { enum: ['ANZ', 'UK'] }),
+  ucatTestDate: date('ucat_test_date'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   // Gamification fields
   xp: integer('xp').notNull().default(0),
