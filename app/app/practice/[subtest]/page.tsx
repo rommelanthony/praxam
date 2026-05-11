@@ -34,14 +34,35 @@ export default function SubtestPage() {
   const [score, setScore] = useState({ correct: 0, wrong: 0 });
   const [loading, setLoading] = useState(true);
   const [startMs, setStartMs] = useState(Date.now());
-  const [sessionId] = useState(() => crypto.randomUUID());
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [sessionError, setSessionError] = useState(false);
 
   const fetchQuestions = useCallback(async () => {
     setLoading(true);
+    setSessionError(false);
     const key = SLUG_TO_KEY[subtest];
     const res = await fetch(`/api/questions?subtest=${key}&limit=20`);
     const data = await res.json();
-    setQuestions(data.questions ?? []);
+    const qs: Question[] = data.questions ?? [];
+    setQuestions(qs);
+    if (qs.length > 0) {
+      try {
+        const sres = await fetch('/api/sessions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ subtest: key, questionIds: qs.map((q) => q.id) }),
+        });
+        const sdata = await sres.json();
+        if (sres.ok && sdata.id) {
+          setSessionId(sdata.id);
+        } else {
+          setSessionError(true);
+        }
+      } catch (e) {
+        console.error('[practice] session create failed:', e);
+        setSessionError(true);
+      }
+    }
     setLoading(false);
     setStartMs(Date.now());
   }, [subtest]);
@@ -54,6 +75,7 @@ export default function SubtestPage() {
 
   function pick(letter: string) {
     if (state !== 'unanswered') return;
+    if (!sessionId) return;
     setPicked(letter);
     const correct = letter === current.correctAnswer;
     setState(correct ? 'correct' : 'wrong');
@@ -88,6 +110,13 @@ export default function SubtestPage() {
   if (loading) return (
     <div className="container-px py-16 flex items-center justify-center">
       <div className="text-ink-soft text-sm animate-pulse">Loading questions…</div>
+    </div>
+  );
+
+  if (sessionError) return (
+    <div className="container-px py-16 text-center">
+      <p className="text-ink-soft mb-4">Couldn&apos;t start practice session. Refresh to try again.</p>
+      <button onClick={() => router.back()} className="text-teal-deep underline text-sm">Go back</button>
     </div>
   );
 
