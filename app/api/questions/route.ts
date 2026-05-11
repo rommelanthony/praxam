@@ -17,8 +17,16 @@ export async function GET(req: NextRequest) {
     .where(
       sql`${questions.subtest} = ${subtest}
         AND NOT (
-          COALESCE(${questions.flags}, '[]'::jsonb) @> '["needs_asset"]'::jsonb
-          OR COALESCE(${questions.flags}, '[]'::jsonb) @> '["needs_passage"]'::jsonb
+          COALESCE(${questions.flags}, '[]'::jsonb) ?| array[
+            'needs_asset',
+            'needs_passage',
+            'requires_image',
+            'needs_image',
+            'needs_review',
+            'yes_no_format',
+            'most_least_format',
+            'passage_mismatch'
+          ]
         )`
     )
     .orderBy(sql`random()`)
