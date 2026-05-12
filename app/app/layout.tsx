@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Logo from '@/components/Logo';
 import { signOut } from '@/app/auth/actions';
 import { createClient } from '@/lib/supabase/server';
+import { ToastManager } from '@/components/Toast';
+import { XpToastManager } from '@/components/XpToast';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -17,6 +19,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           <div className="hidden md:flex gap-8 items-center">
             <Link href="/app" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Dashboard</Link>
             <Link href="/app/practice" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Practice</Link>
+            <Link href="/app/training/speed-reading" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Training</Link>
             <Link href="/app/account" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Account</Link>
           </div>
           <div className="flex gap-3 items-center">
@@ -28,6 +31,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         </div>
       </nav>
       <main>{children}</main>
+      <ToastManager />
+      <XpToastManager />
     </>
   );
 }

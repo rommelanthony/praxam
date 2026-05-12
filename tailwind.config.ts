@@ -22,6 +22,17 @@ const config: Config = {
           DEFAULT: '#6B4FA8',
           soft: '#EDE7F8',
         },
+        // Warm signal tokens — added for Speed Reading Tutor (Qualifier Hunt
+        // legend: extreme=red, negation=amber) and comprehension-floor warnings.
+        // Saturation/lightness chosen to harmonize with teal/violet on light bg.
+        amber: {
+          DEFAULT: 'hsl(32, 75%, 42%)',
+          soft: 'hsl(34, 62%, 93%)',
+        },
+        red: {
+          DEFAULT: 'hsl(355, 65%, 47%)',
+          soft: 'hsl(355, 62%, 94%)',
+        },
         paper: '#FAFBFD',
         surface: {
           DEFAULT: '#FFFFFF',
