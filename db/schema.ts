@@ -111,6 +111,24 @@ export const xpEvents = pgTable('xp_events', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// Speed Reading Tutor session log — append-only record of completed drills.
+// One row per drill completion (baseline, pacer, chunking, scan, qualifier,
+// triage, passage). RLS restricts each row to its owner; no UPDATE/DELETE
+// policies exist on the underlying table (see db/migrations/0002).
+export const speedReadingSessions = pgTable('speed_reading_sessions', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  drill: text('drill', {
+    enum: ['baseline', 'pacer', 'chunking', 'scan', 'qualifier', 'triage', 'passage'],
+  }).notNull(),
+  wpm: integer('wpm'),
+  comprehensionPct: integer('comprehension_pct'),
+  passageId: text('passage_id'),
+  meta: jsonb('meta').$type<Record<string, unknown>>().notNull().default(sql`'{}'::jsonb`),
+  elapsedSec: text('elapsed_sec'), // numeric(6,2); Drizzle returns numeric as string
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 // Daily/timed challenges — one row per attempt.
 export const challenges = pgTable('challenges', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -135,3 +153,5 @@ export type UserAchievement = typeof userAchievements.$inferSelect;
 export type XpEvent = typeof xpEvents.$inferSelect;
 export type NewXpEvent = typeof xpEvents.$inferInsert;
 export type Challenge = typeof challenges.$inferSelect;
+export type SpeedReadingSession = typeof speedReadingSessions.$inferSelect;
+export type NewSpeedReadingSession = typeof speedReadingSessions.$inferInsert;
