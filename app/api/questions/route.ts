@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { questions } from '@/db/schema';
-import { sql } from 'drizzle-orm';
+import { and, inArray, isNotNull, sql } from 'drizzle-orm';
 
 export async function GET(req: NextRequest) {
   const subtest = req.nextUrl.searchParams.get('subtest');
@@ -32,5 +32,39 @@ export async function GET(req: NextRequest) {
     .orderBy(sql`random()`)
     .limit(limit);
 
-  return NextResponse.json({ questions: rows });
+  const orphanPassageIds = Array.from(
+    new Set(
+      rows
+        .filter((r) => r.passage == null && r.passageId != null)
+        .map((r) => r.passageId as string)
+    )
+  );
+
+  let resolved = rows;
+  if (orphanPassageIds.length > 0) {
+    const anchors = await db
+      .select({ passageId: questions.passageId, passage: questions.passage })
+      .from(questions)
+      .where(and(inArray(questions.passageId, orphanPassageIds), isNotNull(questions.passage)));
+
+    const lookup = new Map<string, string>();
+    for (const a of anchors) {
+      if (a.passageId == null || a.passage == null) continue;
+      if (lookup.has(a.passageId)) {
+        console.warn(
+          `[api/questions] multiple non-null passages for passage_id=${a.passageId}; keeping first`
+        );
+        continue;
+      }
+      lookup.set(a.passageId, a.passage);
+    }
+
+    resolved = rows.map((r) =>
+      r.passage == null && r.passageId != null
+        ? { ...r, passage: lookup.get(r.passageId) ?? null }
+        : r
+    );
+  }
+
+  return NextResponse.json({ questions: resolved });
 }
