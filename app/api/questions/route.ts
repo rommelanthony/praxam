@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { questions } from '@/db/schema';
 import { sql } from 'drizzle-orm';
-import { HIDDEN_FLAGS } from '@/lib/questions/filters';
+import { excludeHiddenFlags } from '@/lib/questions/filters';
 import { hydratePassages } from '@/lib/questions/passages';
 
 export async function GET(req: NextRequest) {
@@ -17,10 +17,7 @@ export async function GET(req: NextRequest) {
     .select()
     .from(questions)
     .where(
-      sql`${questions.subtest} = ${subtest}
-        AND NOT (
-          COALESCE(${questions.flags}, '[]'::jsonb) ?| ${[...HIDDEN_FLAGS]}::text[]
-        )`
+      sql`${questions.subtest} = ${subtest} AND ${excludeHiddenFlags(questions.flags)}`
     )
     .orderBy(sql`random()`)
     .limit(limit);

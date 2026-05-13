@@ -7,7 +7,7 @@ import { cache } from 'react';
 import { sql } from 'drizzle-orm';
 import { db } from '@/db';
 import { questions, type Question } from '@/db/schema';
-import { HIDDEN_FLAGS } from '@/lib/questions/filters';
+import { excludeHiddenFlags } from '@/lib/questions/filters';
 import { hydratePassages } from '@/lib/questions/passages';
 import type {
   Passage,
@@ -60,9 +60,7 @@ export const getVRPassages = cache(
       .where(
         sql`${questions.subtest} = 'verbal_reasoning'
           AND ${questions.passageId} IS NOT NULL
-          AND NOT (
-            COALESCE(${questions.flags}, '[]'::jsonb) ?| ${[...HIDDEN_FLAGS]}::text[]
-          )`
+          AND ${excludeHiddenFlags(questions.flags)}`
       );
 
     const hydrated = await hydratePassages(rows);

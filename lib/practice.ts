@@ -2,7 +2,7 @@
 import 'server-only';
 import { db, schema } from '@/db';
 import { sql, eq, and, desc } from 'drizzle-orm';
-import { HIDDEN_FLAGS } from '@/lib/questions/filters';
+import { excludeHiddenFlags } from '@/lib/questions/filters';
 
 const SUBTEST_BY_SLUG: Record<string, string> = {
   'verbal-reasoning': 'verbal_reasoning',
@@ -51,11 +51,9 @@ export async function pickNextQuestion(opts: {
   }
   // Must have a correct answer captured
   conditions.push(sql`${schema.questions.correctAnswer} is not null`);
-  // Skip questions tagged for repair. Mirrors the filter in app/api/questions/route.ts
-  // via the shared HIDDEN_FLAGS constant so the two paths can't drift.
-  conditions.push(sql`NOT (
-    COALESCE(${schema.questions.flags}, '[]'::jsonb) ?| ${[...HIDDEN_FLAGS]}::text[]
-  )`);
+  // Skip questions tagged for repair. Shared with app/api/questions/route.ts
+  // via the excludeHiddenFlags helper so the two paths can't drift.
+  conditions.push(excludeHiddenFlags(schema.questions.flags));
 
   const candidates = await db
     .select()
