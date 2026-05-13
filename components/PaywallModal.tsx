@@ -24,6 +24,16 @@ export function PaywallModal() {
       if (i > -1) listeners.splice(i, 1);
     };
   }, []);
+  // Escape-to-close. Only active while the modal is open so we're not
+  // listening on every page.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
   if (!open) return null;
   return (
     <div

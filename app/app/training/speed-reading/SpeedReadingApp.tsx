@@ -93,16 +93,17 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
     router.refresh();
   };
 
-  const headerTabs: HeaderTab[] = TABS.map((t) => {
-    const paywalled = isPaywalled(t, plan);
-    return {
-      id: t.id,
-      label: t.label,
-      icon: t.icon,
-      locked: (needsBaseline && t.id !== 'baseline') || paywalled,
-      showProBadge: paywalled,
-    };
-  });
+  // Two independent lock states (see Header.tsx):
+  // - disabled (baseline-lock) gets HTML disabled — click won't fire.
+  // - showProBadge (paywall-lock) stays clickable so handleSelect's
+  //   openPaywall() branch can run.
+  const headerTabs: HeaderTab[] = TABS.map((t) => ({
+    id: t.id,
+    label: t.label,
+    icon: t.icon,
+    disabled: needsBaseline && t.id !== 'baseline',
+    showProBadge: isPaywalled(t, plan),
+  }));
 
   const lockedDrills = new Set(
     TABS.filter((t) => isPaywalled(t, plan)).map((t) => t.id as string)

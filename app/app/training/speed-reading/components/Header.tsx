@@ -2,17 +2,28 @@
 // Header but stripped of the brand area (the app layout's main nav already
 // covers branding) and re-themed for the light palette.
 //
-// Each HeaderTab carries its own lock state; the parent (SpeedReadingApp)
-// computes lock based on baseline-presence + plan, so this component is
-// purely presentational.
+// Two independent lock states are intentionally distinguished:
+//
+// 1. `disabled` — baseline not yet taken; click would early-return in the
+//    parent's handleSelect. We HTML-disable the button so the click doesn't
+//    fire at all. Reflects spec sect 7.1 (Baseline forced on first visit).
+//
+// 2. `showProBadge` — drill is paywalled for this user's plan; click should
+//    still fire because the parent's handleSelect calls openPaywall(). We
+//    only dim the button visually + show the Pro badge; HTML disabled would
+//    break the modal reach.
+//
+// Both can be true simultaneously (paywalled drill that also requires
+// baseline) — disabled wins, since the click would early-return before
+// reaching the paywall branch anyway.
 import type { LucideIcon } from 'lucide-react';
 
 export type HeaderTab = {
   id: string;
   label: string;
   icon: LucideIcon;
-  locked: boolean;       // disables click
-  showProBadge: boolean; // visual hint for paywalled drills
+  disabled: boolean;     // baseline-lock — HTML-disable; click would early-return
+  showProBadge: boolean; // paywall-lock — click stays live (opens modal)
 };
 
 export function Header({
@@ -35,9 +46,16 @@ export function Header({
               key={t.id}
               type="button"
               onClick={() => onSelect(t.id)}
+              disabled={t.disabled}
               aria-current={active ? 'page' : undefined}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[14px] rounded-md transition-colors
-                ${active ? 'bg-teal-soft text-teal-deep font-semibold' : t.locked ? 'text-ink-muted hover:text-ink-soft' : 'text-ink-soft hover:bg-surface-cool'}`}
+                ${active
+                  ? 'bg-teal-soft text-teal-deep font-semibold'
+                  : t.disabled
+                    ? 'text-ink-muted opacity-50 cursor-not-allowed'
+                    : t.showProBadge
+                      ? 'text-ink-soft opacity-80 hover:opacity-100 hover:bg-surface-cool'
+                      : 'text-ink-soft hover:bg-surface-cool'}`}
             >
               <Icon size={14} />
               <span>{t.label}</span>

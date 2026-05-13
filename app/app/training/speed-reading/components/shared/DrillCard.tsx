@@ -40,8 +40,12 @@ export function DrillCard({
       </div>
       <div className="text-[16px] font-bold text-navy mb-1">{title}</div>
       <p className="text-[13px] text-ink-soft mb-3 leading-snug">{desc}</p>
-      <div className="flex items-center gap-1 text-[13px] font-medium text-teal-deep group-hover:gap-1.5 transition-all">
-        Open <ChevronRight size={14} />
+      <div
+        className={`flex items-center gap-1 text-[13px] font-medium group-hover:gap-1.5 transition-all ${
+          locked ? 'text-violet' : 'text-teal-deep'
+        }`}
+      >
+        {locked ? 'Unlock' : 'Open'} <ChevronRight size={14} />
       </div>
     </button>
   );
