@@ -30,7 +30,13 @@ export function BaselineMode({
   const [stage, setStage] = useState<Stage>('intro');
   const [elapsed, setElapsed] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [result, setResult] = useState<{ wpm: number; comp: number; elapsedSec: number } | null>(null);
+  const [result, setResult] = useState<{
+    wpm: number;
+    comp: number;
+    elapsedSec: number;
+    answers: number[];
+    correctAnswers: number[];
+  } | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const startRef = useRef(0);
@@ -54,13 +60,14 @@ export function BaselineMode({
 
   const submitQuiz = () => {
     const elapsedSec = Math.max(0.1, elapsed);
-    const correct = passage.questions.reduce(
-      (n, q, i) => n + (answers[i] === q.answer ? 1 : 0),
-      0
-    );
+    // Normalize answers to a stable array (one entry per question, in order).
+    // Submit is gated on every question being answered so no undefined slots.
+    const answersArr = passage.questions.map((_, i) => answers[i]);
+    const correctArr = passage.questions.map((q) => q.answer);
+    const correct = answersArr.reduce((n, a, i) => n + (a === correctArr[i] ? 1 : 0), 0);
     const comp = Math.round((correct / passage.questions.length) * 100);
     const wpm = Math.round((passage.wordCount / elapsedSec) * 60);
-    setResult({ wpm, comp, elapsedSec });
+    setResult({ wpm, comp, elapsedSec, answers: answersArr, correctAnswers: correctArr });
     setStage('done');
   };
 
@@ -73,6 +80,12 @@ export function BaselineMode({
       comprehensionPct: result.comp,
       passageId: passage.id,
       elapsedSec: result.elapsedSec,
+      meta: {
+        answers: result.answers,
+        correctAnswers: result.correctAnswers,
+        questionCount: passage.questions.length,
+        wordCount: passage.wordCount,
+      },
     });
     setSaving(false);
     if (!res.ok) {

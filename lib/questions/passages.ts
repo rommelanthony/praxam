@@ -11,6 +11,14 @@ type Hydratable = {
   passage: string | null;
 };
 
+// Module-level dedup for the "multiple non-null passages for same passage_id"
+// warning. Without this, dev console floods with one warning per duplicate
+// passage_id per hydrate call (~54 entries on the VR bank), each ~60 lines of
+// RSC stack trace. The Set survives across requests within a process so each
+// duplicate passage_id warns at most once per server lifetime. Resets on dev
+// server restart, which is when you'd actually want to be reminded.
+const warnedDupPassageIds = new Set<string>();
+
 export async function hydratePassages<T extends Hydratable>(rows: T[]): Promise<T[]> {
   const orphanPassageIds = Array.from(
     new Set(
@@ -31,9 +39,12 @@ export async function hydratePassages<T extends Hydratable>(rows: T[]): Promise<
   for (const a of anchors) {
     if (a.passageId == null || a.passage == null) continue;
     if (lookup.has(a.passageId)) {
-      console.warn(
-        `[hydratePassages] multiple non-null passages for passage_id=${a.passageId}; keeping first`
-      );
+      if (!warnedDupPassageIds.has(a.passageId)) {
+        warnedDupPassageIds.add(a.passageId);
+        console.warn(
+          `[hydratePassages] multiple non-null passages for passage_id=${a.passageId}; keeping first`
+        );
+      }
       continue;
     }
     lookup.set(a.passageId, a.passage);
