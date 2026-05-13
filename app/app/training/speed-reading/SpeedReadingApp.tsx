@@ -12,9 +12,14 @@
 // Step E renders placeholder tab bodies. The real Header, BaselineMode, Home,
 // and the rest land in steps F and G.
 import { useState, type ReactNode } from 'react';
+import {
+  Activity, BookOpen, Eye, Flag, Gauge, GitBranch, Search,
+  SkipForward, Target, TrendingUp,
+} from 'lucide-react';
 import type { Passage } from '@/lib/speed-reading/types';
 import type { SpeedReadingSession } from '@/db/schema';
 import { openPaywall } from '@/components/PaywallModal';
+import { Header, type HeaderTab } from './components/Header';
 
 type Plan = 'free' | 'pro';
 
@@ -32,18 +37,18 @@ type Tab =
 
 // Tab definitions. `kind` drives lock + always-allowed logic; free users can
 // always reach overview/strategy/progress regardless of plan.
-const TABS: { id: Tab; label: string; kind: 'overview' | 'reference' | 'drill' | 'progress' }[] = [
-  { id: 'home',      label: 'Overview',     kind: 'overview' },
-  { id: 'baseline',  label: 'Baseline',     kind: 'drill' },
-  { id: 'strategy',  label: 'Strategy',     kind: 'reference' },
-  { id: 'pacer',     label: 'Pacer',        kind: 'drill' },
-  { id: 'chunking',  label: 'Chunking',     kind: 'drill' },
-  { id: 'scan',      label: 'Scan',         kind: 'drill' },
-  { id: 'qualifier', label: 'Qualifiers',   kind: 'drill' },
-  { id: 'triage',    label: 'Triage',       kind: 'drill' },
-  { id: 'passage',   label: 'Passage',      kind: 'drill' },
-  { id: 'progress',  label: 'Progress',     kind: 'progress' },
-];
+const TABS = [
+  { id: 'home',      label: 'Overview',   icon: BookOpen,    kind: 'overview' },
+  { id: 'baseline',  label: 'Baseline',   icon: Activity,    kind: 'drill' },
+  { id: 'strategy',  label: 'Strategy',   icon: GitBranch,   kind: 'reference' },
+  { id: 'pacer',     label: 'Pacer',      icon: Gauge,       kind: 'drill' },
+  { id: 'chunking',  label: 'Chunking',   icon: Eye,         kind: 'drill' },
+  { id: 'scan',      label: 'Scan',       icon: Search,      kind: 'drill' },
+  { id: 'qualifier', label: 'Qualifiers', icon: Flag,        kind: 'drill' },
+  { id: 'triage',    label: 'Triage',     icon: SkipForward, kind: 'drill' },
+  { id: 'passage',   label: 'Passage',    icon: Target,      kind: 'drill' },
+  { id: 'progress',  label: 'Progress',   icon: TrendingUp,  kind: 'progress' },
+] as const satisfies readonly { id: Tab; label: string; icon: typeof Activity; kind: 'overview' | 'reference' | 'drill' | 'progress' }[];
 
 // Drills free users can access. Spec sect 5.2.
 const FREE_DRILLS = new Set<Tab>(['baseline', 'pacer']);
@@ -68,7 +73,9 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
   // Force baseline tab when no baseline row exists, regardless of state.
   const effectiveTab: Tab = needsBaseline ? 'baseline' : tab;
 
-  const handleTabClick = (target: (typeof TABS)[number]) => {
+  const handleSelect = (id: string) => {
+    const target = TABS.find((t) => t.id === id);
+    if (!target) return;
     if (needsBaseline && target.id !== 'baseline') return; // locked
     if (isPaywalled(target, plan)) {
       openPaywall();
@@ -77,9 +84,20 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
     setTab(target.id);
   };
 
+  const headerTabs: HeaderTab[] = TABS.map((t) => {
+    const paywalled = isPaywalled(t, plan);
+    return {
+      id: t.id,
+      label: t.label,
+      icon: t.icon,
+      locked: (needsBaseline && t.id !== 'baseline') || paywalled,
+      showProBadge: paywalled,
+    };
+  });
+
   return (
     <div className="container-px py-8">
-      <header className="mb-8">
+      <header className="mb-6">
         <p className="text-[13px] font-semibold uppercase tracking-wider text-teal-deep mb-2">Training</p>
         <h1 className="text-[clamp(1.8rem,3.5vw,2.4rem)] font-bold tracking-tight text-navy mb-1">
           Speed Reading Tutor
@@ -89,33 +107,7 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
         </p>
       </header>
 
-      {/* Stub tab nav — replaced in step F by components/Header.tsx */}
-      <nav className="flex flex-wrap gap-1 mb-6 pb-4 border-b border-line">
-        {TABS.map((t) => {
-          const active = effectiveTab === t.id;
-          const locked = (needsBaseline && t.id !== 'baseline') || isPaywalled(t, plan);
-          return (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => handleTabClick(t)}
-              className={`px-3 py-1.5 text-[14px] rounded-md transition-colors ${
-                active
-                  ? 'bg-teal-soft text-teal-deep font-semibold'
-                  : locked
-                    ? 'text-ink-muted hover:text-ink-soft'
-                    : 'text-ink-soft hover:bg-surface-cool'
-              }`}
-              aria-current={active ? 'page' : undefined}
-            >
-              {t.label}
-              {locked && isPaywalled(t, plan) && (
-                <span className="ml-1.5 text-[11px] uppercase tracking-wider text-violet">Pro</span>
-              )}
-            </button>
-          );
-        })}
-      </nav>
+      <Header tabs={headerTabs} activeId={effectiveTab} onSelect={handleSelect} />
 
       <TabBody tab={effectiveTab} baseline={baseline} initialPassage={initialPassage} />
     </div>
