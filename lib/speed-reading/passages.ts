@@ -20,6 +20,19 @@ import type {
 const MIN_WORDS = 150;
 const MAX_WORDS = 350;
 
+// UCAT VR is 4 questions per passage by published format. Anything with more
+// than this in the bank is either bank pollution (multiple source passages
+// ingested under one passage_id — see green-800-vr-p013, picard-1000-vr-p004
+// etc.) or non-UCAT-realistic publisher formatting. Either way it doesn't
+// belong in a tool that trains people on UCAT pacing. 4 expected + 1 tolerance
+// for legitimate edge cases.
+const MAX_QUESTIONS_PER_PASSAGE = 5;
+
+// One-shot info log of dropped passage_ids on first call per process. Same
+// pattern as hydratePassages' warning dedup. Surfaces bank drift in the dev
+// console without flooding per-render.
+let pollutionLogged = false;
+
 function wordCount(text: string): number {
   return text.trim().split(/\s+/).length;
 }
@@ -80,9 +93,28 @@ export const getVRPassages = cache(
       byPassage.set(r.passageId, group);
     }
 
+    // First call only: surface which passage_ids got dropped for bank-pollution.
+    // Helps catch a future regression where the dropped pool grows past
+    // expectations (~29 today; alarm at >50 or pool below 40).
+    if (!pollutionLogged) {
+      pollutionLogged = true;
+      const dropped: string[] = [];
+      for (const [pid, g] of byPassage) {
+        if (g.questions.length > MAX_QUESTIONS_PER_PASSAGE) {
+          dropped.push(`${pid} (${g.questions.length}q)`);
+        }
+      }
+      if (dropped.length > 0) {
+        console.info(
+          `[getVRPassages] Filtered ${dropped.length} passages with >${MAX_QUESTIONS_PER_PASSAGE} questions (suspected bank pollution): ${dropped.join(', ')}`
+        );
+      }
+    }
+
     let passages: Passage[] = [];
     for (const [passageId, { anchor, questions: qs }] of byPassage) {
       if (qs.length === 0) continue; // no renderable questions → skip
+      if (qs.length > MAX_QUESTIONS_PER_PASSAGE) continue; // bank-pollution gate
       const text = anchor.passage as string; // guarded above
       const wc = wordCount(text);
       if (wc < MIN_WORDS || wc > MAX_WORDS) continue;
