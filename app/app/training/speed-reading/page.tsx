@@ -1,18 +1,34 @@
-// Placeholder stub. Replaced in step E of PR 1 with the real SpeedReadingApp
-// (auth-gated, profile + baseline lookup, initial passage fetch).
-export const metadata = { title: 'Speed Reading Tutor — PracXAM' };
+// Speed Reading Tutor entry page. Server component: handles auth, profile lookup,
+// baseline state, and the initial Baseline passage fetch, then hands all of it
+// to the client-side <SpeedReadingApp /> tab router.
+//
+// Auth gating: the middleware + app/app layout already enforce a signed-in
+// user is present by the time we render. We still pull the user from
+// createClient() to access userId for the baseline lookup.
+import { createClient } from '@/lib/supabase/server';
+import { getOrCreateProfile } from '@/lib/practice';
+import { getBaseline } from '@/lib/speed-reading/sessions';
+import { getRandomVRPassage } from '@/lib/speed-reading/passages';
+import SpeedReadingApp from './SpeedReadingApp';
 
-export default function SpeedReadingPlaceholder() {
+export const metadata = { title: 'Speed Reading Tutor — PracXAM' };
+export const dynamic = 'force-dynamic';
+
+export default async function SpeedReadingPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null; // middleware should have redirected, defensive guard
+
+  const profile = await getOrCreateProfile(user.id, user.email!);
+  const baseline = await getBaseline(user.id);
+  const initialPassage = await getRandomVRPassage();
+
   return (
-    <div className="container-px py-12 max-w-2xl">
-      <p className="text-[13px] font-semibold uppercase tracking-wider text-teal-deep mb-2">Training</p>
-      <h1 className="text-[clamp(1.8rem,3.5vw,2.4rem)] font-bold tracking-tight text-navy mb-2">
-        Speed Reading Tutor
-      </h1>
-      <p className="text-ink-soft text-lg">
-        Coming soon. This module trains UCAT Verbal Reasoning speed, comprehension, and
-        scan-and-locate technique through a sequence of timed drills.
-      </p>
-    </div>
+    <SpeedReadingApp
+      email={profile.email}
+      plan={profile.plan as 'free' | 'pro'}
+      baseline={baseline}
+      initialPassage={initialPassage}
+    />
   );
 }

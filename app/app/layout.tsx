@@ -6,6 +6,7 @@ import { signOut } from '@/app/auth/actions';
 import { createClient } from '@/lib/supabase/server';
 import { ToastManager } from '@/components/Toast';
 import { XpToastManager } from '@/components/XpToast';
+import { PaywallModal } from '@/components/PaywallModal';
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -33,6 +34,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <main>{children}</main>
       <ToastManager />
       <XpToastManager />
+      <PaywallModal />
     </>
   );
 }
