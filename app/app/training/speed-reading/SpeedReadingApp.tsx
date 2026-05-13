@@ -8,10 +8,8 @@
 // Paywall rule (spec sect 5.2): free users can access Overview/Strategy/Progress
 // (non-drill tabs) plus Baseline and Pacer (free drills); all other drills open
 // the paywall modal instead of switching tabs.
-//
-// Step E renders placeholder tab bodies. The real Header, BaselineMode, Home,
-// and the rest land in steps F and G.
 import { useState, type ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Activity, BookOpen, Eye, Flag, Gauge, GitBranch, Search,
   SkipForward, Target, TrendingUp,
@@ -20,6 +18,8 @@ import type { Passage } from '@/lib/speed-reading/types';
 import type { SpeedReadingSession } from '@/db/schema';
 import { openPaywall } from '@/components/PaywallModal';
 import { Header, type HeaderTab } from './components/Header';
+import { BaselineMode } from './components/BaselineMode';
+import { Home } from './components/Home';
 
 type Plan = 'free' | 'pro';
 
@@ -69,6 +69,7 @@ type Props = {
 export default function SpeedReadingApp({ email, plan, baseline, initialPassage }: Props) {
   const needsBaseline = baseline === null;
   const [tab, setTab] = useState<Tab>(needsBaseline ? 'baseline' : 'home');
+  const router = useRouter();
 
   // Force baseline tab when no baseline row exists, regardless of state.
   const effectiveTab: Tab = needsBaseline ? 'baseline' : tab;
@@ -84,6 +85,14 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
     setTab(target.id);
   };
 
+  // After a successful baseline save: switch to Overview, then refresh the
+  // route so the server re-fetches getBaseline() and the parent re-renders
+  // with the new non-null baseline prop.
+  const handleBaselineSaved = () => {
+    setTab('home');
+    router.refresh();
+  };
+
   const headerTabs: HeaderTab[] = TABS.map((t) => {
     const paywalled = isPaywalled(t, plan);
     return {
@@ -94,6 +103,10 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
       showProBadge: paywalled,
     };
   });
+
+  const lockedDrills = new Set(
+    TABS.filter((t) => isPaywalled(t, plan)).map((t) => t.id as string)
+  );
 
   return (
     <div className="container-px py-8">
@@ -109,55 +122,62 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
 
       <Header tabs={headerTabs} activeId={effectiveTab} onSelect={handleSelect} />
 
-      <TabBody tab={effectiveTab} baseline={baseline} initialPassage={initialPassage} />
+      <TabBody
+        tab={effectiveTab}
+        baseline={baseline}
+        initialPassage={initialPassage}
+        plan={plan}
+        lockedDrills={lockedDrills}
+        onSelect={handleSelect}
+        onBaselineSaved={handleBaselineSaved}
+        isFirstRun={needsBaseline}
+      />
     </div>
   );
 }
 
-// Step-E placeholders. Each tab renders a small panel describing what the
-// step F/G port will replace it with. The Baseline tab also displays the
-// fetched initial passage so the data-fetch chain is observable.
 function TabBody({
   tab,
   baseline,
   initialPassage,
+  plan,
+  lockedDrills,
+  onSelect,
+  onBaselineSaved,
+  isFirstRun,
 }: {
   tab: Tab;
   baseline: SpeedReadingSession | null;
   initialPassage: Passage;
+  plan: Plan;
+  lockedDrills: Set<string>;
+  onSelect: (id: string) => void;
+  onBaselineSaved: () => void;
+  isFirstRun: boolean;
 }): ReactNode {
   if (tab === 'baseline') {
     return (
-      <Placeholder title="BaselineMode" landsIn="step G">
-        <p className="text-ink-soft text-sm">
-          {baseline === null
-            ? 'No baseline taken yet — this tab will be forced on first visit.'
-            : 'Baseline already taken. Tab is reachable for retakes.'}
-        </p>
-        <div className="mt-4 p-4 bg-surface-cool rounded-md text-[13px]">
-          <p className="font-semibold text-navy mb-1">Initial passage fetched from data layer:</p>
-          <ul className="text-ink-soft space-y-0.5">
-            <li>id: <code className="font-mono text-[12px]">{initialPassage.id}</code></li>
-            <li>title: {initialPassage.title}</li>
-            <li>wordCount: {initialPassage.wordCount}</li>
-            <li>difficulty: {initialPassage.difficulty}</li>
-            <li>questions: {initialPassage.questions.length}</li>
-          </ul>
-        </div>
-      </Placeholder>
+      <BaselineMode
+        passage={initialPassage}
+        isFirstRun={isFirstRun}
+        onSaved={onBaselineSaved}
+      />
     );
   }
   if (tab === 'home') {
+    // effectiveTab logic guarantees baseline is non-null when tab is 'home',
+    // but TS can't see across that branch — assert.
     return (
-      <Placeholder title="Home (Overview)" landsIn="step G">
-        <p className="text-ink-soft text-sm">
-          Drill catalog + baseline summary + training plan callout.
-        </p>
-      </Placeholder>
+      <Home
+        baseline={baseline as SpeedReadingSession}
+        plan={plan}
+        lockedDrills={lockedDrills}
+        onSelect={onSelect}
+      />
     );
   }
   return (
-    <Placeholder title={tab} landsIn="step F or G">
+    <Placeholder title={tab} landsIn="PR 2/3 (per spec sect 9)">
       <p className="text-ink-soft text-sm">
         {tab === 'strategy' && 'Two-mode strategy reference + language traps panel.'}
         {tab === 'pacer' && 'RSVP word flasher locked to target WPM.'}
