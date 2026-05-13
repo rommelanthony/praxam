@@ -53,7 +53,11 @@ export function PaywallModal() {
           <button type="button" onClick={() => setOpen(false)} className="btn btn-ghost">
             Not now
           </button>
-          <Link href="/app/account" className="btn btn-teal">
+          <Link
+            href="/app/account"
+            onClick={() => setOpen(false)}
+            className="btn btn-teal"
+          >
             See plan
           </Link>
         </div>
