@@ -20,18 +20,18 @@ import type {
 const MIN_WORDS = 150;
 const MAX_WORDS = 350;
 
-// UCAT VR is 4 questions per passage by published format. Anything with more
-// than this in the bank is either bank pollution (multiple source passages
-// ingested under one passage_id — see green-800-vr-p013, picard-1000-vr-p004
-// etc.) or non-UCAT-realistic publisher formatting. Either way it doesn't
-// belong in a tool that trains people on UCAT pacing. 4 expected + 1 tolerance
-// for legitimate edge cases.
+// UCAT VR is 4 questions per passage by published format. Both bounds are
+// real: too few = corruption (orphan-stem rows with passage prose stuffed in
+// the stem field, or passage-without-questions remnants); too many = pollution
+// (multiple source passages ingested under one passage_id — see
+// green-800-vr-p013, picard-1000-vr-p004 etc.). 4 expected ± 1 tolerance.
+const MIN_QUESTIONS_PER_PASSAGE = 3;
 const MAX_QUESTIONS_PER_PASSAGE = 5;
 
 // One-shot info log of dropped passage_ids on first call per process. Same
 // pattern as hydratePassages' warning dedup. Surfaces bank drift in the dev
 // console without flooding per-render.
-let pollutionLogged = false;
+let driftLogged = false;
 
 function wordCount(text: string): number {
   return text.trim().split(/\s+/).length;
@@ -93,20 +93,27 @@ export const getVRPassages = cache(
       byPassage.set(r.passageId, group);
     }
 
-    // First call only: surface which passage_ids got dropped for bank-pollution.
-    // Helps catch a future regression where the dropped pool grows past
-    // expectations (~29 today; alarm at >50 or pool below 40).
-    if (!pollutionLogged) {
-      pollutionLogged = true;
-      const dropped: string[] = [];
+    // First call only: surface which passage_ids got dropped at each bound.
+    // Pollution (>5) and corruption (<3) are different damage shapes — the
+    // log separates them so you can tell which class is growing.
+    if (!driftLogged) {
+      driftLogged = true;
+      const polluted: string[] = [];
+      const corrupt: string[] = [];
       for (const [pid, g] of byPassage) {
         if (g.questions.length > MAX_QUESTIONS_PER_PASSAGE) {
-          dropped.push(`${pid} (${g.questions.length}q)`);
+          polluted.push(`${pid} (${g.questions.length}q)`);
+        } else if (g.questions.length < MIN_QUESTIONS_PER_PASSAGE) {
+          corrupt.push(`${pid} (${g.questions.length}q)`);
         }
       }
-      if (dropped.length > 0) {
+      if (polluted.length > 0 || corrupt.length > 0) {
         console.info(
-          `[getVRPassages] Filtered ${dropped.length} passages with >${MAX_QUESTIONS_PER_PASSAGE} questions (suspected bank pollution): ${dropped.join(', ')}`
+          `[getVRPassages] Filtered ${polluted.length + corrupt.length} passages: ` +
+            `${polluted.length} with >${MAX_QUESTIONS_PER_PASSAGE} questions (pollution), ` +
+            `${corrupt.length} with <${MIN_QUESTIONS_PER_PASSAGE} questions (corruption).` +
+            (polluted.length > 0 ? `\n  pollution: ${polluted.join(', ')}` : '') +
+            (corrupt.length > 0 ? `\n  corruption: ${corrupt.join(', ')}` : '')
         );
       }
     }
@@ -114,7 +121,11 @@ export const getVRPassages = cache(
     let passages: Passage[] = [];
     for (const [passageId, { anchor, questions: qs }] of byPassage) {
       if (qs.length === 0) continue; // no renderable questions → skip
-      if (qs.length > MAX_QUESTIONS_PER_PASSAGE) continue; // bank-pollution gate
+      // UCAT-shape gate: real VR passages have 3-5 questions. Anything outside
+      // is corruption (e.g. orphan-stem rows that survived hydration) or
+      // pollution (multiple passages conflated under one passage_id).
+      if (qs.length < MIN_QUESTIONS_PER_PASSAGE) continue;
+      if (qs.length > MAX_QUESTIONS_PER_PASSAGE) continue;
       const text = anchor.passage as string; // guarded above
       const wc = wordCount(text);
       if (wc < MIN_WORDS || wc > MAX_WORDS) continue;

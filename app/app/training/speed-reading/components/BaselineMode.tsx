@@ -117,7 +117,7 @@ export function BaselineMode({
           <ol className="space-y-3 mb-6">
             <BaselineStep n={1} title="Read naturally" body="Don't try to speed up yet. Read as you normally would." />
             <BaselineStep n={2} title="Click 'Done reading'" body="The timer captures your raw WPM." />
-            <BaselineStep n={3} title={`Answer ${passage.questions.length} questions`} body="This measures whether you actually absorbed the passage." />
+            <BaselineStep n={3} title={`Answer ${passage.questions.length} question${passage.questions.length === 1 ? '' : 's'}`} body="This measures whether you actually absorbed the passage." />
           </ol>
           <button type="button" onClick={startReading} className="btn btn-teal inline-flex items-center gap-1.5">
             <Play size={16} /> Begin baseline test
