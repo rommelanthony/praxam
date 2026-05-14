@@ -29,6 +29,7 @@ import { BaselineMode } from './components/BaselineMode';
 import { Home } from './components/Home';
 import { PacerMode } from './components/PacerMode';
 import { ChunkingMode } from './components/ChunkingMode';
+import { ScanMode } from './components/ScanMode';
 
 type Plan = 'free' | 'pro';
 
@@ -252,14 +253,15 @@ function TabBody({
       />
     );
   }
-  // C4 (Scan) will consume `rotation` too. Reference it so tsc doesn't warn
-  // on the placeholder fallthrough until it lands.
-  void rotation;
+  if (tab === 'scan') {
+    // Pro-only at the gate level. Scan doesn't use baseline.wpm so it only
+    // needs the rotation prop.
+    return <ScanMode rotation={rotation} />;
+  }
   return (
     <Placeholder title={tab} landsIn="PR 2/3 (per spec sect 9)">
       <p className="text-ink-soft text-sm">
         {tab === 'strategy' && 'Two-mode strategy reference + language traps panel.'}
-        {tab === 'scan' && 'Keyword-locate drill.'}
         {tab === 'qualifier' && 'Timed highlight drill for extreme/soft/negation qualifiers.'}
         {tab === 'triage' && '5-second skip-or-attempt decisions.'}
         {tab === 'passage' && 'Full timed passage + comprehension quiz.'}

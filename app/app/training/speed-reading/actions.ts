@@ -89,3 +89,32 @@ export async function saveChunkingSession(input: {
 
   return { ok: true };
 }
+
+// Scan has no target WPM and no comprehension check — wpm and
+// comprehensionPct columns stay null. Meta carries the keyword count and the
+// per-keyword find times (deltas between consecutive finds, first measured
+// from start). perKeywordSec preserves the full per-keyword breakdown so
+// Progress can chart find-speed over time later; avg is trivially derivable.
+export async function saveScanSession(input: {
+  passageId: string;
+  elapsedSec: number;
+  keywordCount: number;
+  perKeywordSec: number[];
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: 'not_authenticated' };
+
+  await logSession({
+    userId: user.id,
+    drill: 'scan',
+    passageId: input.passageId,
+    elapsedSec: input.elapsedSec,
+    meta: {
+      keywordCount: input.keywordCount,
+      perKeywordSec: input.perKeywordSec,
+    },
+  });
+
+  return { ok: true };
+}
