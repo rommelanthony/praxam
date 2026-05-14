@@ -27,6 +27,7 @@ import { openPaywall } from '@/components/PaywallModal';
 import { Header, type HeaderTab } from './components/Header';
 import { BaselineMode } from './components/BaselineMode';
 import { Home } from './components/Home';
+import { PacerMode } from './components/PacerMode';
 
 type Plan = 'free' | 'pro';
 
@@ -230,15 +231,23 @@ function TabBody({
       />
     );
   }
-  // PR 2 drills (pacer, chunking, scan) will consume `rotation` for fresh
-  // passage selection. Reference it here so the unused-prop warning stays
-  // quiet during the in-between commits.
+  if (tab === 'pacer') {
+    // Free users land here too; baseline is guaranteed non-null because
+    // effectiveTab logic forces Baseline first when needsBaseline.
+    return (
+      <PacerMode
+        baseline={baseline as SpeedReadingSession}
+        rotation={rotation}
+      />
+    );
+  }
+  // C3 (Chunking) and C4 (Scan) will consume `rotation` too. Reference it so
+  // tsc doesn't warn on the placeholder fallthrough until they land.
   void rotation;
   return (
     <Placeholder title={tab} landsIn="PR 2/3 (per spec sect 9)">
       <p className="text-ink-soft text-sm">
         {tab === 'strategy' && 'Two-mode strategy reference + language traps panel.'}
-        {tab === 'pacer' && 'RSVP word flasher locked to target WPM.'}
         {tab === 'chunking' && 'Word-group highlighter for visual span training.'}
         {tab === 'scan' && 'Keyword-locate drill.'}
         {tab === 'qualifier' && 'Timed highlight drill for extreme/soft/negation qualifiers.'}
