@@ -49,6 +49,7 @@ export function Header({
               disabled={t.disabled}
               aria-current={active ? 'page' : undefined}
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[14px] rounded-md transition-colors
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-deep/40 focus-visible:ring-offset-2
                 ${active
                   ? 'bg-teal-soft text-teal-deep font-semibold'
                   : t.disabled

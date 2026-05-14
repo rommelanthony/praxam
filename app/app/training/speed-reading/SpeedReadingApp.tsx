@@ -1,6 +1,7 @@
 'use client';
-// Top-level tab router for the Speed Reading Tutor. Receives baseline state
-// and the initial Baseline passage from the server component shell.
+// Top-level tab router for the Speed Reading Tutor. Receives baseline state,
+// the full filtered VR passage pool, and the server-picked initial Baseline
+// passage from the server component shell.
 //
 // Baseline-forcing rule (spec sect 7.1): when getBaseline(userId) returned null,
 // every non-baseline tab is locked and `effectiveTab` collapses to 'baseline'.
@@ -8,7 +9,13 @@
 // Paywall rule (spec sect 5.2): free users can access Overview/Strategy/Progress
 // (non-drill tabs) plus Baseline and Pacer (free drills); all other drills open
 // the paywall modal instead of switching tabs.
-import { useState, type ReactNode } from 'react';
+//
+// Passage rotation (spec sect 7.4): track which passage_ids have been shown
+// this session; drills that let the user "draw another passage" should call
+// pickFreshPassage() to avoid repeats. Set lives in component state — resets
+// only on hard reload, which is correct: a soft route refresh after baseline
+// save shouldn't wipe rotation history.
+import { useCallback, useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Activity, BookOpen, Eye, Flag, Gauge, GitBranch, Search,
@@ -63,13 +70,56 @@ type Props = {
   email: string;
   plan: Plan;
   baseline: SpeedReadingSession | null;
+  passages: Passage[];
   initialPassage: Passage;
 };
 
-export default function SpeedReadingApp({ email, plan, baseline, initialPassage }: Props) {
+export type PassageRotation = {
+  passages: Passage[];
+  pickFreshPassage: () => Passage | null;
+  markPassageShown: (id: string) => void;
+  shownCount: number;
+};
+
+export default function SpeedReadingApp({
+  email,
+  plan,
+  baseline,
+  passages,
+  initialPassage,
+}: Props) {
   const needsBaseline = baseline === null;
   const [tab, setTab] = useState<Tab>(needsBaseline ? 'baseline' : 'home');
   const router = useRouter();
+
+  // Passage rotation state — see spec sect 7.4. Seeded with the initial passage
+  // (already on screen for Baseline) so the next drill that draws fresh won't
+  // repeat it.
+  const [shownPassageIds, setShownPassageIds] = useState<Set<string>>(
+    () => new Set([initialPassage.id])
+  );
+
+  const markPassageShown = useCallback((id: string) => {
+    setShownPassageIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  }, []);
+
+  const pickFreshPassage = useCallback((): Passage | null => {
+    const fresh = passages.filter((p) => !shownPassageIds.has(p.id));
+    if (fresh.length === 0) return null; // exhausted — caller decides what to do
+    return fresh[Math.floor(Math.random() * fresh.length)];
+  }, [passages, shownPassageIds]);
+
+  const rotation: PassageRotation = {
+    passages,
+    pickFreshPassage,
+    markPassageShown,
+    shownCount: shownPassageIds.size,
+  };
 
   // Force baseline tab when no baseline row exists, regardless of state.
   const effectiveTab: Tab = needsBaseline ? 'baseline' : tab;
@@ -127,6 +177,7 @@ export default function SpeedReadingApp({ email, plan, baseline, initialPassage 
         tab={effectiveTab}
         baseline={baseline}
         initialPassage={initialPassage}
+        rotation={rotation}
         plan={plan}
         lockedDrills={lockedDrills}
         onSelect={handleSelect}
@@ -141,6 +192,7 @@ function TabBody({
   tab,
   baseline,
   initialPassage,
+  rotation,
   plan,
   lockedDrills,
   onSelect,
@@ -150,6 +202,7 @@ function TabBody({
   tab: Tab;
   baseline: SpeedReadingSession | null;
   initialPassage: Passage;
+  rotation: PassageRotation;
   plan: Plan;
   lockedDrills: Set<string>;
   onSelect: (id: string) => void;
@@ -177,6 +230,10 @@ function TabBody({
       />
     );
   }
+  // PR 2 drills (pacer, chunking, scan) will consume `rotation` for fresh
+  // passage selection. Reference it here so the unused-prop warning stays
+  // quiet during the in-between commits.
+  void rotation;
   return (
     <Placeholder title={tab} landsIn="PR 2/3 (per spec sect 9)">
       <p className="text-ink-soft text-sm">
