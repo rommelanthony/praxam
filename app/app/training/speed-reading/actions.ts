@@ -42,9 +42,10 @@ export async function saveBaselineSession(input: {
 }
 
 // PR-2 plan decision (b): column `wpm` carries the target WPM the user trained
-// at; meta carries the drill-specific knob (chunkSize for Pacer). Lets Progress
-// queries treat wpm as the canonical column across drills without coalescing
-// from meta. Drill column already disambiguates row semantics.
+// at; meta carries the drill-specific knob (chunkSize for Pacer,
+// wordsPerFixation for Chunking). Lets Progress queries treat wpm as the
+// canonical column across drills without coalescing from meta. Drill column
+// already disambiguates row semantics.
 export async function savePacerSession(input: {
   passageId: string;
   elapsedSec: number;
@@ -62,6 +63,28 @@ export async function savePacerSession(input: {
     passageId: input.passageId,
     elapsedSec: input.elapsedSec,
     meta: { chunkSize: input.chunkSize },
+  });
+
+  return { ok: true };
+}
+
+export async function saveChunkingSession(input: {
+  passageId: string;
+  elapsedSec: number;
+  targetWpm: number;
+  wordsPerFixation: number;
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return { ok: false, error: 'not_authenticated' };
+
+  await logSession({
+    userId: user.id,
+    drill: 'chunking',
+    wpm: input.targetWpm,
+    passageId: input.passageId,
+    elapsedSec: input.elapsedSec,
+    meta: { wordsPerFixation: input.wordsPerFixation },
   });
 
   return { ok: true };

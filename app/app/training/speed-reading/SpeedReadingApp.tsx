@@ -28,6 +28,7 @@ import { Header, type HeaderTab } from './components/Header';
 import { BaselineMode } from './components/BaselineMode';
 import { Home } from './components/Home';
 import { PacerMode } from './components/PacerMode';
+import { ChunkingMode } from './components/ChunkingMode';
 
 type Plan = 'free' | 'pro';
 
@@ -241,14 +242,23 @@ function TabBody({
       />
     );
   }
-  // C3 (Chunking) and C4 (Scan) will consume `rotation` too. Reference it so
-  // tsc doesn't warn on the placeholder fallthrough until they land.
+  if (tab === 'chunking') {
+    // Pro-only at the gate level (free users hit paywall on click), but
+    // baseline is still guaranteed non-null by effectiveTab logic.
+    return (
+      <ChunkingMode
+        baseline={baseline as SpeedReadingSession}
+        rotation={rotation}
+      />
+    );
+  }
+  // C4 (Scan) will consume `rotation` too. Reference it so tsc doesn't warn
+  // on the placeholder fallthrough until it lands.
   void rotation;
   return (
     <Placeholder title={tab} landsIn="PR 2/3 (per spec sect 9)">
       <p className="text-ink-soft text-sm">
         {tab === 'strategy' && 'Two-mode strategy reference + language traps panel.'}
-        {tab === 'chunking' && 'Word-group highlighter for visual span training.'}
         {tab === 'scan' && 'Keyword-locate drill.'}
         {tab === 'qualifier' && 'Timed highlight drill for extreme/soft/negation qualifiers.'}
         {tab === 'triage' && '5-second skip-or-attempt decisions.'}
