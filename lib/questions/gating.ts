@@ -117,15 +117,22 @@ export async function getNextQuestionsForUser(input: {
 // excludeHiddenFlags() to avoid postgres-js's array-as-record serialization
 // bug (see commit e48e236).
 
+// correctAnswer IS NOT NULL guards against serving un-gradable rows (rare
+// data-quality holdouts that survived the HIDDEN_FLAGS filter but lack a
+// correct_answer value). Applied to both paths so the helper is consistently
+// safe regardless of plan.
+
 function buildFreeWhere(subtest: string, attempted: Set<string>) {
   const base = sql`${questions.subtest} = ${subtest}
     AND ${questions.isFree} = true
+    AND ${questions.correctAnswer} IS NOT NULL
     AND ${excludeHiddenFlags(questions.flags)}`;
   return appendExclusion(base, attempted);
 }
 
 function buildProWhere(subtest: string, attempted?: Set<string>) {
   const base = sql`${questions.subtest} = ${subtest}
+    AND ${questions.correctAnswer} IS NOT NULL
     AND ${excludeHiddenFlags(questions.flags)}`;
   return appendExclusion(base, attempted);
 }
