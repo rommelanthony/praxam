@@ -3,6 +3,15 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import type { Question } from '@/db/schema';
 import ChartPassage from '@/components/practice/ChartPassage';
+import { openPaywall } from '@/components/PaywallModal';
+import { SUBTEST_NAMES } from '@/lib/questions/labels';
+
+type PaywallState = {
+  reason: string;
+  subtest: string;
+  attempted: number;
+  freeLimit: number;
+};
 
 const SUBTEST_LABELS: Record<string, string> = {
   'verbal-reasoning': 'Verbal Reasoning',
@@ -36,13 +45,37 @@ export default function SubtestPage() {
   const [startMs, setStartMs] = useState(Date.now());
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [sessionError, setSessionError] = useState(false);
+  const [paywall, setPaywall] = useState<PaywallState | null>(null);
+
+  // Fire the paywall modal with practice-specific copy. Used by both
+  // fetchQuestions (when the bulk fetch returns the paywall arm) and the
+  // inline "Upgrade to Pro" button on the lock state (when the user closes
+  // the modal and wants it back).
+  const triggerPaywallModal = useCallback((pw: PaywallState) => {
+    openPaywall({
+      title: `You've used your ${pw.freeLimit} free ${SUBTEST_NAMES[pw.subtest] ?? pw.subtest} questions`,
+      body: <>Upgrade to Pro to access the full question bank — every subtest, no caps.</>,
+    });
+  }, []);
 
   const fetchQuestions = useCallback(async () => {
     setLoading(true);
     setSessionError(false);
+    setPaywall(null);
     const key = SLUG_TO_KEY[subtest];
     const res = await fetch(`/api/questions?subtest=${key}&limit=20`);
     const data = await res.json();
+
+    // Free user hit the 10-per-subtest hard-stop. Show lock state + fire
+    // the paywall modal. Don't try to create a session — there are no
+    // questions to attach to it.
+    if (data.paywall) {
+      setPaywall(data.paywall);
+      triggerPaywallModal(data.paywall);
+      setLoading(false);
+      return;
+    }
+
     const qs: Question[] = data.questions ?? [];
     setQuestions(qs);
     if (qs.length > 0) {
@@ -65,7 +98,7 @@ export default function SubtestPage() {
     }
     setLoading(false);
     setStartMs(Date.now());
-  }, [subtest]);
+  }, [subtest, triggerPaywallModal]);
 
   useEffect(() => { fetchQuestions(); }, [fetchQuestions]);
 
@@ -117,6 +150,27 @@ export default function SubtestPage() {
     <div className="container-px py-16 text-center">
       <p className="text-ink-soft mb-4">Couldn&apos;t start practice session. Refresh to try again.</p>
       <button onClick={() => router.back()} className="text-teal-deep underline text-sm">Go back</button>
+    </div>
+  );
+
+  // Paywall lock state: free user has used all 10 free questions in this
+  // subtest. Persistent (survives modal close) and reload-safe (re-fetch
+  // would return the same paywall response). Click "Upgrade to Pro" to
+  // re-open the modal.
+  if (paywall) return (
+    <div className="container-px py-16 max-w-2xl mx-auto text-center">
+      <p className="text-[13px] font-semibold uppercase tracking-wider text-violet mb-2">Subtest locked</p>
+      <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-tight text-navy mb-3">
+        You&apos;ve used your {paywall.freeLimit} free {SUBTEST_NAMES[paywall.subtest] ?? paywall.subtest} questions
+      </h1>
+      <p className="text-ink-soft mb-6">Upgrade to Pro to access the full question bank — every subtest, no caps.</p>
+      <button
+        type="button"
+        onClick={() => triggerPaywallModal(paywall)}
+        className="btn btn-teal"
+      >
+        Upgrade to Pro
+      </button>
     </div>
   );
 

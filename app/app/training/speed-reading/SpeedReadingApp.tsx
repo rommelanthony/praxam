@@ -132,7 +132,11 @@ export default function SpeedReadingApp({
     if (!target) return;
     if (needsBaseline && target.id !== 'baseline') return; // locked
     if (isPaywalled(target, plan)) {
-      openPaywall();
+      // Pass the drill label so the modal shows e.g. "Upgrade to Pro to
+      // unlock Chunking" instead of the generic "this drill" copy.
+      // Body falls back to the default (the per-drill list) — only title
+      // is overridden so users still see what's in the Pro bundle.
+      openPaywall({ title: `Upgrade to Pro to unlock ${target.label}` });
       return;
     }
     setTab(target.id);

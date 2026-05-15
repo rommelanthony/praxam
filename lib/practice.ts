@@ -1,133 +1,22 @@
-// Server-side practice helpers: pick questions, log answers, update profile stats.
+// Server-side user-profile helper.
+//
+// Historical note: this file previously also exported pickNextQuestion,
+// submitAnswer, subtestFromSlug, SUBTEST_NAMES, and SUBTEST_BY_SLUG. The
+// plan-gating PR retired the entire answerAndNext / QuestionRunner server-
+// action chain that consumed those exports — see the deleted
+// app/app/practice/[subtest]/actions.ts and components/practice/
+// QuestionRunner.tsx. The live practice flow at app/app/practice/[subtest]/
+// page.tsx talks directly to /api/questions and /api/answers; nothing in
+// the chain was load-bearing. SUBTEST_NAMES moved to lib/questions/labels.ts
+// for shared client/server use.
+//
+// File-name follow-up: this module's name no longer matches its contents
+// (only `getOrCreateProfile` remains). Future hygiene PR can rename to
+// lib/profile.ts and update the three import sites (account/page.tsx,
+// app/page.tsx, training/speed-reading/page.tsx).
 import 'server-only';
 import { db, schema } from '@/db';
-import { sql, eq, and, desc } from 'drizzle-orm';
-import { excludeHiddenFlags } from '@/lib/questions/filters';
-
-const SUBTEST_BY_SLUG: Record<string, string> = {
-  'verbal-reasoning': 'verbal_reasoning',
-  'decision-making': 'decision_making',
-  'quantitative-reasoning': 'quantitative_reasoning',
-  'abstract-reasoning': 'abstract_reasoning',
-  'situational-judgement': 'situational_judgement',
-};
-
-export function subtestFromSlug(slug: string): string | null {
-  return SUBTEST_BY_SLUG[slug] || null;
-}
-
-export const SUBTEST_NAMES: Record<string, string> = {
-  verbal_reasoning: 'Verbal Reasoning',
-  decision_making: 'Decision Making',
-  quantitative_reasoning: 'Quantitative Reasoning',
-  abstract_reasoning: 'Abstract Reasoning',
-  situational_judgement: 'Situational Judgement',
-};
-
-/** Fetch a random question the user hasn't seen recently, gated by their plan. */
-export async function pickNextQuestion(opts: {
-  userId: string;
-  subtest: string;
-  plan: 'free' | 'pro';
-}) {
-  const { userId, subtest, plan } = opts;
-
-  // Recent question IDs to avoid (last 50 the user answered in this subtest)
-  const recent = await db
-    .select({ qid: schema.answers.questionId })
-    .from(schema.answers)
-    .innerJoin(schema.questions, eq(schema.questions.id, schema.answers.questionId))
-    .where(and(eq(schema.answers.userId, userId), eq(schema.questions.subtest, subtest as any)))
-    .orderBy(desc(schema.answers.createdAt))
-    .limit(50);
-
-  const recentIds = recent.map((r) => r.qid);
-
-  // Pick a random question for this subtest, respecting plan and recency.
-  // Use Postgres random() for simplicity; for high traffic later switch to a smarter sampling.
-  const conditions = [eq(schema.questions.subtest, subtest as any)];
-  if (plan === 'free') {
-    conditions.push(eq(schema.questions.isFree, true));
-  }
-  // Must have a correct answer captured
-  conditions.push(sql`${schema.questions.correctAnswer} is not null`);
-  // Skip questions tagged for repair. Shared with app/api/questions/route.ts
-  // via the excludeHiddenFlags helper so the two paths can't drift.
-  conditions.push(excludeHiddenFlags(schema.questions.flags));
-
-  const candidates = await db
-    .select()
-    .from(schema.questions)
-    .where(and(...conditions))
-    .orderBy(sql`random()`)
-    .limit(20);
-
-  const fresh = candidates.find((q) => !recentIds.includes(q.id)) || candidates[0];
-  return fresh || null;
-}
-
-/** Submit an answer and update profile stats in a single transaction. */
-export async function submitAnswer(opts: {
-  userId: string;
-  sessionId: string | null;
-  questionId: string;
-  pickedLetter: string;
-  timeTakenMs: number;
-}) {
-  const { userId, sessionId, questionId, pickedLetter, timeTakenMs } = opts;
-
-  // Look up the correct answer
-  const [q] = await db
-    .select({ correctAnswer: schema.questions.correctAnswer })
-    .from(schema.questions)
-    .where(eq(schema.questions.id, questionId))
-    .limit(1);
-
-  if (!q) throw new Error(`Question ${questionId} not found`);
-  const isCorrect = pickedLetter === q.correctAnswer;
-
-  // Insert into answers table. Sessions are optional for now — we'll generate one if absent.
-  let activeSessionId = sessionId;
-  if (!activeSessionId) {
-    const [created] = await db
-      .insert(schema.sessions)
-      .values({
-        userId,
-        subtest: 'mixed',
-        questionIds: [questionId],
-      })
-      .returning({ id: schema.sessions.id });
-    activeSessionId = created.id;
-  }
-
-  await db.insert(schema.answers).values({
-    sessionId: activeSessionId,
-    questionId,
-    userId,
-    pickedLetter,
-    isCorrect,
-    timeTakenMs,
-  });
-
-  // Bump profile stats — questionsAnsweredTotal++, recompute streak
-  await db
-    .update(schema.profiles)
-    .set({
-      questionsAnsweredTotal: sql`${schema.profiles.questionsAnsweredTotal} + 1`,
-      lastPracticeDate: sql`current_date`,
-      streakDays: sql`
-        case
-          when ${schema.profiles.lastPracticeDate} is null then 1
-          when ${schema.profiles.lastPracticeDate} = current_date then ${schema.profiles.streakDays}
-          when ${schema.profiles.lastPracticeDate} = current_date - 1 then ${schema.profiles.streakDays} + 1
-          else 1
-        end
-      `,
-    })
-    .where(eq(schema.profiles.id, userId));
-
-  return { isCorrect, correctAnswer: q.correctAnswer };
-}
+import { eq } from 'drizzle-orm';
 
 /** Get the user's profile or create one if missing (defensive — usually trigger handles this). */
 export async function getOrCreateProfile(userId: string, email: string) {
