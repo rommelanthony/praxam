@@ -122,6 +122,23 @@ export async function getNextQuestionsForUser(input: {
 // correct_answer value). Applied to both paths so the helper is consistently
 // safe regardless of plan.
 
+// Per-subtest attempt counts for a user against the is_free pool. Used by the
+// practice picker (server component) to compute per-tile lock state. Returns
+// only subtests the user has attempted at least one free question in; absent
+// subtests imply attempted=0 — picker code coalesces.
+export async function getAttemptCountsByFreeSubtest(userId: string): Promise<Record<string, number>> {
+  const rows = await db
+    .select({
+      subtest: questions.subtest,
+      attempted: sql<number>`count(distinct ${answers.questionId})::int`,
+    })
+    .from(answers)
+    .innerJoin(questions, eq(questions.id, answers.questionId))
+    .where(and(eq(answers.userId, userId), eq(questions.isFree, true)))
+    .groupBy(questions.subtest);
+  return Object.fromEntries(rows.map((r) => [r.subtest, r.attempted]));
+}
+
 function buildFreeWhere(subtest: string, attempted: Set<string>) {
   const base = sql`${questions.subtest} = ${subtest}
     AND ${questions.isFree} = true
