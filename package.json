@@ -12,6 +12,7 @@
     "db:copy-images": "tsx scripts/copy-images.ts"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^9.5.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
     "@types/d3-shape": "^3.1.8",
@@ -23,7 +24,8 @@
     "postgres": "^3.4.5",
     "react": "^19.0.0-rc-66855b96-20241106",
     "react-dom": "^19.0.0-rc-66855b96-20241106",
-    "react-markdown": "^10.1.0"
+    "react-markdown": "^10.1.0",
+    "stripe": "^22.1.1"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
