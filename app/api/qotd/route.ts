@@ -2,7 +2,8 @@
 import { db } from "@/db";
 import { qotd, questions, profiles } from "@/db/schema";
 import { createClient } from "@/lib/supabase/server";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
+import { excludeHiddenFlags } from "@/lib/questions/filters";
 export const dynamic = "force-dynamic";
 export async function GET() {
   const supabase = await createClient();
@@ -10,7 +11,7 @@ export async function GET() {
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   let [today] = await db.select().from(qotd).where(eq(qotd.date, sql`current_date`)).limit(1);
   if (!today) {
-    const [q] = await db.select({ id: questions.id }).from(questions).where(sql`${questions.isFree} = true and ${questions.correctAnswer} is not null`).orderBy(sql`random()`).limit(1);
+    const [q] = await db.select({ id: questions.id }).from(questions).where(and(sql`${questions.isFree} = true and ${questions.correctAnswer} is not null`, excludeHiddenFlags(questions.flags))).orderBy(sql`random()`).limit(1);
     if (q) { await db.insert(qotd).values({ date: new Date().toISOString().slice(0,10), questionId: q.id }).onConflictDoNothing(); today = { date: new Date().toISOString().slice(0,10), questionId: q.id }; }
   }
   if (!today) return NextResponse.json({ question: null });
