@@ -14,6 +14,7 @@ import {
   getAttemptCountsByFreeSubtest,
 } from '@/lib/questions/gating';
 import { LockedTile } from '@/components/practice/LockedTile';
+import { excludeHiddenFlags } from '@/lib/questions/filters';
 
 export const metadata = { title: 'Practice — PracXAM' };
 export const dynamic = 'force-dynamic';
@@ -34,6 +35,7 @@ async function getCounts() {
       free: sql<number>`count(*) filter (where ${questions.isFree})::int`,
     })
     .from(questions)
+    .where(excludeHiddenFlags(questions.flags))
     .groupBy(questions.subtest);
   return Object.fromEntries(rows.map((r) => [r.subtest, r]));
 }
