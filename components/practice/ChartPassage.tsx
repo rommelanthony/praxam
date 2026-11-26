@@ -14,6 +14,8 @@ type BaseSpec = {
   series: Series[];
   data?: DataRow[];
   note?: string;
+  /** Opt-in: print each value on grouped bars, stacked segments and line points. */
+  showValues?: boolean;
 };
 
 type VennSet = { label: string; value: number; color?: string };
@@ -131,7 +133,7 @@ function Legend({ series, palette }: { series: Series[]; palette: string[] }) {
   return (
     <g>
       {series.map((s, i) => (
-        <g key={s.key} transform={`translate(${M.left + i * 130}, ${H - 8})`}>
+        <g key={s.key} transform={`translate(${M.left + i * 130}, ${H - 20})`}>
           <rect width="12" height="12" fill={palette[i % palette.length]} />
           <text x="16" y="10" fontSize="11" fill="#1e293b">{s.label}</text>
         </g>
@@ -184,7 +186,14 @@ function GroupedBarChart({ spec }: { spec: BaseSpec & { type: 'grouped_bar' } })
           const h = (v / max) * PH;
           const x = M.left + bandW * i + (bandW - groupW) / 2 + barW * j;
           const y = M.top + PH - h;
-          return <rect key={`${i}-${j}`} x={x} y={y} width={barW - 1} height={h} fill={PALETTE[j % PALETTE.length]} rx="1" />;
+          return (
+            <g key={`${i}-${j}`}>
+              <rect x={x} y={y} width={barW - 1} height={h} fill={PALETTE[j % PALETTE.length]} rx="1" />
+              {spec.showValues && (
+                <text x={x + (barW - 1) / 2} y={y - 3} textAnchor="middle" fontSize="9" fill="#1e293b">{v}</text>
+              )}
+            </g>
+          );
         })
       )}
       <Legend series={spec.series} palette={PALETTE} />
@@ -212,7 +221,14 @@ function StackedBarChart({ spec }: { spec: BaseSpec & { type: 'stacked_bar' } })
               const v = Number(d[s.key] ?? 0);
               const h = (v / max) * PH;
               yCursor -= h;
-              return <rect key={s.key} x={x} y={yCursor} width={barW} height={h} fill={PALETTE[j % PALETTE.length]} />;
+              return (
+                <g key={s.key}>
+                  <rect x={x} y={yCursor} width={barW} height={h} fill={PALETTE[j % PALETTE.length]} />
+                  {spec.showValues && h >= 12 && (
+                    <text x={x + barW / 2} y={yCursor + h / 2 + 4} textAnchor="middle" fontSize="10" fill="#ffffff">{v}</text>
+                  )}
+                </g>
+              );
             })}
           </g>
         );
@@ -242,6 +258,25 @@ function LineChart({ spec }: { spec: BaseSpec & { type: 'line' } }) {
             {data.map((d, i) => (
               <circle key={i} cx={xAt(i)} cy={yAt(Number(d[s.key] ?? 0))} r="3.5" fill={color} />
             ))}
+            {spec.showValues &&
+              data.map((d, i) => {
+                const v = Number(d[s.key] ?? 0);
+                const others = spec.series.filter((o) => o.key !== s.key).map((o) => Number(d[o.key] ?? 0));
+                // Highest line labels above, lowest below, any middle line to the right.
+                const pos = others.length === 0 || v >= Math.max(...others) ? 'above' : v <= Math.min(...others) ? 'below' : 'right';
+                return (
+                  <text
+                    key={`v${i}`}
+                    x={xAt(i) + (pos === 'right' ? 7 : 0)}
+                    y={yAt(v) + (pos === 'above' ? -8 : pos === 'below' ? 16 : 3)}
+                    textAnchor={pos === 'right' ? 'start' : 'middle'}
+                    fontSize="9"
+                    fill={color}
+                  >
+                    {v}
+                  </text>
+                );
+              })}
           </g>
         );
       })}
