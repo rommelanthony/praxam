@@ -5,6 +5,8 @@ import type { Question } from '@/db/schema';
 import ChartPassage from '@/components/practice/ChartPassage';
 import QuestionImages from '@/components/practice/QuestionImages';
 import ExplanationBody from '@/components/practice/ExplanationBody';
+import YesNoStatements from '@/components/practice/YesNoStatements';
+import { isAnswerCorrect, isYesNo } from '@/lib/questions/yesno';
 import { openPaywall } from '@/components/PaywallModal';
 import { SUBTEST_NAMES } from '@/lib/questions/labels';
 
@@ -112,7 +114,7 @@ export default function SubtestPage() {
     if (state !== 'unanswered') return;
     if (!sessionId) return;
     setPicked(letter);
-    const correct = letter === current.correctAnswer;
+    const correct = isAnswerCorrect(current, letter);
     setState(correct ? 'correct' : 'wrong');
     setScore((s) => ({
       correct: s.correct + (correct ? 1 : 0),
@@ -216,7 +218,19 @@ export default function SubtestPage() {
         <p className="text-[17px] font-semibold text-navy leading-snug">{current.stem}</p>
       </div>
 
-      {/* Answer choices */}
+      {/* Answer choices — Yes/No statement sets use their own control */}
+      {isYesNo(current) ? (
+        <div className="mb-8">
+          <YesNoStatements
+            key={current.id}
+            choices={current.choices as Array<{ label: string; text: string }>}
+            answerKey={current.correctAnswer!}
+            submitted={state === 'unanswered' ? null : picked}
+            onSubmit={pick}
+            disabled={!sessionId}
+          />
+        </div>
+      ) : (
       <div className="flex flex-col gap-3 mb-8">
         {(current.choices as Array<{ label: string; text: string }>).map((c) => {
           const isCorrect = c.label === current.correctAnswer;
@@ -246,6 +260,7 @@ export default function SubtestPage() {
           );
         })}
       </div>
+      )}
 
       {/* Explanation */}
       {state !== 'unanswered' && current.explanation && (

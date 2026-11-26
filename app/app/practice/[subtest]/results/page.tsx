@@ -3,6 +3,8 @@ import ChartPassage from '@/components/practice/ChartPassage';
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import ExplanationBody from '@/components/practice/ExplanationBody';
+import YesNoStatements from '@/components/practice/YesNoStatements';
+import { gradeYesNo, isYesNo } from '@/lib/questions/yesno';
 import type { Question, Answer } from '@/db/schema';
 
 const SUBTEST_LABELS: Record<string, string> = {
@@ -66,6 +68,8 @@ function QuestionRow({ item, index }: { item: ResultItem; index: number }) {
   const choices = question.choices as Array<{ label: string; text: string }>;
   const pickedChoice = choices.find((c) => c.label === answer.pickedLetter);
   const correctChoice = choices.find((c) => c.label === question.correctAnswer);
+  const yesNo = isYesNo(question);
+  const yn = yesNo ? gradeYesNo(answer.pickedLetter, question.correctAnswer!) : null;
 
   return (
     <div className={`rounded-lg border ${isCorrect ? 'border-green-200' : 'border-red-200'} overflow-hidden`}>
@@ -87,10 +91,16 @@ function QuestionRow({ item, index }: { item: ResultItem; index: number }) {
           <p className="text-[13px] text-ink-muted font-mono mb-0.5">Q{index + 1}</p>
           <p className="text-[15px] font-medium text-navy leading-snug line-clamp-2">{question.stem}</p>
           <div className="flex flex-wrap gap-3 mt-2 text-[12px] font-mono">
+            {yn ? (
+              <span className={isCorrect ? 'text-green-700' : 'text-red-600'}>
+                {yn.right} of {yn.total} statements correct · {yn.marks} of 2 marks
+              </span>
+            ) : (
             <span className={isCorrect ? 'text-green-700' : 'text-red-600'}>
               Your answer: {answer.pickedLetter} — {pickedChoice?.text ?? '—'}
             </span>
-            {!isCorrect && (
+            )}
+            {!isCorrect && !yn && (
               <span className="text-green-700">
                 Correct: {question.correctAnswer} — {correctChoice?.text ?? '—'}
               </span>
@@ -125,7 +135,12 @@ function QuestionRow({ item, index }: { item: ResultItem; index: number }) {
             </div>
           )}
 
-          {/* All choices */}
+          {/* All choices — Yes/No sets show each statement's verdict */}
+          {yesNo ? (
+            <div className="mb-3">
+              <YesNoStatements choices={choices} answerKey={question.correctAnswer!} submitted={answer.pickedLetter ?? ''} compact />
+            </div>
+          ) : (
           <div className="flex flex-col gap-1.5 mb-3">
             {choices.map((c) => {
               const isCor = c.label === question.correctAnswer;
@@ -142,6 +157,7 @@ function QuestionRow({ item, index }: { item: ResultItem; index: number }) {
               );
             })}
           </div>
+          )}
 
           {/* Explanation */}
           {question.explanation && (
