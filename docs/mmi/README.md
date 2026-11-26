@@ -18,8 +18,8 @@ Realistic asynchronous MMI practice (Auckland/Kira-style): read-aloud scenario â
 ## Setup
 1. Run `db/migrations/0003_mmi.sql` in the Supabase SQL editor. It creates `mmi_attempts`, `mmi_responses` and `mmi_marks` with owner RLS, plus the private `mmi-recordings` bucket (50 MB, webm/mp4/ogg) and owner-only storage policies.
 2. Env vars (Vercel):
-   - `ANTHROPIC_API_KEY`: required for AI feedback (without it responses show "feedback could not be generated" and self-marking still works)
-   - `MMI_FEEDBACK_MODEL`: optional, defaults to `claude-haiku-5-5` (cheapest); set `claude-sonnet-5-5` for richer feedback
+   - AI feedback needs `ANTHROPIC_API_KEY` **or** `OPENAI_API_KEY`. Anthropic is used if its key is set, otherwise OpenAI (`gpt-6-luna`). Force one with `MMI_FEEDBACK_PROVIDER=anthropic|openai`. With neither, responses show "feedback could not be generated" and self-marking still works.
+   - `MMI_FEEDBACK_MODEL`: optional; defaults to `claude-haiku-5-5` (Anthropic) or `gpt-6-luna` (OpenAI). Use `claude-sonnet-5-5` or `gpt-6-sol` for richer feedback
    - `OPENAI_API_KEY`: server-side transcription of recordings, so AI feedback works in every browser (Safari, Firefox). Without it, only Chrome/Edge live transcripts or typed answers get AI feedback.
    - `MMI_TRANSCRIBE_MODEL`: optional, defaults to `gpt-transcribe`
    - `MMI_TRANSCRIBE`: `auto` (default: only when the browser transcript is missing or incomplete), `always`, or `off`

@@ -1,5 +1,6 @@
 // Server-side AI feedback for an MMI response. Calls the Anthropic Messages
-// API directly (no SDK dependency). Requires ANTHROPIC_API_KEY.
+// API or OpenAI Chat Completions directly (no SDK dependency). Needs
+// ANTHROPIC_API_KEY or OPENAI_API_KEY.
 import 'server-only';
 import type { MmiFeedback } from '@/db/schema';
 import { bandOf, countWords, type Bank, type Station } from './content';
@@ -87,25 +88,67 @@ export function extractJson(text: string): unknown {
   return JSON.parse(text.slice(start, end + 1));
 }
 
-export async function generateFeedback(bank: Bank, st: Station, r: { transcript: string; durationS: number; allowedS: number; answerMode: 'speak' | 'type' }): Promise<MmiFeedback> {
+type Provider = 'anthropic' | 'openai';
+
+/**
+ * Which AI marks the answer. MMI_FEEDBACK_PROVIDER forces one; otherwise
+ * Anthropic if its key is set, else OpenAI (the same key used for transcription).
+ */
+export function feedbackProvider(): Provider | null {
+  const forced = process.env.MMI_FEEDBACK_PROVIDER;
+  if (forced === 'anthropic' || forced === 'openai') return forced;
+  if (process.env.ANTHROPIC_API_KEY) return 'anthropic';
+  if (process.env.OPENAI_API_KEY) return 'openai';
+  return null;
+}
+
+// Both defaults cost about the same ($0.10 / $0.50 per million tokens).
+const DEFAULT_OPENAI_MODEL = 'gpt-6-luna';
+
+async function callAnthropic(model: string, prompt: string): Promise<string> {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) throw new Error('not_configured');
-  const model = process.env.MMI_FEEDBACK_MODEL || DEFAULT_MODEL;
-  let lastError = 'bad_json';
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({ model, max_tokens: 1000, messages: [{ role: 'user', content: prompt }] }),
+  });
+  if (!res.ok) throw new Error(`anthropic_${res.status}`);
+  const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
+  return (data.content ?? []).filter((c) => c.type === 'text').map((c) => c.text ?? '').join('');
+}
+
+async function callOpenAI(model: string, prompt: string): Promise<string> {
+  const key = process.env.OPENAI_API_KEY;
+  if (!key) throw new Error('not_configured');
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', Authorization: `Bearer ${key}` },
+    body: JSON.stringify({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+      response_format: { type: 'json_object' },
+      reasoning_effort: 'low',
+      max_completion_tokens: 2500, // includes reasoning tokens
+    }),
+  });
+  if (!res.ok) throw new Error(`openai_${res.status}`);
+  const data = (await res.json()) as { choices?: Array<{ message?: { content?: string | null } }> };
+  return data.choices?.[0]?.message?.content ?? '';
+}
+
+export async function generateFeedback(bank: Bank, st: Station, r: { transcript: string; durationS: number; allowedS: number; answerMode: 'speak' | 'type' }): Promise<MmiFeedback> {
+  const provider = feedbackProvider();
+  if (!provider) throw new Error('not_configured');
+  const model = process.env.MMI_FEEDBACK_MODEL || (provider === 'anthropic' ? DEFAULT_MODEL : DEFAULT_OPENAI_MODEL);
+  const prompt = buildPrompt(bank, st, r);
   for (let attempt = 0; attempt < 2; attempt++) {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model, max_tokens: 1000, messages: [{ role: 'user', content: buildPrompt(bank, st, r) }] }),
-    });
-    if (!res.ok) throw new Error(`anthropic_${res.status}`);
-    const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };
-    const text = (data.content ?? []).filter((c) => c.type === 'text').map((c) => c.text ?? '').join('');
+    const text = provider === 'anthropic' ? await callAnthropic(model, prompt) : await callOpenAI(model, prompt);
     try {
       return { ...cleanFeedback(extractJson(text), st.attributes), model };
     } catch {
-      lastError = 'bad_json'; // retry once
+      // bad JSON: retry once
     }
   }
-  throw new Error(lastError);
+  throw new Error('bad_json');
 }
