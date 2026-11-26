@@ -4,6 +4,8 @@ import Link from "next/link";
 import ExplanationBody from "@/components/practice/ExplanationBody";
 import QuestionImages from "@/components/practice/QuestionImages";
 import type { Question } from "@/db/schema";
+import YesNoStatements from "@/components/practice/YesNoStatements";
+import { isAnswerCorrect, isYesNo } from "@/lib/questions/yesno";
 import { XP } from "@/lib/gamification-shared";
 import ChartPassage from "@/components/practice/ChartPassage";
 export default function QotdPage() {
@@ -18,7 +20,7 @@ export default function QotdPage() {
   useEffect(() => { fetch("/api/qotd").then(r => r.json()).then(d => { setQuestion(d.question); setCompletedToday(d.completedToday); setLoading(false); }); }, []);
   async function pick(letter: string) {
     if (picked || !question) return;
-    const isCorrect = letter === question.correctAnswer;
+    const isCorrect = isAnswerCorrect(question, letter);
     setPicked(letter);
     const res = await fetch("/api/answers", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ questionId: question.id, sessionId: crypto.randomUUID(), pickedLetter: letter, isCorrect, timeTakenMs: Date.now() - startMs.current, subtest: question.subtest, isQotd: true }) });
     const data = await res.json();
@@ -27,7 +29,7 @@ export default function QotdPage() {
   if (loading) return <div className="container-px py-16 flex justify-center"><div className="w-8 h-8 border-4 border-teal-deep border-t-transparent rounded-full animate-spin" /></div>;
   if (!question) return <div className="container-px py-16 text-center"><p className="text-4xl mb-4">☀️</p><p className="text-ink-soft">No question today. Check back soon!</p><Link href="/app" className="text-teal-deep underline text-sm mt-4 inline-block">← Dashboard</Link></div>;
   const choices = question.choices as Array<{ label: string; text: string }>;
-  const isCorrect = picked === question.correctAnswer;
+  const isCorrect = isAnswerCorrect(question, picked);
   return (
     <div className="container-px py-10 max-w-2xl">
       <Link href="/app" className="text-[13px] text-ink-muted hover:text-teal-deep mb-6 inline-block">← Dashboard</Link>
@@ -47,6 +49,11 @@ export default function QotdPage() {
           {question.passage && (<div className="bg-surface-cool border border-line rounded-xl p-5 mb-6 text-[15px] text-ink leading-relaxed">{question.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{question.passageTitle}</p>}<ChartPassage passage={question.passage} /></div>)}
           <QuestionImages imageRoles={question.imageRoles} imageRefs={question.imageRefs} />
           <p className="text-[17px] font-semibold text-navy leading-snug mb-6">{question.stem}</p>
+          {isYesNo(question) ? (
+            <div className="mb-6">
+              <YesNoStatements key={question.id} choices={choices} answerKey={question.correctAnswer!} submitted={revealed ? picked : null} onSubmit={pick} disabled={!!picked} />
+            </div>
+          ) : (
           <div className="flex flex-col gap-2.5 mb-6">
             {choices.map(c => {
               const isCor = c.label === question.correctAnswer;
@@ -65,6 +72,7 @@ export default function QotdPage() {
               );
             })}
           </div>
+          )}
           {revealed && (
             <div className={`rounded-xl p-5 mb-5 ${isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"}`}>
               <div className="flex items-center gap-2 mb-3">

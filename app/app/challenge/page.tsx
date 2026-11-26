@@ -3,6 +3,8 @@ import ChartPassage from '@/components/practice/ChartPassage';
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import type { Question } from "@/db/schema";
+import YesNoStatements from "@/components/practice/YesNoStatements";
+import { isAnswerCorrect, isYesNo } from "@/lib/questions/yesno";
 const SUBTESTS = [{ key: "verbal_reasoning", label: "Verbal Reasoning", seconds: 280, icon: "📖" }, { key: "decision_making", label: "Decision Making", seconds: 640, icon: "🧩" }, { key: "quantitative_reasoning", label: "Quantitative Reasoning", seconds: 400, icon: "📊" }, { key: "abstract_reasoning", label: "Abstract Reasoning", seconds: 160, icon: "🔷" }, { key: "situational_judgement", label: "Situational Judgement", seconds: 230, icon: "⚖️" }];
 type Phase = "pick" | "playing" | "done";
 export default function ChallengePage() {
@@ -38,17 +40,17 @@ export default function ChallengePage() {
   async function pickAnswer(letter: string) {
     if (answers[qIdx] !== undefined || !questions[qIdx]) return;
     const q = questions[qIdx];
-    const isCorrect = letter === q.correctAnswer;
+    const isCorrect = isAnswerCorrect(q, letter);
     const newAnswers = { ...answers, [qIdx]: letter };
     setAnswers(newAnswers);
     const isLast = qIdx === questions.length - 1;
-    const correct = Object.values(newAnswers).filter((a,i) => a === questions[i]?.correctAnswer).length;
+    const correct = Object.entries(newAnswers).filter(([i,a]) => questions[parseInt(i)] && isAnswerCorrect(questions[parseInt(i)], a)).length;
     const res = await fetch("/api/answers", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ questionId: q.id, sessionId: sessionId.current, pickedLetter: letter, isCorrect, timeTakenMs: Date.now() - startRef.current, subtest: selectedSubtest, isSessionEnd: isLast, sessionCorrect: correct, sessionTotal: questions.length }) });
     const data = await res.json();
     if (isLast) { clearInterval(timerRef.current!); setXpEarned(data.xpAwarded ?? 0); setPhase("done"); }
-    else setTimeout(() => setQIdx(i => i + 1), 500);
+    else setTimeout(() => setQIdx(i => i + 1), isYesNo(q) ? 1500 : 500);
   }
-  const correctCount = Object.entries(answers).filter(([i,l]) => l === questions[parseInt(i)]?.correctAnswer).length;
+  const correctCount = Object.entries(answers).filter(([i,l]) => questions[parseInt(i)] && isAnswerCorrect(questions[parseInt(i)], l)).length;
   const pct = questions.length > 0 ? Math.round((correctCount / questions.length) * 100) : 0;
   const urgent = seconds < 30;
   if (phase === "pick") return (
@@ -80,7 +82,7 @@ export default function ChallengePage() {
           <div className="bg-surface-cool rounded-xl p-4"><p className="text-[2rem] font-extrabold text-teal-deep">{xpEarned}</p><p className="text-[12px] text-ink-muted uppercase tracking-wide">XP Earned</p></div>
         </div>
         <div className="flex flex-col gap-2 mb-8 text-left">
-          {questions.map((q,i) => { const correct = answers[i] === q.correctAnswer; return (<div key={q.id} className={`flex items-start gap-3 p-3 rounded-lg text-[13px] ${correct ? "bg-green-50" : "bg-red-50"}`}><span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold text-white ${correct ? "bg-green-500" : "bg-red-400"}`}>{correct ? "✓" : "✗"}</span><p className={`line-clamp-1 ${correct ? "text-green-900" : "text-red-900"}`}>{q.stem}</p></div>); })}
+          {questions.map((q,i) => { const correct = isAnswerCorrect(q, answers[i]); return (<div key={q.id} className={`flex items-start gap-3 p-3 rounded-lg text-[13px] ${correct ? "bg-green-50" : "bg-red-50"}`}><span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-bold text-white ${correct ? "bg-green-500" : "bg-red-400"}`}>{correct ? "✓" : "✗"}</span><p className={`line-clamp-1 ${correct ? "text-green-900" : "text-red-900"}`}>{q.stem}</p></div>); })}
         </div>
         <div className="flex gap-3">
           <button onClick={() => { setPhase("pick"); setAnswers({}); setQIdx(0); setXpEarned(0); }} className="flex-1 py-3 rounded-xl bg-navy text-white font-bold hover:bg-navy/90">Try again →</button>
@@ -98,7 +100,7 @@ export default function ChallengePage() {
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-4">
           <div className="flex-1">
             <p className="text-[11px] font-bold uppercase tracking-wider text-ink-muted">{cfg?.icon} {cfg?.label}</p>
-            <div className="flex gap-1 mt-1">{questions.map((_,i) => (<div key={i} className={`flex-1 h-1.5 rounded-full ${i < qIdx ? (answers[i] === questions[i]?.correctAnswer ? "bg-green-400" : "bg-red-400") : i === qIdx ? "bg-navy" : "bg-line"}`} />))}</div>
+            <div className="flex gap-1 mt-1">{questions.map((_,i) => (<div key={i} className={`flex-1 h-1.5 rounded-full ${i < qIdx ? (isAnswerCorrect(questions[i], answers[i]) ? "bg-green-400" : "bg-red-400") : i === qIdx ? "bg-navy" : "bg-line"}`} />))}</div>
           </div>
           <div className={`font-mono font-bold text-[20px] px-4 py-1.5 rounded-lg ${urgent ? "bg-red-50 text-red-600 animate-pulse" : "bg-surface-cool text-navy"}`}>{fmtSecs(seconds)}</div>
           <p className="text-[13px] text-ink-muted font-mono">{qIdx+1}/{questions.length}</p>
@@ -108,6 +110,9 @@ export default function ChallengePage() {
         {q && (<>
           {q.passage && (<div className="bg-surface border border-line rounded-xl p-5 mb-5 text-[15px] text-ink leading-relaxed">{q.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{q.passageTitle}</p>}<ChartPassage passage={q.passage} /></div>)}
           <p className="text-[17px] font-semibold text-navy leading-snug mb-5">{q.stem}</p>
+          {isYesNo(q) ? (
+            <YesNoStatements key={q.id} choices={choices} answerKey={q.correctAnswer!} submitted={picked ?? null} onSubmit={pickAnswer} />
+          ) : (
           <div className="flex flex-col gap-2.5">
             {choices.map(c => {
               const isPicked = picked === c.label;
@@ -126,6 +131,7 @@ export default function ChallengePage() {
               );
             })}
           </div>
+          )}
         </>)}
       </div>
     </div>
