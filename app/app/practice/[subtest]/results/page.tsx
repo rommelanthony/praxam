@@ -1,4 +1,5 @@
 'use client';
+import ChartPassage from '@/components/practice/ChartPassage';
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import ExplanationBody from '@/components/practice/ExplanationBody';
@@ -120,7 +121,7 @@ function QuestionRow({ item, index }: { item: ResultItem; index: number }) {
                   {question.passageTitle}
                 </p>
               )}
-              <p className="whitespace-pre-line line-clamp-6">{question.passage}</p>
+              <ChartPassage passage={question.passage} clampLines={6} />
             </div>
           )}
 

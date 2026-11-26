@@ -28,20 +28,77 @@ type ChartSpec =
 
 const PALETTE = ['#0d9488', '#1e3a5f', '#7c3aed', '#f59e0b', '#dc2626'];
 
-export default function ChartPassage({ passage }: { passage: string | null }) {
+// Plain-text passages may contain a pipe table ("Col | Col" lines). Find the first run of
+// 2+ consecutive lines with the same number of " | "-separated cells and render it as a table.
+type TableBlock = { before: string; header: string[]; rows: string[][]; after: string };
+export function parsePipeTable(text: string): TableBlock | null {
+  const lines = text.split('\n');
+  const cells = (l: string) => l.split(' | ').map((c) => c.trim());
+  for (let i = 0; i < lines.length; i++) {
+    if (!lines[i].includes(' | ')) continue;
+    const n = cells(lines[i]).length;
+    let j = i + 1;
+    while (j < lines.length && lines[j].includes(' | ') && cells(lines[j]).length === n) j++;
+    if (j - i >= 2) {
+      return {
+        before: lines.slice(0, i).join('\n').trim(),
+        header: cells(lines[i]),
+        rows: lines.slice(i + 1, j).map(cells),
+        after: lines.slice(j).join('\n').trim(),
+      };
+    }
+    i = j - 1;
+  }
+  return null;
+}
+
+function TextPassage({ text, clampLines }: { text: string; clampLines?: number }) {
+  const t = parsePipeTable(text);
+  const clamp = clampLines ? 'line-clamp-6' : '';
+  if (!t) return <p className={`whitespace-pre-line ${clamp}`}>{text}</p>;
+  const numeric = (c: string) => /^[£$€¥-]?[\d,.]+\s*(%|p|g|ml|km)?$/.test(c);
+  return (
+    <div>
+      {t.before && <p className="whitespace-pre-line mb-3">{t.before}</p>}
+      <div className="overflow-x-auto mb-3">
+        <table className="w-full text-[13px] border-collapse">
+          <thead>
+            <tr>
+              {t.header.map((h, k) => (
+                <th key={k} className={`border-b-2 border-line px-2 py-1.5 font-semibold text-navy ${k === 0 || !numeric(t.rows[0]?.[k] ?? '') ? 'text-left' : 'text-right'}`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {t.rows.map((r, ri) => (
+              <tr key={ri} className={ri % 2 ? 'bg-surface-cool/60' : ''}>
+                {r.map((c, k) => (
+                  <td key={k} className={`border-b border-line px-2 py-1.5 tabular-nums ${k === 0 || !numeric(c) ? 'text-left' : 'text-right'}`}>{c}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {t.after && <p className="whitespace-pre-line">{t.after}</p>}
+    </div>
+  );
+}
+
+export default function ChartPassage({ passage, clampLines }: { passage: string | null; clampLines?: number }) {
   if (!passage) return null;
   const trimmed = passage.trim();
   if (!trimmed.startsWith('{')) {
-    return <p className="whitespace-pre-line">{passage}</p>;
+    return <TextPassage text={passage} clampLines={clampLines} />;
   }
   let spec: ChartSpec;
   try {
     spec = JSON.parse(trimmed);
   } catch {
-    return <p className="whitespace-pre-line">{passage}</p>;
+    return <TextPassage text={passage} clampLines={clampLines} />;
   }
   if (!spec.__chart__) {
-    return <p className="whitespace-pre-line">{passage}</p>;
+    return <TextPassage text={passage} clampLines={clampLines} />;
   }
 
   return (

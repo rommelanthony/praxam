@@ -5,6 +5,12 @@ import ChartPassage from '@/components/practice/ChartPassage';
 
 const SAMPLES: Array<{ label: string; passage: string }> = [
   {
+    label: 'pipe table (plain-text passage)',
+    passage:
+      'Four mobile phone plans. Minutes over the included allowance are charged at the per-minute rate.\n\n' +
+      'Plan | Monthly fee | Included minutes | Extra minute\nBasic | £12.00 | 100 | 10p\nTalk More | £15.00 | 500 | 15p\nFlex | £16.31 | 500 | 10p\nSaver | £9.50 | 0 | 8p',
+  },
+  {
     label: 'bar',
     passage: JSON.stringify({
       __chart__: true,
