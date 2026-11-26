@@ -1,7 +1,8 @@
 ﻿"use client";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
+import ExplanationBody from "@/components/practice/ExplanationBody";
+import QuestionImages from "@/components/practice/QuestionImages";
 import type { Question } from "@/db/schema";
 import { XP } from "@/lib/gamification-shared";
 import ChartPassage from "@/components/practice/ChartPassage";
@@ -44,6 +45,7 @@ export default function QotdPage() {
       ) : (
         <div className="bg-surface border border-line rounded-2xl p-7">
           {question.passage && (<div className="bg-surface-cool border border-line rounded-xl p-5 mb-6 text-[15px] text-ink leading-relaxed">{question.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{question.passageTitle}</p>}<ChartPassage passage={question.passage} /></div>)}
+          <QuestionImages imageRoles={question.imageRoles} imageRefs={question.imageRefs} />
           <p className="text-[17px] font-semibold text-navy leading-snug mb-6">{question.stem}</p>
           <div className="flex flex-col gap-2.5 mb-6">
             {choices.map(c => {
@@ -70,7 +72,7 @@ export default function QotdPage() {
                 <p className={`font-extrabold text-[16px] ${isCorrect ? "text-green-800" : "text-red-800"}`}>{isCorrect ? "Correct!" : "Not quite"}</p>
                 <span className="ml-auto font-bold text-teal-deep font-mono">+{xpEarned} XP</span>
               </div>
-              {question.explanation && <div className={`text-[13px] ${isCorrect ? "text-green-900" : "text-red-900"}`}><ReactMarkdown>{question.explanation}</ReactMarkdown></div>}
+              {question.explanation && <div className={`text-[13px] ${isCorrect ? "text-green-900" : "text-red-900"}`}><ExplanationBody text={question.explanation} isCorrect={!!isCorrect} /></div>}
               {newAchs.length > 0 && <div className="mt-3 pt-3 border-t border-current/10"><p className="text-[12px] font-bold uppercase tracking-wider mb-1 opacity-70">🏆 Achievement unlocked!</p>{newAchs.map(id => <p key={id} className="text-[13px] font-semibold">{id}</p>)}</div>}
             </div>
           )}

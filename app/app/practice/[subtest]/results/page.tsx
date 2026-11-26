@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
+import ExplanationBody from '@/components/practice/ExplanationBody';
 import type { Question, Answer } from '@/db/schema';
 
 const SUBTEST_LABELS: Record<string, string> = {
@@ -53,28 +53,6 @@ function ScoreRing({ correct, total }: { correct: number; total: number }) {
         <p className="text-xs text-ink-muted font-mono">{correct}/{total}</p>
       </div>
     </div>
-  );
-}
-
-function ExplanationBody({ text, isCorrect }: { text: string; isCorrect: boolean }) {
-  const headingColor = isCorrect ? 'text-green-800' : 'text-red-800';
-  const bulletColor  = isCorrect ? 'text-green-700' : 'text-red-700';
-  return (
-    <ReactMarkdown
-      components={{
-        strong: ({ children }) => <strong className={`font-semibold ${headingColor}`}>{children}</strong>,
-        p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
-        ul: ({ children }) => <ul className="mt-1 space-y-0.5">{children}</ul>,
-        li: ({ children }) => (
-          <li className={`flex items-start gap-1.5 ${bulletColor}`}>
-            <span className="mt-1.5 w-1 h-1 rounded-full bg-current flex-shrink-0" />
-            <span>{children}</span>
-          </li>
-        ),
-      }}
-    >
-      {text}
-    </ReactMarkdown>
   );
 }
 

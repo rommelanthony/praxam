@@ -3,6 +3,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import type { Question } from '@/db/schema';
 import ChartPassage from '@/components/practice/ChartPassage';
+import QuestionImages from '@/components/practice/QuestionImages';
+import ExplanationBody from '@/components/practice/ExplanationBody';
 import { openPaywall } from '@/components/PaywallModal';
 import { SUBTEST_NAMES } from '@/lib/questions/labels';
 
@@ -206,6 +208,9 @@ export default function SubtestPage() {
         </div>
       )}
 
+      {/* Images — AR set panels + test shape, or any other figures */}
+      <QuestionImages imageRoles={current.imageRoles} imageRefs={current.imageRefs} />
+
       {/* Question stem */}
       <div className="mb-6">
         <p className="text-[17px] font-semibold text-navy leading-snug">{current.stem}</p>
@@ -250,7 +255,7 @@ export default function SubtestPage() {
             : 'bg-red-50 border-red-200 text-red-900'
         }`}>
           <p className="font-semibold mb-1">{state === 'correct' ? '✓ Correct' : '✗ Incorrect'}</p>
-          <p>{current.explanation}</p>
+          <ExplanationBody text={current.explanation} isCorrect={state === 'correct'} />
         </div>
       )}
 
