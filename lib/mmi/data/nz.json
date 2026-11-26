@@ -1,0 +1,3065 @@
+{
+ "edition": "nz",
+ "place": "Aotearoa New Zealand",
+ "lang": "en-NZ",
+ "attributes": {
+  "comm": {
+   "label": "Communication",
+   "description": "speaks clearly and fluently at a steady pace, with confidence and good expression",
+   "levels": {
+    "1": "Hard to follow: disorganised, very short or rambling, little sense of the listener.",
+    "3": "Clear enough with some structure; mostly relevant; uses a reasonable share of the time.",
+    "5": "Clear, well organised and engaging from start to finish; signposts points, adapts language to the listener and finishes on time."
+   }
+  },
+  "equity": {
+   "label": "Equity",
+   "description": "aware of fairness, social justice and human rights in health; can explain at an introductory level how systemic discrimination (racism, sexism, ableism) and social determinants create and maintain inequities",
+   "levels": {
+    "1": "Does not notice unfairness, or blames individuals for structural problems.",
+    "3": "Recognises that some groups are affected more and names one or two causes.",
+    "5": "Explains several structural causes (discrimination, social determinants, access), who is affected and why, and suggests fair, practical responses."
+   }
+  },
+  "ethics": {
+   "label": "Ethical reasoning",
+   "description": "sees more than one side of an issue and applies ethical principles with integrity to reach a fair, reasoned position",
+   "levels": {
+    "1": "Gives a one-sided or unreasoned view; misses the dilemma.",
+    "3": "Identifies the main dilemma and considers more than one side.",
+    "5": "Weighs competing principles and stakeholders fairly, reaches a reasoned position and acknowledges its limits."
+   }
+  },
+  "critical": {
+   "label": "Critical thinking",
+   "description": "identifies the real issue, analyses it, draws logical unbiased conclusions and builds a structured, persuasive argument",
+   "levels": {
+    "1": "Restates the question or makes assertions without reasons.",
+    "3": "Identifies the main issue and gives some reasons and examples.",
+    "5": "Analyses the issue in depth, weighs evidence and trade-offs, and builds a logical, persuasive argument."
+   }
+  },
+  "cultural": {
+   "label": "Cultural safety and self-reflection",
+   "description": "recognises how their own culture and background shape their view, respects other perspectives and is willing to learn from them",
+   "levels": {
+    "1": "Shows little awareness of their own perspective or of other cultures; may stereotype.",
+    "3": "Shows some awareness that culture and background shape views; respectful.",
+    "5": "Reflects honestly on their own culturally shaped perspective, shows genuine respect and curiosity about others, and links this to safe care."
+   }
+  },
+  "team": {
+   "label": "Teamwork and leadership",
+   "description": "draws on real experience of diverse teams: taking initiative, building trust, handling conflict, shared accountability",
+   "levels": {
+    "1": "No concrete example, or describes teamwork only in general terms.",
+    "3": "Gives a relevant example with a clear role and some reflection.",
+    "5": "Gives a specific example showing initiative, trust-building, handling conflict and shared accountability, with clear lessons learned."
+   }
+  },
+  "resilience": {
+   "label": "Resilience and motivation",
+   "description": "handles setbacks constructively, shows determination for a health career, a growth mindset and deliberate self-care",
+   "levels": {
+    "1": "Little evidence of coping or motivation; vague or unrealistic.",
+    "3": "Describes a real challenge and reasonable coping or motivation.",
+    "5": "Shows realistic understanding of challenges, specific coping and self-care strategies already used, growth from setbacks and well-grounded motivation."
+   }
+  },
+  "flex": {
+   "label": "Flexible problem solving",
+   "description": "thinks fluently, combines ideas in new ways and suggests creative, practical solutions",
+   "levels": {
+    "1": "No solutions, or only one obvious idea.",
+    "3": "Offers a few sensible ideas.",
+    "5": "Generates several creative, practical ideas, adapts when considering new angles and is open to changing their mind."
+   }
+  }
+ },
+ "domains": [
+  "Equity",
+  "Moral/ethical",
+  "Career choice",
+  "Healthcare issue",
+  "Personal insight",
+  "Personal experience",
+  "Hauora Māori",
+  "Situational"
+ ],
+ "anchors": {
+  "Equity": [
+   "equity"
+  ],
+  "Moral/ethical": [
+   "ethics"
+  ],
+  "Career choice": [
+   "resilience",
+   "comm"
+  ],
+  "Healthcare issue": [
+   "critical",
+   "flex"
+  ],
+  "Personal insight": [
+   "cultural"
+  ],
+  "Personal experience": [
+   "team"
+  ],
+  "Hauora Māori": [
+   "cultural",
+   "equity"
+  ]
+ },
+ "stations": [
+  {
+   "id": "gp-cost",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "critical",
+    "flex"
+   ],
+   "title": "The cost of a GP visit",
+   "scenario": "Surveys in Aotearoa New Zealand regularly find that some adults put off seeing a GP because of the cost of an appointment.",
+   "question": "Which groups are most likely to be affected, and what could be done about it?",
+   "keyPoints": [
+    "Identifies groups: low-income households, Māori and Pacific whānau, people with disabilities or chronic illness, rural people, students, those with insecure work",
+    "Explains causes beyond price: time off work, transport, enrolment barriers, past experiences of discrimination",
+    "Impacts: delayed diagnosis, more emergency department use, worse chronic disease control, widening inequity",
+    "Solutions at several levels: targeted funding, low-cost or community clinics, nurse-led and pharmacy care, outreach, telehealth",
+    "Weighs trade-offs such as limited funding and workforce shortages",
+    "Clear structure: groups, then causes, then impacts, then solutions"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "disability-access",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "cultural",
+    "flex"
+   ],
+   "title": "Hard to reach",
+   "scenario": "Many clinics, health websites and booking systems are difficult to use for people who are Deaf, blind, neurodivergent or have a learning disability.",
+   "question": "What inequities can this create, and how might health services respond?",
+   "keyPoints": [
+    "Recognises ableism and how inaccessible systems create unequal access and outcomes",
+    "Examples: missed information, consent not truly informed, missed appointments, reliance on family to interpret",
+    "Links to rights: equal access, dignity, and the UN Convention on the Rights of Persons with Disabilities",
+    "Solutions: NZ Sign Language interpreters, Easy Read, accessible websites, longer appointments, staff training",
+    "Co-design with disabled people (\"nothing about us without us\")",
+    "Shows reflection on own assumptions about disability"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "opt-out-donation",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Opt-out organ donation",
+   "scenario": "Some countries automatically register adults as organ donors unless they choose to opt out. In New Zealand, people currently choose whether to be a donor, and families are involved in the final decision.",
+   "question": "What are your thoughts on New Zealand moving to an opt-out system?",
+   "keyPoints": [
+    "Recognises the dilemma: saving lives vs bodily autonomy and consent",
+    "Arguments for: more donors, fewer deaths on waiting lists, reflects most people's stated wishes",
+    "Arguments against: presumed consent is not real consent, trust, family distress, uneven public awareness",
+    "Cultural perspectives, including tikanga Māori views on the body and whānau decision-making",
+    "Considers evidence: opt-out alone may not raise rates without infrastructure and family conversations",
+    "Reaches a reasoned position while respecting other views"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "paid-plasma",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "Paying blood donors",
+   "scenario": "In some countries, people are paid to donate blood plasma. In New Zealand, blood and plasma donors are volunteers and are not paid.",
+   "question": "Should people be paid to donate blood or plasma?",
+   "keyPoints": [
+    "Identifies the dilemma: supply and self-sufficiency vs exploitation and altruism",
+    "Risk that payment targets people on low incomes, creating unfair pressure",
+    "Safety concerns: people may hide risk factors to get paid",
+    "Benefits: more supply, less reliance on imported products (NZ already imports some immunoglobulin)",
+    "Middle options: reimbursing costs or time, recognition schemes",
+    "Clear, reasoned conclusion that acknowledges the other side"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "ai-scribes",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "ethics",
+    "flex"
+   ],
+   "title": "AI in the consulting room",
+   "scenario": "Some GP clinics now use AI tools that listen to the consultation and write the doctor's notes automatically, so the doctor can focus on the patient.",
+   "question": "What are your thoughts on using AI in this way?",
+   "keyPoints": [
+    "Benefits: more eye contact and time with patients, less burnout from paperwork",
+    "Risks: errors in notes, privacy and data security, where recordings are stored",
+    "Consent: patients must know and be able to say no",
+    "Equity and culture: accents, te reo Māori, data sovereignty",
+    "Accountability: the clinician must still check and own the notes",
+    "Forms a balanced opinion; open to changing it with evidence"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "youth-vaping",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Vaping at school",
+   "scenario": "Vaping has become common among secondary school students in Aotearoa New Zealand, even though vapes cannot legally be sold to anyone under 18.",
+   "question": "What are your thoughts on how this issue should be addressed?",
+   "keyPoints": [
+    "Recognises tension: vaping helps some adults quit smoking but harms and addicts young people",
+    "Why youth vape: flavours, marketing, peer use, stress, easy supply",
+    "Unequal impact on some communities and lower-income areas",
+    "Mix of solutions: enforcement on retailers, product rules (e.g. the 2025 ban on disposable vapes), education young people trust, quit support",
+    "Involve young people and whānau in designing responses",
+    "Forms and justifies an opinion without needing deep technical knowledge"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "fifteen-years",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "comm"
+   ],
+   "title": "Fifteen years from now",
+   "scenario": "Training to become a health professional takes many years, and careers often change direction along the way.",
+   "question": "Where do you see yourself in fifteen years, and how will you look after your own wellbeing along the way?",
+   "keyPoints": [
+    "Realistic goals linked to genuine motivation and community need",
+    "Openness to change; aware the path may shift",
+    "Specific, practical self-care strategies already used, not just intentions",
+    "Support networks: whānau, friends, mentors, faith or culture, peer support",
+    "Awareness of burnout risk in health careers",
+    "Communicates with warmth and clarity"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "role-model",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "comm"
+   ],
+   "title": "A role model",
+   "scenario": "Most people who choose a health career can point to someone who influenced them.",
+   "question": "Think of a health professional you have met or learned about. What qualities do you admire in them, and how do those qualities connect to the career you want?",
+   "keyPoints": [
+    "A specific person with concrete details, not a generic description",
+    "Qualities named and illustrated with behaviour seen",
+    "Honest reflection on which qualities they already have and which they need to develop",
+    "Links clearly to their own motivation and career choice",
+    "Avoids idealising; aware no professional is perfect",
+    "Clear structure: who, what they did, why it matters to me"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "difficult-trait",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "team"
+   ],
+   "title": "Your hardest trait",
+   "scenario": "Everyone has qualities that others can find difficult to work with.",
+   "question": "Describe one of yours. How do you manage it, and how might it help or hinder you as a health professional?",
+   "keyPoints": [
+    "Names a genuine trait, not a disguised strength like \"I work too hard\"",
+    "Specific example of when it caused a problem",
+    "Concrete strategies used to manage it, and evidence they work",
+    "Recognises where the trait can also be a strength",
+    "Links to teamwork and patient care in a health setting",
+    "Shows honesty and self-awareness without being self-critical"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "shaped-you",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "comm",
+    "resilience"
+   ],
+   "title": "What shaped you",
+   "scenario": "Our families, cultures, communities and experiences shape how we see the world.",
+   "question": "What has most shaped the person you are today, and how might it influence the way you care for patients?",
+   "keyPoints": [
+    "A specific influence explained with examples",
+    "Reflects on own culture or background and how it shapes their views",
+    "Recognises possible blind spots or biases it creates",
+    "Links to caring for patients from different backgrounds",
+    "Shows respect for perspectives different from their own",
+    "Authentic, well-structured story"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "disagreed",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "comm"
+   ],
+   "title": "A respectful disagreement",
+   "scenario": "In health care, team members sometimes disagree about the right course of action.",
+   "question": "Describe a time you disagreed with someone you respected. What happened, how did you handle it, and what did you learn?",
+   "keyPoints": [
+    "A real, specific situation with clear context",
+    "Explains their own view and genuinely tries to understand the other person's",
+    "Respectful communication: listening, timing, choosing the right setting",
+    "Outcome, including compromise or changing their own mind",
+    "What they learned about teamwork or themselves",
+    "Does not portray the other person negatively"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "community-help",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "equity"
+   ],
+   "title": "Giving back",
+   "scenario": "Many health professionals were involved in their communities before they started training.",
+   "question": "Describe a time you helped your community or someone outside your family. What did you learn about the people you were helping?",
+   "keyPoints": [
+    "A specific experience with their real role and actions",
+    "Learning about the people helped, not just about themselves",
+    "Awareness of the barriers or inequities those people face",
+    "Respect and avoiding a saviour framing",
+    "Teamwork with others involved",
+    "Links to how this shapes them as a future health professional"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "life-expectancy",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "equity",
+    "cultural",
+    "critical"
+   ],
+   "title": "The life expectancy gap",
+   "scenario": "On average, Māori in Aotearoa New Zealand live several years less than non-Māori.",
+   "question": "What factors contribute to this gap?",
+   "keyPoints": [
+    "Structural determinants: colonisation, land loss, income, housing, education, employment",
+    "Racism in the health system and wider society, including institutional racism",
+    "Access barriers: cost, distance, culturally unsafe services",
+    "Te Tiriti o Waitangi: Crown obligations of partnership, equity and active protection",
+    "Avoids blaming individual lifestyle choices",
+    "Mentions strengths-based approaches: kaupapa Māori services, Māori health workforce"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "kaupapa-services",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "By Māori, for Māori",
+   "scenario": "Kaupapa Māori health services are designed and delivered by Māori, using Māori values, practices and models of health such as Te Whare Tapa Whā.",
+   "question": "How might services like these improve health outcomes for Māori?",
+   "keyPoints": [
+    "Explains holistic models such as Te Whare Tapa Whā: taha tinana, hinengaro, wairua, whānau",
+    "Trust and cultural safety lead to better engagement and earlier care",
+    "Whānau-centred care and tino rangatiratanga (self-determination)",
+    "Links to Te Tiriti and equity",
+    "Considers challenges: funding, workforce, how mainstream services must also change",
+    "Reflects on own cultural position and learning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "rural-birth",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "flex",
+    "critical"
+   ],
+   "title": "Far from a birthing unit",
+   "scenario": "Several small rural maternity units in Aotearoa New Zealand have closed over the years. Some women now travel more than an hour to give birth.",
+   "question": "What inequities can this create, and how might they be reduced?",
+   "keyPoints": [
+    "Identifies who is most affected: rural, low-income, Māori and Pacific whānau, people without a car",
+    "Risks: births on the roadside, delayed emergency care, stress, cost of travel and accommodation",
+    "Wider impacts: separation from whānau and support networks, lost local workforce",
+    "Recognises why units close: workforce shortages, safety with low birth numbers, funding",
+    "Solutions: midwife-led local care, transport and accommodation support, telehealth, rural workforce incentives",
+    "Balances safety, cost and access rather than one simple answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "family-interpreter",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "cultural",
+    "ethics"
+   ],
+   "title": "The child interpreter",
+   "scenario": "Patients who don't speak English well are sometimes asked to use a family member, occasionally a child, to interpret during health appointments.",
+   "question": "What problems can this cause, and what should health services do?",
+   "keyPoints": [
+    "Accuracy: medical terms mistranslated, information filtered or softened",
+    "Confidentiality and privacy: patient may not disclose sensitive issues",
+    "Burden and harm to children who hear distressing information",
+    "Consent may not be truly informed; a breach of the right to effective communication",
+    "Solutions: professional interpreters (in person, phone, video), translated materials, staff training",
+    "Respects the patient's choice while making professional interpreting the default"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "digital-divide",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "flex",
+    "critical"
+   ],
+   "title": "Health goes online",
+   "scenario": "More health services are moving online, including booking appointments, video consultations, repeat prescriptions and viewing test results.",
+   "question": "Who could be left behind, and how should services make sure they are not?",
+   "keyPoints": [
+    "Groups at risk: older people, people on low incomes, rural areas with poor internet, disabled people, those with low digital literacy or limited English",
+    "Benefits for others: convenience, less travel and time off work",
+    "Risk of widening inequity if online becomes the only option",
+    "Solutions: keep phone and in-person options, free Wi-Fi or data, help from staff or community workers, accessible design",
+    "Co-design with users who struggle most",
+    "Weighs efficiency gains against fairness"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "dismissed-pain",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "critical",
+    "cultural"
+   ],
+   "title": "Taken seriously",
+   "scenario": "Research from several countries suggests that women's pain is more likely than men's to be underestimated by health professionals, and that conditions such as endometriosis can take years to diagnose.",
+   "question": "Why might this happen, and what could be done about it?",
+   "keyPoints": [
+    "Explains bias: stereotypes about women and pain, research historically based on men",
+    "Recognises intersecting factors such as ethnicity, disability and class",
+    "Impacts: delayed diagnosis, suffering, loss of trust, time off school or work",
+    "Solutions: education about bias, listening and believing patients, better research, clear referral pathways",
+    "Self-reflection: how their own assumptions might affect how they listen",
+    "Structured argument supported by reasons, not just opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "food-environment",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "critical",
+    "ethics"
+   ],
+   "title": "What's on the corner",
+   "scenario": "Lower-income neighbourhoods in New Zealand often have more fast-food outlets and fewer affordable fresh-food options than wealthier areas.",
+   "question": "How might this affect people's health, and whose responsibility is it to address it?",
+   "keyPoints": [
+    "Links food environment to obesity, diabetes, heart disease and dental decay",
+    "Avoids blaming individuals; explains how cost, time and access shape choices",
+    "Considers several responsibilities: government, councils, food industry, schools, communities, individuals",
+    "Possible actions: zoning near schools, healthy food subsidies, community gardens, food in schools programmes",
+    "Recognises the tension between personal freedom and public health",
+    "Reaches a reasoned view on shared responsibility"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "rainbow-youth",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "cultural",
+    "flex"
+   ],
+   "title": "A welcoming clinic",
+   "scenario": "Surveys in New Zealand show that rainbow (LGBTQIA+) young people report poorer wellbeing than their peers and are less likely to feel comfortable accessing health care.",
+   "question": "What might contribute to this, and how could health services become more welcoming?",
+   "keyPoints": [
+    "Contributing factors: stigma, discrimination, bullying, family rejection, minority stress",
+    "Health system barriers: assumptions, wrong names or pronouns, past negative experiences",
+    "Respect and confidentiality as foundations of trust",
+    "Practical changes: inclusive forms and language, staff training, visible signals of safety, youth-friendly services",
+    "Involve rainbow young people in designing services",
+    "Reflects on own assumptions and learning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "teen-consent",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Should parents be told?",
+   "scenario": "In New Zealand, people aged 16 and over can consent to their own health care, and younger people can often consent if they understand what is involved. Their information is usually kept confidential, even from their parents.",
+   "question": "Should parents always be told when their 14-year-old sees a doctor?",
+   "keyPoints": [
+    "Identifies the tension: young person's autonomy and privacy vs parents' role and protection",
+    "Confidentiality encourages young people to seek help they might otherwise avoid",
+    "Limits: serious risk of harm can justify sharing information",
+    "Encouraging the young person to involve whānau where safe",
+    "Considers different family and cultural expectations",
+    "Reaches a nuanced position rather than \"always\" or \"never\""
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "opting-out",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "cultural",
+    "critical"
+   ],
+   "title": "A matter of conscience",
+   "scenario": "Since 2021, adults in New Zealand who meet strict criteria can request assisted dying. Health practitioners can choose not to take part because of their own beliefs.",
+   "question": "What are your thoughts on health professionals being able to opt out of some kinds of care for personal reasons?",
+   "keyPoints": [
+    "Respects the professional's conscience and moral integrity",
+    "Weighs this against patients' rights to lawful care and timely access",
+    "Recognises access problems if many practitioners opt out, especially in rural areas",
+    "Duty to tell patients how to access care elsewhere without delay or judgement (in NZ, an objecting practitioner must tell the person they can contact the SCENZ Group)",
+    "Acknowledges diverse religious, cultural and personal views",
+    "Clear position that recognises both sides; not judged on which view they hold"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "genetic-family",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Should the family know?",
+   "scenario": "A genetic test shows a patient carries a gene variant that greatly raises the risk of a serious but often preventable cancer. The same variant may be present in their brothers and sisters. The patient does not want them told.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Identifies conflict: patient confidentiality and autonomy vs preventing serious harm to relatives",
+    "Explores why the patient may not want to share: fear, family conflict, guilt",
+    "Preferred approach: support and encourage the patient to tell family, offer help to do so",
+    "Recognises that disclosure without consent is a serious step needing strong justification and senior advice",
+    "Considers trust in the health system if confidentiality is broken",
+    "Balanced, reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "funding-choice",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "One budget, two programmes",
+   "scenario": "A health service can fund only one of two programmes: an expensive new medicine that extends life by several months for a small number of people with advanced cancer, or a falls-prevention programme for hundreds of older people.",
+   "question": "How should decisions like this be made?",
+   "keyPoints": [
+    "Recognises scarce resources mean every choice has an opportunity cost",
+    "Considers principles: benefit to the most people, fairness, need, quality of life, cost-effectiveness",
+    "Hears both sides: value of extra time at end of life vs preventing injury and loss of independence",
+    "Equity: who benefits and who misses out",
+    "Fair process: transparent criteria, evidence, public and patient input (e.g. Pharmac-style decisions)",
+    "Forms a reasoned view while respecting that people weigh values differently"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "clinician-social",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "comm",
+    "critical"
+   ],
+   "title": "Doctors on social media",
+   "scenario": "Some health professionals post videos about their work on social media, sometimes sharing patients' stories with permission. Their videos can reach thousands of people.",
+   "question": "What are your thoughts on this?",
+   "keyPoints": [
+    "Benefits: public health education, countering misinformation, making careers visible",
+    "Risks: privacy even with consent, patients feeling pressured to agree, identification from details",
+    "Professionalism and trust in the profession",
+    "Conflicts of interest: sponsorship, chasing views",
+    "Possible boundaries: professional guidelines, no identifiable patients, accuracy",
+    "Balanced view with a reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "smoker-surgery",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "Earning a place in the queue",
+   "scenario": "Some people argue that patients who continue to smoke should have lower priority for certain planned operations than patients who don't smoke.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Arguments for: smoking raises surgical risk and may reduce benefit; scarce resources",
+    "Arguments against: punishing addiction, slippery slope to other \"lifestyle\" judgements",
+    "Equity: smoking rates are higher in groups already facing disadvantage",
+    "Distinguishes clinical risk (a medical reason) from moral blame",
+    "Alternative: support to quit before surgery rather than exclusion",
+    "Reaches a reasoned, compassionate position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "not-selected",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "flex"
+   ],
+   "title": "If it's not this year",
+   "scenario": "Each year, many applicants who would make good health professionals are not offered a place.",
+   "question": "If you are not selected this year, what will you do?",
+   "keyPoints": [
+    "Honest about disappointment, with a realistic response",
+    "Concrete plan: reflect on feedback, strengthen weaker areas, reapply or consider other pathways",
+    "Open to related careers and what they offer",
+    "Keeps wellbeing and support networks in mind",
+    "Shows commitment to health without making it their whole identity",
+    "Clear and composed communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "which-profession",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "team"
+   ],
+   "title": "Why this profession?",
+   "scenario": "Health care relies on many professions working together, including nurses, pharmacists, physiotherapists, midwives, kaiāwhina and doctors.",
+   "question": "Why have you chosen this profession over the others, and what do you know about what it is really like?",
+   "keyPoints": [
+    "Specific reasons drawn from real experiences or research",
+    "Shows understanding of the day-to-day reality, not only the highlights",
+    "Respects other professions and sees medicine as part of a team",
+    "Realistic about demands: training length, workload, uncertainty",
+    "Evidence of testing the choice (volunteering, conversations, reading)",
+    "Genuine, well-structured answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "after-mistake",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "ethics"
+   ],
+   "title": "After a mistake",
+   "scenario": "Every health professional will make mistakes during their career, and some will affect patients.",
+   "question": "How do you think you would cope after making a mistake that affected a patient?",
+   "keyPoints": [
+    "Honesty and open disclosure to the patient and team",
+    "Puts patient safety first: fix the harm, report it",
+    "Learns from it: reflection, systems thinking, not just self-blame",
+    "Seeks support: supervisors, peers, wellbeing services",
+    "Recognises the emotional impact and the risk of burnout",
+    "Links to past experience of handling their own errors"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "hard-to-staff",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "equity"
+   ],
+   "title": "Where the need is",
+   "scenario": "Some areas of health care, such as rural general practice, mental health and care of older people, struggle to attract enough staff.",
+   "question": "Would you consider working in one of these areas? Why or why not?",
+   "keyPoints": [
+    "Honest answer with real reasons, not just what sounds good",
+    "Understands why these areas are hard to staff",
+    "Recognises the equity impact of shortages on communities",
+    "Open-minded about how interests may change during training",
+    "Considers personal factors: whānau, lifestyle, support",
+    "Clear reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "work-life",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "cultural"
+   ],
+   "title": "Switching off",
+   "scenario": "Many health professionals find it hard to switch off from work, and burnout is common.",
+   "question": "How will you balance your career with the rest of your life?",
+   "keyPoints": [
+    "Specific strategies already in use (sport, music, faith, whānau, friends, rest)",
+    "Recognises early warning signs of stress in themselves",
+    "Willing to ask for help and use support services",
+    "Values relationships and identity outside work",
+    "Realistic about how demanding training is",
+    "Communicates with clarity and self-awareness"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "one-change",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "flex"
+   ],
+   "title": "Making a difference",
+   "scenario": "Imagine you have finished your training and are working in the health system.",
+   "question": "What is one thing you hope to change or contribute, and why does it matter to you?",
+   "keyPoints": [
+    "A specific, realistic goal",
+    "Clear personal connection to the goal",
+    "Shows understanding of the problem and its causes",
+    "Practical ideas for how they would contribute, including teamwork",
+    "Recognises change takes time and persistence",
+    "Inspiring but grounded communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "ed-waits",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "The long wait",
+   "scenario": "Emergency departments across New Zealand regularly report long waiting times, with some patients waiting many hours to be seen or admitted.",
+   "question": "What do you think causes this, and what could help?",
+   "keyPoints": [
+    "Causes across the system: limited GP access, bed shortages, staffing, delayed discharges, ageing population",
+    "Recognises ED crowding is a whole-hospital and community problem",
+    "Impacts: patient harm, staff burnout, unequal effects on some groups",
+    "Solutions: urgent care and primary care access, better discharge planning, more beds and staff, triage improvements",
+    "Considers trade-offs and cost",
+    "Forms a clear opinion without needing detailed statistics"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "superbugs",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "comm"
+   ],
+   "title": "When antibiotics stop working",
+   "scenario": "Infections that resist antibiotics are becoming more common around the world.",
+   "question": "What are your thoughts on how this problem should be tackled?",
+   "keyPoints": [
+    "Explains in plain terms why resistance develops: overuse and misuse",
+    "Sources: unnecessary prescribing, patients not finishing courses, use in farming",
+    "Solutions: careful prescribing, public education, infection prevention, vaccination, surveillance",
+    "Need for new antibiotics and global cooperation",
+    "Recognises pressure on clinicians from patients who expect antibiotics",
+    "Clear, structured argument"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "health-influencers",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "cultural"
+   ],
+   "title": "Health advice from influencers",
+   "scenario": "Many young people now get health information from social media influencers rather than from health professionals.",
+   "question": "What are your thoughts on this, and how should health professionals respond?",
+   "keyPoints": [
+    "Recognises why influencers appeal: relatable, accessible, free",
+    "Risks: misinformation, products for sale, unrealistic body images",
+    "Not all online information is bad; some creators are accurate and reach people services miss",
+    "Responses: health professionals creating trustworthy content, teaching how to judge sources, partnering with trusted voices",
+    "Respect for young people's choices and cultures",
+    "Balanced view"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "workforce-mobility",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "ethics"
+   ],
+   "title": "Who will staff our hospitals?",
+   "scenario": "New Zealand relies heavily on doctors and nurses trained overseas, while some health workers trained here move to Australia for higher pay.",
+   "question": "What are your thoughts on how New Zealand should address its health workforce shortages?",
+   "keyPoints": [
+    "Causes: pay gaps, workload, training numbers, ageing workforce",
+    "Ethical issue of recruiting staff from countries that need them",
+    "Options: train more locally, rural and Māori and Pacific pathways, retention through pay and conditions, bonding schemes",
+    "Supporting overseas-trained staff to settle and practise safely",
+    "Long-term vs short-term solutions",
+    "Reasoned opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "sugar-tax",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Taxing sugary drinks",
+   "scenario": "Some countries tax sugary drinks to reduce obesity and tooth decay. New Zealand does not currently have a tax like this.",
+   "question": "Should New Zealand introduce one?",
+   "keyPoints": [
+    "Arguments for: evidence from other countries of reduced consumption, revenue for health",
+    "Arguments against: hits low-income households harder, personal freedom, industry pushback",
+    "Equity: potential benefits are greatest in groups with highest consumption",
+    "Complementary measures: water in schools, labelling, marketing limits",
+    "Recognises a single tax is not a full solution",
+    "Forms and justifies a view"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "youth-social-media",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "cultural"
+   ],
+   "title": "Growing up online",
+   "scenario": "There is growing concern about the effect of social media on young people's mental wellbeing, and some countries are restricting social media for children.",
+   "question": "What are your thoughts on what should be done?",
+   "keyPoints": [
+    "Recognises both harms (comparison, cyberbullying, sleep loss) and benefits (connection, identity, support)",
+    "Evidence is mixed and still developing",
+    "Considers options: age limits, platform responsibility, education, parental tools",
+    "Involves young people in solutions rather than only restricting them",
+    "Considers equity and practicality of enforcement",
+    "Draws on own observations thoughtfully"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "wrong-assumption",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "comm",
+    "flex"
+   ],
+   "title": "A wrong assumption",
+   "scenario": "We all make assumptions about people based on how they look, speak or where they come from.",
+   "question": "Tell us about a time an assumption you made about someone turned out to be wrong. What did you learn?",
+   "keyPoints": [
+    "An honest, specific example",
+    "Explains where the assumption came from",
+    "What changed their view",
+    "Insight into their own culturally shaped perspective",
+    "How they now act differently",
+    "Link to caring for diverse patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "strength-weakness",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "comm"
+   ],
+   "title": "Your best quality",
+   "scenario": "The qualities that serve us well can sometimes work against us.",
+   "question": "What strength do others most often see in you, and when might that strength become a weakness in a health setting?",
+   "keyPoints": [
+    "Names a genuine strength with an example",
+    "Thoughtful insight into how it can become a weakness",
+    "Concrete example or scenario in health care",
+    "Strategies to manage the downside",
+    "Self-aware without false modesty",
+    "Clear structure"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "useful-feedback",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "comm"
+   ],
+   "title": "Feedback that changed you",
+   "scenario": "Health professionals receive feedback throughout their careers from patients, colleagues and supervisors.",
+   "question": "What is the most useful feedback you have received, and how did it change you?",
+   "keyPoints": [
+    "Specific feedback and context",
+    "Honest about initial reaction",
+    "Reflection on why it was useful",
+    "Concrete changes made as a result",
+    "Continues to seek feedback",
+    "Links to lifelong learning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "different-values",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "ethics",
+    "comm"
+   ],
+   "title": "When values differ",
+   "scenario": "Patients' beliefs and values will sometimes be very different from your own.",
+   "question": "Describe a value you hold strongly. How would you care for a patient whose beliefs are very different from yours?",
+   "keyPoints": [
+    "Clearly describes a personal value and where it comes from",
+    "Recognises it shapes their views, which may differ from patients'",
+    "Commits to respectful, non-judgemental care",
+    "Practical approaches: listening, asking about what matters to the patient, not imposing views",
+    "Knows when to seek help from colleagues",
+    "Shows cultural humility"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "comfort-zone",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "flex"
+   ],
+   "title": "Out of your comfort zone",
+   "scenario": "Training and working in health care regularly puts people in unfamiliar situations.",
+   "question": "When did you last step well outside your comfort zone, and what did it teach you about yourself?",
+   "keyPoints": [
+    "A specific recent example",
+    "What made it uncomfortable",
+    "How they adapted and coped",
+    "What they learned about themselves",
+    "How that helps them in future challenges",
+    "Authentic and reflective"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "your-background",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "What you bring",
+   "scenario": "Everyone's background gives them some advantages and some challenges.",
+   "question": "What advantages or challenges has your background given you, and how might they shape how you see your patients?",
+   "keyPoints": [
+    "Honest reflection on their own circumstances",
+    "Recognises advantages they may have had, not only challenges",
+    "Understands how background shapes perspective and possible blind spots",
+    "Links to empathy for patients from different circumstances",
+    "Avoids assuming their experience is universal",
+    "Respectful and thoughtful communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "struggling-group",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "flex",
+    "comm"
+   ],
+   "title": "Turning a group around",
+   "scenario": "Sometimes a group or team is not working well together.",
+   "question": "Describe a time you helped a group that was struggling. What did you do, and what happened?",
+   "keyPoints": [
+    "Specific situation and why the group struggled",
+    "Their actions: listening, clarifying goals, sharing tasks, encouraging others",
+    "Handled any conflict respectfully",
+    "Honest outcome, including what did not work",
+    "Lessons about leadership and teamwork",
+    "Clear story structure"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "let-team-down",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "resilience",
+    "cultural"
+   ],
+   "title": "Letting the team down",
+   "scenario": "Everyone lets people down at some point.",
+   "question": "Tell us about a time you let a team down. How did you handle it?",
+   "keyPoints": [
+    "Takes real responsibility without excuses",
+    "Explains what happened and its impact on others",
+    "Actions taken to put it right",
+    "What they learned and changed",
+    "Rebuilt trust",
+    "Honest and self-aware"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "different-culture-team",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "comm"
+   ],
+   "title": "Working across cultures",
+   "scenario": "Health care teams bring together people from many cultures and backgrounds.",
+   "question": "Describe a time you worked closely with people from a background very different from your own. What did you learn about working together?",
+   "keyPoints": [
+    "Specific example and setting",
+    "Differences noticed and how they affected the work",
+    "How they adapted their communication",
+    "What they learned from others",
+    "Respect rather than stereotyping",
+    "Links to health care teams and patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "supporting-someone",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "resilience"
+   ],
+   "title": "Being there for someone",
+   "scenario": "Caring for others can be rewarding and demanding.",
+   "question": "Describe a time you supported someone through a difficult period. What did you learn about caring for others? (Choose an example you are comfortable sharing.)",
+   "keyPoints": [
+    "A specific example the applicant is comfortable discussing",
+    "How they supported the person: listening, practical help, involving others",
+    "Respected the person's wishes and limits",
+    "Knew when to involve others or professional help",
+    "Looked after their own wellbeing",
+    "Learning that applies to caring for patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "peer-conflict",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "comm",
+    "ethics"
+   ],
+   "title": "Caught in the middle",
+   "scenario": "Conflict between people in a group can affect everyone.",
+   "question": "Describe a time two people in a group you belonged to were in conflict. What role did you play?",
+   "keyPoints": [
+    "Specific situation and what the conflict was about",
+    "Stayed fair and did not take sides unfairly",
+    "Helped communication between the two, or knew when to involve a leader",
+    "Kept the group's goals in focus",
+    "Outcome and what they would do differently",
+    "Lessons about conflict in teams"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "real-responsibility",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "resilience",
+    "comm"
+   ],
+   "title": "Real responsibility",
+   "scenario": "Health professionals carry responsibility for other people.",
+   "question": "Tell us about a time you had real responsibility for others, for example in a job, a sports team, church, whānau or volunteering. What did it teach you?",
+   "keyPoints": [
+    "Specific responsibility and who depended on them",
+    "Challenges faced and how they handled them",
+    "Teamwork and asking for help when needed",
+    "Reliability and accountability",
+    "What it taught them about themselves",
+    "Link to responsibility in health care"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "maori-workforce",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Who is doing the caring?",
+   "scenario": "Māori are under-represented in the medical workforce compared with their share of the population.",
+   "question": "Why does this matter, and what could help change it?",
+   "keyPoints": [
+    "Impact on trust, cultural safety and health outcomes for Māori patients",
+    "Causes: barriers in schooling, cost, distance, lack of role models, institutional racism",
+    "Te Tiriti obligations and equity",
+    "Solutions: targeted admission schemes, mentoring, scholarships, kaupapa Māori support in training",
+    "Benefits for the whole health system, not just Māori patients",
+    "Reflects on own role as a future colleague"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "rheumatic-fever",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "A preventable disease",
+   "scenario": "Rheumatic fever is now rare in most wealthy countries, but rates in New Zealand remain much higher among Māori and Pacific children and young people.",
+   "question": "What factors contribute to this, and how could it be prevented?",
+   "keyPoints": [
+    "Basic understanding: can follow an untreated strep throat; damages the heart",
+    "Structural factors: crowded or damp housing, poverty, access to primary care",
+    "Racism and colonisation as underlying determinants",
+    "Prevention: free sore-throat checks, school programmes, healthy homes, whānau-centred services",
+    "Partnership with Māori and Pacific communities",
+    "Avoids blaming families"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "whanau-ward",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Whānau at the bedside",
+   "scenario": "Some Māori patients prefer to have several whānau members present during hospital stays and when important decisions are made.",
+   "question": "How should a hospital respond?",
+   "keyPoints": [
+    "Understands whānau as central to wellbeing and decision-making",
+    "Cultural safety: adapt the system rather than expect patients to fit it",
+    "Practical responses: whānau rooms, flexible visiting, including whānau in discussions",
+    "Balances with other patients' needs and the patient's own wishes and privacy",
+    "Links to Te Tiriti and better outcomes",
+    "Creative, practical solutions"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "data-sovereignty",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "ethics"
+   ],
+   "title": "Whose data?",
+   "scenario": "Māori data sovereignty is the idea that data about Māori should be subject to Māori governance.",
+   "question": "Why might this matter in health research and health services?",
+   "keyPoints": [
+    "History of research done on Māori rather than with or for them",
+    "Data can be used to stigmatise or to support self-determination",
+    "Tino rangatiratanga and Te Tiriti partnership",
+    "Practical meaning: Māori involvement in how data is collected, stored, used and reported",
+    "Benefits: trust, relevant research, better outcomes",
+    "Respectful, reasoned discussion even with limited prior knowledge"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "smoking-gap",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "Closing the smoking gap",
+   "scenario": "Smoking rates in New Zealand have fallen a great deal, but they remain higher among Māori than non-Māori.",
+   "question": "Why might this be, and what approaches are most likely to work?",
+   "keyPoints": [
+    "Historical and structural factors: colonisation, targeted marketing, stress, poverty",
+    "Avoids blaming individuals",
+    "Effective approaches: kaupapa Māori quit services, whānau-based support, Māori-led campaigns",
+    "Policy levers and their equity effects",
+    "Strengths-based framing and Māori leadership",
+    "Clear analysis of causes and solutions"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "tiriti-practice",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "Te Tiriti in practice",
+   "scenario": "Health professionals in Aotearoa New Zealand are expected to understand Te Tiriti o Waitangi and its relevance to health.",
+   "question": "What does Te Tiriti mean to you, and how might it shape the way you practise as a health professional?",
+   "keyPoints": [
+    "Basic understanding of Te Tiriti and principles such as partnership, active protection, equity and options",
+    "Personal connection or reflection, whatever their background",
+    "Practical examples: cultural safety, whānau involvement, addressing inequity, learning te reo and tikanga",
+    "Recognises this is ongoing learning",
+    "Respectful and genuine; avoids tokenism",
+    "Clear communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "adult-dental",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "ethics",
+    "critical"
+   ],
+   "title": "Teeth are health too",
+   "scenario": "In New Zealand, dental care is free for under-18s, but most adults pay privately. Around four in ten adults say they have gone without dental care because of the cost.",
+   "question": "Should dental care for adults be free? What are the arguments on each side?",
+   "keyPoints": [
+    "Links oral health to general health: pain, infection, diabetes, heart disease, nutrition, employment",
+    "Equity: unmet need is highest for low-income, Māori and Pacific adults",
+    "Arguments for: prevention saves later costs and emergency visits; health is health",
+    "Arguments against or limits: cost, workforce shortages, competing priorities",
+    "Middle options: targeted funding, community dental services, prevention in schools and communities",
+    "Reaches a reasoned view that acknowledges trade-offs"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "pacific-diabetes",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "critical",
+    "cultural"
+   ],
+   "title": "Diabetes in Pacific communities",
+   "scenario": "Type 2 diabetes is more common among Pacific peoples in New Zealand than in the general population.",
+   "question": "What factors contribute to this, and what approaches might help?",
+   "keyPoints": [
+    "Structural factors: income, food environment, housing, work patterns, access to care",
+    "Avoids blaming culture or individual choices",
+    "Cultural strengths: church, family and community networks as health assets",
+    "Pacific-led approaches: church-based programmes, Pacific providers, health workers who share language and culture",
+    "Prevention and earlier diagnosis, not only treatment",
+    "Reflects on own cultural lens"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "refugee-care",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "cultural",
+    "flex"
+   ],
+   "title": "A new country, a new health system",
+   "scenario": "People who arrive in New Zealand as refugees may face language barriers, past trauma and a health system that works very differently from the one they knew.",
+   "question": "What challenges might they face, and how could health services help?",
+   "keyPoints": [
+    "Challenges: language, unfamiliar system, cost, transport, trauma, mistrust of authorities, cultural expectations",
+    "Health needs: untreated conditions, mental health, vaccinations, dental care",
+    "Trauma-informed and culturally safe care",
+    "Practical help: interpreters, navigators, community health workers, longer appointments",
+    "Partnership with refugee communities and resettlement agencies",
+    "Recognises strengths and resilience, not only deficits"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "lonely-elders",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "flex",
+    "cultural"
+   ],
+   "title": "Living alone",
+   "scenario": "More older New Zealanders are living alone, and research links loneliness and social isolation with poorer physical and mental health.",
+   "question": "Who is most at risk, and what could be done about it?",
+   "keyPoints": [
+    "Explains health effects: depression, heart disease, poorer recovery, cognitive decline",
+    "Groups at higher risk: people living rurally, recently bereaved, disabled, low income, migrants, rainbow older people",
+    "Barriers: transport, digital exclusion, cost, mobility",
+    "Ideas: community groups, intergenerational programmes, marae and church networks, social prescribing, volunteer visiting",
+    "Respects older people's independence and choices",
+    "Creative, practical solutions"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "postcode-lottery",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "ethics",
+    "critical"
+   ],
+   "title": "Depends where you live",
+   "scenario": "Access to some treatments, specialists and waiting times in New Zealand can depend on which region a person lives in. This is sometimes called a \"postcode lottery\".",
+   "question": "Is this fair, and what could be done about it?",
+   "keyPoints": [
+    "Identifies causes: regional funding history, workforce distribution, rural distance, local decisions",
+    "Fairness: equal access for equal need vs local flexibility",
+    "Impacts fall hardest on rural and lower-income communities",
+    "Options: national standards, shared waiting lists, travel support, telehealth, workforce incentives",
+    "Recognises trade-offs of centralisation",
+    "Reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "research-diversity",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "critical",
+    "cultural"
+   ],
+   "title": "Who is in the research?",
+   "scenario": "Historically, many medical studies have included few women, older people, Māori, Pacific peoples or people from other minority groups.",
+   "question": "Why does this matter, and how could it be improved?",
+   "keyPoints": [
+    "Treatments and doses may not work the same for everyone; evidence may not apply",
+    "Reasons for under-representation: mistrust from past harm, access, cost, eligibility rules, researcher assumptions",
+    "Ethics of research done on rather than with communities",
+    "Solutions: community partnership, culturally safe research, flexible participation, diverse research teams",
+    "Links to Māori data sovereignty and Te Tiriti where relevant",
+    "Clear, structured argument"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "health-literacy",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "flex",
+    "cultural"
+   ],
+   "title": "Hard to understand",
+   "scenario": "Many people find health information difficult to understand, such as medicine labels, consent forms and discharge instructions.",
+   "question": "Who is most affected, and what can health professionals do about it?",
+   "keyPoints": [
+    "Health literacy affects people across all groups, not only those with less schooling",
+    "Higher risk: stress, illness, older age, limited English, disability",
+    "Impacts: medicine errors, missed follow-up, unnecessary readmissions",
+    "Professional responsibility: plain language, teach-back, pictures, interpreters, involving whānau",
+    "Avoids talking down to patients",
+    "Practical, creative ideas"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "climate-health",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "critical",
+    "flex"
+   ],
+   "title": "Climate and health",
+   "scenario": "Climate change is expected to bring more heatwaves, flooding and extreme weather to New Zealand, and its effects may not be shared equally.",
+   "question": "Who might be most affected, and what role should the health sector play?",
+   "keyPoints": [
+    "Health effects: heat illness, injuries, disease spread, mental distress, disruption to services",
+    "Unequal effects: low-income households, older people, rural and coastal communities, Māori and Pacific communities, people with chronic illness",
+    "Health sector role: emergency planning, protecting vulnerable patients, community resilience",
+    "Health sector's own emissions and sustainability",
+    "Links between climate action and health benefits (active transport, warmer homes)",
+    "Balanced, reasoned answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "sport-cost",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "flex",
+    "critical"
+   ],
+   "title": "Priced out of sport",
+   "scenario": "The cost of club fees, gear and travel means some children in New Zealand miss out on organised sport.",
+   "question": "Why might this matter for health, and what could help?",
+   "keyPoints": [
+    "Health benefits of sport: physical fitness, mental wellbeing, belonging, skills",
+    "Who misses out: lower-income families, rural children, disabled children, some ethnic communities",
+    "Wider costs: parents' time, transport, uniforms",
+    "Solutions: subsidies, school-based sport, gear libraries, community and marae-based programmes, inclusive clubs",
+    "Recognises other forms of activity matter too",
+    "Creative, practical ideas"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "period-products",
+   "style": "core",
+   "domain": "Equity",
+   "attributes": [
+    "equity",
+    "flex",
+    "critical"
+   ],
+   "title": "Free in schools",
+   "scenario": "Some young people have missed school because they could not afford period products. The Ministry of Education now provides free period products to schools and kura that choose to take part.",
+   "question": "What are your thoughts on this approach, and what other everyday costs can affect young people's health and education?",
+   "keyPoints": [
+    "Recognises link between poverty, dignity, health and school attendance",
+    "Benefits of universal provision: reduces stigma, simple to run",
+    "Possible concerns: cost, whether it reaches everyone who needs it",
+    "Other costs: food, transport, uniforms, internet, doctor and prescription costs, warm clothing",
+    "Solutions at school and community level",
+    "Reasoned opinion with wider thinking"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "placebo",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "The sugar pill",
+   "scenario": "Some doctors have prescribed placebos, treatments with no active ingredient, because some patients feel better after taking them.",
+   "question": "Is it ever acceptable to give a patient a placebo?",
+   "keyPoints": [
+    "Identifies tension: benefit and kindness vs honesty and informed consent",
+    "Deception risks trust in the doctor-patient relationship",
+    "Interest in \"open-label\" placebos where patients are told",
+    "Risk of missing or under-treating a real condition",
+    "Considers patient autonomy and respect",
+    "Reasoned position acknowledging both sides"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "patient-gift",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "cultural",
+    "comm"
+   ],
+   "title": "A gift of thanks",
+   "scenario": "A grateful patient offers their doctor an expensive gift after their treatment.",
+   "question": "Should health professionals accept gifts from patients?",
+   "keyPoints": [
+    "Considers value and timing: small token vs expensive gift; during vs after care",
+    "Risks: perceived favouritism, pressure, conflict of interest, exploiting vulnerable patients",
+    "Cultural meaning of gifts and koha; refusing can cause offence",
+    "Professional guidelines and declaring gifts",
+    "Options: graciously declining, sharing with team, donating",
+    "Balanced, respectful answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "pharma-perks",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "flex"
+   ],
+   "title": "Free lunch",
+   "scenario": "Pharmaceutical companies sometimes pay for doctors' meals, travel or education events.",
+   "question": "What are your thoughts on this?",
+   "keyPoints": [
+    "Recognises potential for influence on prescribing, even unconsciously",
+    "Benefits claimed: education, information about new medicines",
+    "Patient trust and transparency",
+    "Options: disclosure registers, independent education funding, limits on gifts",
+    "Personal stance on how they would handle such offers",
+    "Clear reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "hidden-medicine",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "comm",
+    "cultural"
+   ],
+   "title": "Hidden in the food",
+   "scenario": "A woman with advanced dementia in a rest home often refuses her medicines. A staff member suggests hiding them in her food.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Tension between her wellbeing and her autonomy and dignity",
+    "Capacity: can she make this decision? Who decides if not?",
+    "Why she refuses: side effects, swallowing, distress, taste",
+    "Proper process: assessment, involving whānau or legal decision-maker, documented plan",
+    "Explore alternatives first: different forms, timing, reviewing whether medicines are needed",
+    "Compassionate and reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "mandatory-vaccines",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "equity"
+   ],
+   "title": "Required to be vaccinated?",
+   "scenario": "Some people argue that health workers should be required to be vaccinated against diseases such as influenza and measles.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Duty to protect vulnerable patients and colleagues",
+    "Respect for bodily autonomy and personal beliefs",
+    "Evidence and proportionality: which diseases, which settings",
+    "Workforce impact if staff leave",
+    "Alternatives: strong encouragement, easy access, masks or redeployment",
+    "Reasoned position respecting other views"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "treating-family",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Treating your own family",
+   "scenario": "Doctors are often asked for medical help by their own family members.",
+   "question": "Should doctors treat their own family? Why or why not?",
+   "keyPoints": [
+    "Risks: loss of objectivity, incomplete history or examination, emotional pressure, confidentiality",
+    "Family may not feel free to refuse or disagree",
+    "Exceptions: emergencies, minor issues, remote areas with no alternative",
+    "Professional guidance generally advises against it",
+    "How to say no kindly and help them find appropriate care",
+    "Balanced, practical answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "not-telling-dad",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "cultural",
+    "comm"
+   ],
+   "title": "Don't tell him",
+   "scenario": "A family asks a doctor not to tell their elderly father that his illness is terminal. They say knowing would take away his hope.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Patient's right to information and to make decisions about the end of their life",
+    "Family's care and possible cultural expectations about disclosure",
+    "Ask the patient how much he wants to know and who he wants involved",
+    "Honesty delivered with compassion and pacing",
+    "Supports the family while keeping the patient at the centre",
+    "Reasoned, culturally aware conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "embryo-testing",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "critical",
+    "equity"
+   ],
+   "title": "Testing embryos",
+   "scenario": "Parents having IVF can sometimes test embryos for serious genetic conditions before choosing which to implant. Some people worry this could lead to selecting embryos for other traits.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Benefits: avoiding serious inherited disease, reducing suffering",
+    "Concerns: slippery slope to non-medical traits, \"designer babies\"",
+    "Disability perspectives: message about the value of disabled lives",
+    "Equity: cost means access mainly for wealthier families",
+    "Need for regulation and clear limits",
+    "Thoughtful, balanced conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "tracker-insurance",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "Your steps for a discount",
+   "scenario": "Some insurance companies offer cheaper premiums to people who share data from fitness trackers showing how active they are.",
+   "question": "What are your thoughts on this?",
+   "keyPoints": [
+    "Benefits: encourages activity, rewards healthy behaviour",
+    "Privacy and how data might be used later",
+    "Fairness: disadvantages people with disabilities, chronic illness or less free time",
+    "Is consent truly free when money is involved?",
+    "Could it widen health inequity?",
+    "Reasoned position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "health-strikes",
+   "style": "core",
+   "domain": "Moral/ethical",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "Should health workers strike?",
+   "scenario": "In 2025, nurses and senior doctors in New Zealand went on strike several times over pay, staffing and working conditions.",
+   "question": "Should health workers be allowed to strike?",
+   "keyPoints": [
+    "Workers' rights and the link between staffing and patient safety",
+    "Duty of care: risk to patients during strikes",
+    "Use of life-preserving services and planning to reduce harm",
+    "Long-term effects on workforce retention if conditions don't improve",
+    "Who is most affected by disruption",
+    "Balanced, reasoned position; not judged on which side they take"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "ai-future",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "flex"
+   ],
+   "title": "Doctors and AI",
+   "scenario": "Some people predict that artificial intelligence will take over parts of doctors' work in the coming decades.",
+   "question": "How might this change the career you are choosing, and why do you still want to pursue it?",
+   "keyPoints": [
+    "Realistic view of what AI may do (diagnosis support, admin) and what it cannot replace",
+    "Human skills: empathy, judgement, communication, trust",
+    "Willingness to adapt and keep learning",
+    "Ethical and safety concerns",
+    "Motivation not dependent on job never changing",
+    "Clear, thoughtful communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "cost-of-training",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "critical"
+   ],
+   "title": "Counting the cost",
+   "scenario": "Training as a doctor takes many years, and many students finish with a large student loan.",
+   "question": "How have you weighed the costs of this career against its rewards?",
+   "keyPoints": [
+    "Honest about financial, time and personal costs",
+    "Rewards beyond money: purpose, service, learning",
+    "Has discussed with whānau or others; realistic planning",
+    "Awareness this is a long-term commitment",
+    "Support strategies during training",
+    "Balanced reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "commitment-tested",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "cultural"
+   ],
+   "title": "Still committed",
+   "scenario": "Many people who start on the path to a health career question it at some point.",
+   "question": "What has tested your commitment to a health career the most, and why are you still committed?",
+   "keyPoints": [
+    "A specific and genuine challenge",
+    "Honest reflection on doubts",
+    "What helped them through",
+    "Why their motivation is stronger now",
+    "Self-awareness about future challenges",
+    "Clear, authentic story"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "generalist-specialist",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "critical"
+   ],
+   "title": "Broad or deep?",
+   "scenario": "Some doctors specialise in one area of the body or one type of illness. Others, such as GPs, care for people across their whole lives.",
+   "question": "Which appeals to you more right now, and why?",
+   "keyPoints": [
+    "Shows understanding of both paths",
+    "Reasons linked to their own strengths and values",
+    "Open to changing their mind during training",
+    "Recognises value of both to the health system",
+    "Mentions needs such as primary care shortages",
+    "Clear reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "keep-learning",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "flex"
+   ],
+   "title": "Never finished learning",
+   "scenario": "Medical knowledge changes quickly. Some of what doctors learn at university will be out of date within a decade.",
+   "question": "How will you keep learning throughout your career?",
+   "keyPoints": [
+    "Current learning habits with examples",
+    "Using reliable sources and evidence",
+    "Learning from colleagues, patients and mistakes",
+    "Openness to changing practice",
+    "Balancing learning with wellbeing",
+    "Practical, specific plan"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "community-serve",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "equity"
+   ],
+   "title": "Who will you serve?",
+   "scenario": "Health professionals often feel drawn to a particular community.",
+   "question": "Is there a particular community you hope to serve? Why?",
+   "keyPoints": [
+    "A specific community and a genuine connection to it",
+    "Understanding of that community's health needs and strengths",
+    "Awareness of inequities they face",
+    "Humility: working with the community, not just for it",
+    "Realistic about challenges",
+    "Clear, genuine communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "facing-suffering",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "cultural"
+   ],
+   "title": "The hard days",
+   "scenario": "Health professionals regularly see people in pain, grieving or at the end of their lives.",
+   "question": "How do you think you will cope with this side of the work?",
+   "keyPoints": [
+    "Realistic understanding of the emotional demands",
+    "Coping strategies already used",
+    "Support: debriefing, supervision, peers, whānau, faith or culture",
+    "Recognises signs of compassion fatigue",
+    "Balances empathy with self-protection",
+    "Thoughtful, honest answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "advice-junior",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "flex"
+   ],
+   "title": "Advice to a younger student",
+   "scenario": "A Year 11 student tells you they want a career in health but aren't sure which one.",
+   "question": "What advice would you give them?",
+   "keyPoints": [
+    "Encourages exploring different health careers",
+    "Practical steps: talking to professionals, volunteering, work experience",
+    "Honest about demands as well as rewards",
+    "Encourages looking after wellbeing and other interests",
+    "Draws on own experience",
+    "Clear, supportive communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "leader-type",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "team"
+   ],
+   "title": "What kind of leader?",
+   "scenario": "Doctors are often expected to lead teams, even early in their careers.",
+   "question": "What kind of leader do you want to be, and why?",
+   "keyPoints": [
+    "Clear description of leadership values",
+    "Examples of leaders they admire or experiences of leading",
+    "Shared leadership and respecting other professions",
+    "Handling mistakes, conflict and pressure",
+    "Self-awareness about leadership areas to develop",
+    "Clear communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "whose-choice",
+   "style": "core",
+   "domain": "Career choice",
+   "attributes": [
+    "resilience",
+    "comm",
+    "cultural"
+   ],
+   "title": "Whose choice is it?",
+   "scenario": "Some students feel strong expectations from family, school or community to choose medicine.",
+   "question": "How much has your career choice been your own, and how have you handled other people's expectations?",
+   "keyPoints": [
+    "Honest account of influences on their choice",
+    "Shows the decision is genuinely their own, with evidence",
+    "Respects whānau and community expectations while setting their own direction",
+    "How they handled pressure or disagreement",
+    "Recognises cultural differences in how career decisions are made",
+    "Clear, mature communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "immunisation-rates",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Falling immunisation rates",
+   "scenario": "Childhood immunisation rates in New Zealand have fallen in recent years, and the country had a measles outbreak in late 2025.",
+   "question": "What do you think is behind this, and what could help?",
+   "keyPoints": [
+    "Causes: access barriers, misinformation, mistrust, pandemic disruption, busy lives",
+    "Unequal rates across communities",
+    "Impacts: outbreaks, risk to babies and immunocompromised people",
+    "Solutions: outreach, community-led clinics, trusted messengers, reminders, convenient times and places",
+    "Respectful engagement with hesitant parents",
+    "Reasoned opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "weight-loss-drugs",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "The new weight-loss medicines",
+   "scenario": "New weight-loss medicines are in high demand around the world, but they are expensive and supplies have sometimes been limited.",
+   "question": "What are your thoughts on how they should be used and funded?",
+   "keyPoints": [
+    "Recognises potential health benefits for some patients",
+    "Concerns: cost, long-term evidence, side effects, use for cosmetic reasons",
+    "Equity: who can afford them privately vs who most needs them",
+    "Prioritising funding for those with greatest clinical need",
+    "Medicines alongside, not instead of, prevention and environment changes",
+    "Forms a reasoned opinion without needing technical detail"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "alcohol-harm",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "cultural"
+   ],
+   "title": "A drinking culture",
+   "scenario": "Alcohol causes significant harm in New Zealand, yet it is widely available, relatively cheap and heavily marketed.",
+   "question": "What do you think should be done?",
+   "keyPoints": [
+    "Harms: injuries, violence, cancer, liver disease, foetal alcohol spectrum disorder, effects on whānau",
+    "Culture of drinking and peer pressure, including among young people",
+    "Policy options: price, availability, marketing limits, drink-driving rules",
+    "Support and treatment options",
+    "Balance between personal freedom and harm to others",
+    "Reflects on own observations of drinking culture"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "youth-mental-waits",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Waiting for help",
+   "scenario": "Many young people in New Zealand wait weeks or months for mental health support.",
+   "question": "What are your thoughts on how this could be improved?",
+   "keyPoints": [
+    "Causes: workforce shortages, rising demand, funding, complex needs",
+    "Risks of delays for young people and whānau",
+    "Options: early intervention, school-based services, youth one-stop shops, digital tools, peer support",
+    "Culturally appropriate services for Māori, Pacific and rainbow youth",
+    "Balance between quick access and quality care",
+    "Practical, reasoned answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "ageing-population",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "comm"
+   ],
+   "title": "An ageing population",
+   "scenario": "New Zealand's population is ageing, and more people are living with several long-term conditions at once.",
+   "question": "How should the health system prepare?",
+   "keyPoints": [
+    "Rising demand: chronic disease, dementia, aged care, frailty",
+    "Workforce: carers, nurses, geriatric care",
+    "Shift to prevention, community care and supporting people at home",
+    "Support for unpaid family carers",
+    "Funding and sustainability questions",
+    "Clear, structured argument"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "pharmacist-prescribing",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "team"
+   ],
+   "title": "Pharmacists prescribing",
+   "scenario": "Some countries allow pharmacists to prescribe a wider range of medicines to ease pressure on GPs.",
+   "question": "What are your thoughts on doing more of this in New Zealand?",
+   "keyPoints": [
+    "Benefits: faster access, convenience, uses pharmacists' expertise",
+    "Risks: missed diagnoses, fragmented care, conflicts of interest with sales",
+    "Training, clear limits and communication with GPs",
+    "Teamwork across professions",
+    "Equity: pharmacies are widely available in many communities",
+    "Reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "fluoridation",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "ethics"
+   ],
+   "title": "Fluoride in the water",
+   "scenario": "Adding fluoride to drinking water to reduce tooth decay is often debated in New Zealand.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Evidence: reduces tooth decay, especially in children and lower-income communities",
+    "Concerns raised: consent, choice, safety worries",
+    "Public health vs individual choice",
+    "Equity: benefits are greatest for those with least access to dental care",
+    "How to communicate evidence respectfully",
+    "Forms and justifies a view while acknowledging the debate"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "e-scooters",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "comm"
+   ],
+   "title": "Scooter injuries",
+   "scenario": "Shared e-scooters are popular in New Zealand cities, but they have led to a large number of injuries.",
+   "question": "What are your thoughts on how this should be managed?",
+   "keyPoints": [
+    "Benefits: low-emission transport, convenience",
+    "Injuries to riders and pedestrians; pressure on emergency departments",
+    "Options: speed limits, helmet rules, infrastructure, parking rules, alcohol rules",
+    "Balancing freedom, safety and innovation",
+    "Evidence-based decisions",
+    "Clear reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "pandemic-lessons",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Lessons from COVID-19",
+   "scenario": "The COVID-19 pandemic put enormous pressure on New Zealand's health system and communities.",
+   "question": "What lessons should New Zealand take into future pandemics?",
+   "keyPoints": [
+    "Importance of preparedness: supplies, surge capacity, public health workforce",
+    "Unequal impacts and the value of community and iwi-led responses",
+    "Trust, clear communication and misinformation",
+    "Balancing public health measures with economic and social harms",
+    "Mental health and education effects",
+    "Thoughtful, balanced view"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "gambling-harm",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Gambling harm",
+   "scenario": "Online gambling is growing, and gambling harm affects families as well as the person gambling.",
+   "question": "What are your thoughts on how gambling harm should be addressed?",
+   "keyPoints": [
+    "Recognises gambling as a health issue with effects on mental health, finances and whānau",
+    "Unequal impact: pokie machines concentrated in poorer areas",
+    "Online gambling: easy access, targeting, young people",
+    "Options: regulation, advertising limits, support services, harm-reduction tools",
+    "Balancing freedom with protection",
+    "Reasoned opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "treated-someone",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "ethics",
+    "comm"
+   ],
+   "title": "Proud of how you acted",
+   "scenario": "How we treat people often says more about us than what we achieve.",
+   "question": "Describe a moment you are proud of how you treated someone. What does it say about you?",
+   "keyPoints": [
+    "A specific moment, not an achievement list",
+    "What they did and why",
+    "Insight into their values",
+    "Respect for the other person's perspective",
+    "Link to the kind of health professional they want to be",
+    "Genuine, modest tone"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "friends-describe",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "comm",
+    "resilience"
+   ],
+   "title": "How others see you",
+   "scenario": "People often see us differently from how we see ourselves.",
+   "question": "How would your friends describe you, and would they be right?",
+   "keyPoints": [
+    "Specific qualities with examples",
+    "Thoughtful comparison of others' view and self-view",
+    "Includes at least one less flattering quality",
+    "Shows self-awareness and openness to feedback",
+    "Link to health care",
+    "Honest and engaging"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "changed-belief",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "critical",
+    "flex"
+   ],
+   "title": "A belief you changed",
+   "scenario": "Our views often change as we learn and meet new people.",
+   "question": "Tell us about a belief you once held strongly but later changed. What changed it?",
+   "keyPoints": [
+    "A genuine belief and why they held it",
+    "What new information or experience changed it",
+    "How they handled the discomfort of changing their mind",
+    "Recognises how background shapes beliefs",
+    "Openness to continuing change",
+    "Clear reflection"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "felt-judged",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "equity",
+    "resilience"
+   ],
+   "title": "Being misjudged",
+   "scenario": "Most people have been judged or misunderstood at some point. (Choose an example you are comfortable sharing.)",
+   "question": "Describe a time you felt judged or misunderstood. How has it shaped the way you treat others?",
+   "keyPoints": [
+    "An example the applicant is comfortable discussing",
+    "How it felt and how they responded",
+    "What they learned about assumptions and bias",
+    "How it shapes their treatment of others",
+    "Link to patients who may feel judged in health settings",
+    "Reflective, not bitter"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "working-on",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "flex"
+   ],
+   "title": "Work in progress",
+   "scenario": "Everyone has something they are working to get better at.",
+   "question": "What is something you are working on improving right now, and how?",
+   "keyPoints": [
+    "A genuine area for growth",
+    "Why it matters to them",
+    "Concrete steps they are taking",
+    "Evidence of progress",
+    "Openness to feedback",
+    "Link to future practice"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "heritage",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "Your heritage",
+   "scenario": "Our culture and heritage can shape our values and how we see the world.",
+   "question": "What does your culture or heritage mean to you, and how might it influence your work in health?",
+   "keyPoints": [
+    "Thoughtful description of own culture, whatever their background",
+    "How it shapes values and views",
+    "Possible blind spots it may create",
+    "Respect for other cultures",
+    "Links to culturally safe care",
+    "Genuine communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "asking-help",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "team"
+   ],
+   "title": "Asking for help",
+   "scenario": "Many people find it hard to ask for help.",
+   "question": "How easy do you find it to ask for help, and why?",
+   "keyPoints": [
+    "Honest self-assessment",
+    "Example of asking or failing to ask",
+    "Reflection on what makes it hard",
+    "Why asking for help matters in health care (patient safety, teamwork)",
+    "Strategies to improve",
+    "Self-aware and practical"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "patience",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "comm"
+   ],
+   "title": "What tests your patience",
+   "scenario": "Health care can be slow, frustrating and unpredictable.",
+   "question": "What tests your patience most, and how do you handle it?",
+   "keyPoints": [
+    "Honest example",
+    "Recognises their own triggers",
+    "Strategies to stay calm",
+    "Considers the other person's perspective",
+    "Link to working with patients and teams under pressure",
+    "Self-aware and measured"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "success-meaning",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "resilience",
+    "critical"
+   ],
+   "title": "What success means",
+   "scenario": "People define success in very different ways.",
+   "question": "What does success mean to you, and has that changed over time?",
+   "keyPoints": [
+    "Clear personal definition",
+    "Influences on it: whānau, culture, experiences",
+    "How it has changed and why",
+    "Balance between achievement and wellbeing or relationships",
+    "Link to their career",
+    "Reflective answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "talker-listener",
+   "style": "core",
+   "domain": "Personal insight",
+   "attributes": [
+    "cultural",
+    "comm",
+    "team"
+   ],
+   "title": "Talker or listener?",
+   "scenario": "Good communication depends on both speaking and listening.",
+   "question": "Are you a better talker or a better listener? Give an example.",
+   "keyPoints": [
+    "Honest self-assessment with example",
+    "Understands what good listening involves",
+    "Recognises the weaker skill and how to develop it",
+    "Importance of listening in health care",
+    "Adapting style to different people and cultures",
+    "Clear and engaging"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "taught-someone",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "comm",
+    "flex"
+   ],
+   "title": "Teaching a skill",
+   "scenario": "Health professionals often teach patients, whānau and colleagues.",
+   "question": "Describe a time you taught or coached someone a skill. What worked, and what didn't?",
+   "keyPoints": [
+    "Specific situation and skill",
+    "Adapted approach to the learner",
+    "Patience and encouragement",
+    "Honest about what didn't work",
+    "What they learned about teaching",
+    "Link to patient education"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "pressure-decision",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "flex",
+    "resilience"
+   ],
+   "title": "A quick decision",
+   "scenario": "Sometimes others rely on you to make a decision quickly.",
+   "question": "Describe a time you had to make a quick decision under pressure while others relied on you.",
+   "keyPoints": [
+    "Clear situation and stakes",
+    "How they gathered information and decided",
+    "Involved others where possible",
+    "Outcome and reflection",
+    "What they would do differently",
+    "Calm, structured story"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "stood-up",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "ethics",
+    "equity"
+   ],
+   "title": "Standing up",
+   "scenario": "Doing the right thing is not always easy or popular.",
+   "question": "Describe a time you stood up for someone or for something you believed was right.",
+   "keyPoints": [
+    "Specific situation and why it mattered",
+    "Courage balanced with respect",
+    "How they involved others or appropriate authority",
+    "Outcome and consequences",
+    "What they learned",
+    "Link to advocacy in health"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "new-group",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "comm"
+   ],
+   "title": "The new person",
+   "scenario": "Starting in a new group can be uncomfortable.",
+   "question": "Describe a time you joined a group where you didn't know anyone. How did you find your place?",
+   "keyPoints": [
+    "Specific situation",
+    "How they built relationships",
+    "Respect for the group's existing culture",
+    "Contribution they made",
+    "What they learned about belonging",
+    "Link to joining new clinical teams"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "help-received",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "resilience"
+   ],
+   "title": "Help that mattered",
+   "scenario": "Sometimes another person's help makes a real difference to us.",
+   "question": "Describe a time someone's help made a real difference to you. What did you learn from how they helped?",
+   "keyPoints": [
+    "Specific example",
+    "What the helper did and how",
+    "Insight into what made the help effective",
+    "Gratitude and humility",
+    "How they now help others",
+    "Link to caring for patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "didnt-succeed",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "resilience",
+    "critical"
+   ],
+   "title": "When it didn't work",
+   "scenario": "Not every team effort succeeds, even with hard work.",
+   "question": "Describe a goal or project you worked hard on with others that didn't succeed. What did you learn?",
+   "keyPoints": [
+    "Specific project and their role",
+    "Honest analysis of why it failed",
+    "Takes appropriate share of responsibility",
+    "How the team responded",
+    "Lessons applied later",
+    "Growth mindset"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "organised-event",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "flex",
+    "comm"
+   ],
+   "title": "Making it happen",
+   "scenario": "Organising an event or project takes planning and teamwork.",
+   "question": "Describe an event or project you helped organise. What was your role, and what would you do differently?",
+   "keyPoints": [
+    "Specific event and their role",
+    "Planning, delegation and communication",
+    "Problems that arose and how they solved them",
+    "Recognition of others' contributions",
+    "What they would change",
+    "Clear structure"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "spotted-problem",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "critical",
+    "ethics"
+   ],
+   "title": "Something wasn't right",
+   "scenario": "Sometimes you notice a problem that others have missed.",
+   "question": "Describe a time you noticed a mistake or problem others had missed. What did you do?",
+   "keyPoints": [
+    "Specific situation",
+    "How they checked they were right",
+    "How they raised it respectfully",
+    "Response of others and outcome",
+    "What they learned about speaking up",
+    "Link to patient safety culture"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "difficult-person",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "comm",
+    "cultural"
+   ],
+   "title": "Someone you clashed with",
+   "scenario": "We don't always get on with everyone we work with.",
+   "question": "Describe a time you had to work with someone you found difficult. How did you make it work?",
+   "keyPoints": [
+    "Specific example, described fairly",
+    "Tried to understand the other person's perspective",
+    "Communication strategies used",
+    "Focus on shared goals",
+    "Outcome and what they learned",
+    "Avoids blaming"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "handing-over",
+   "style": "core",
+   "domain": "Personal experience",
+   "attributes": [
+    "team",
+    "resilience",
+    "comm"
+   ],
+   "title": "Letting go",
+   "scenario": "Good leaders know when to share responsibility.",
+   "question": "Describe a time you handed a task or role to someone else. How did you decide to trust them, and how did it go?",
+   "keyPoints": [
+    "Specific situation",
+    "Reasons for delegating",
+    "How they set the person up to succeed",
+    "Balancing support with trust",
+    "Outcome and lessons",
+    "Link to teamwork in health care"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "rongoa",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Rongoā Māori",
+   "scenario": "Rongoā Māori is traditional Māori healing, which can include plant medicines, massage and spiritual practices. ACC now funds rongoā Māori as part of rehabilitation after an injury.",
+   "question": "How might rongoā and conventional medicine work together?",
+   "keyPoints": [
+    "Respectful understanding of rongoā as a holistic system linked to whakapapa and whenua",
+    "Patient choice and cultural identity",
+    "Communication between practitioners and patients; asking about all treatments used",
+    "Safety: possible interactions, evidence, regulation",
+    "Partnership with rongoā practitioners rather than control",
+    "Reflects on own cultural position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "te-reo-care",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "Language in care",
+   "scenario": "Some patients feel more comfortable speaking te reo Māori with health professionals.",
+   "question": "Why might language matter in health care, and what can health professionals do?",
+   "keyPoints": [
+    "Language linked to identity, comfort, trust and understanding",
+    "Correct pronunciation of names as basic respect",
+    "Access to Māori-speaking staff or interpreters",
+    "Learning basic te reo and tikanga as a professional",
+    "Links to cultural safety and equity",
+    "Clear communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "late-diagnosis",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "Found too late",
+   "scenario": "Māori are more likely than non-Māori to be diagnosed with some cancers at a later stage, when treatment is harder.",
+   "question": "What factors might explain this, and what could help?",
+   "keyPoints": [
+    "Access barriers: cost, distance, time, transport",
+    "Experiences of racism and mistrust",
+    "Screening programme design and reach",
+    "Solutions: kaupapa Māori screening, outreach, whānau-centred approaches, Māori navigators",
+    "Te Tiriti obligations",
+    "Avoids blaming patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "tupapaku",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Caring after death",
+   "scenario": "In tikanga Māori, the body of a person who has died (tūpāpaku) is treated with particular care, and whānau may wish to stay with them and take them home quickly.",
+   "question": "How should hospitals support whānau at this time?",
+   "keyPoints": [
+    "Respect for tikanga and its meaning to whānau",
+    "Practical responses: space for whānau, karakia, timely release processes, kaumātua involvement",
+    "Balancing legal requirements (such as coroner processes) with cultural needs",
+    "Staff training and Māori health services in hospitals",
+    "Compassion and communication with grieving whānau",
+    "Creative, practical solutions"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "maori-wellbeing",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "Wellbeing through identity",
+   "scenario": "Māori approaches to mental wellbeing often emphasise connection to whānau, whenua, culture and identity.",
+   "question": "How might culturally grounded approaches support Māori mental wellbeing?",
+   "keyPoints": [
+    "Holistic models such as Te Whare Tapa Whā",
+    "Effects of colonisation and loss of connection on wellbeing",
+    "Strengths of identity, belonging and whānau",
+    "Kaupapa Māori services working alongside clinical care",
+    "Equity in access and outcomes",
+    "Thoughtful, respectful discussion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "rural-maori-access",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Distance to care",
+   "scenario": "Many Māori whānau live in rural and provincial areas a long way from specialist health services.",
+   "question": "How could access to care be improved?",
+   "keyPoints": [
+    "Barriers: distance, transport, cost, time off work, fewer local services",
+    "Ideas: mobile clinics, outreach specialists, telehealth, marae-based clinics",
+    "Partnership with iwi and Māori providers",
+    "Supporting whānau to travel and stay near hospitals",
+    "Rural Māori health workforce",
+    "Practical, creative ideas"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "racism-health",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "Racism in health care",
+   "scenario": "Surveys show many Māori report experiencing racism when using health services.",
+   "question": "How might this affect health, and what can individual health professionals do?",
+   "keyPoints": [
+    "Effects: avoiding care, delayed treatment, stress, mistrust",
+    "Recognises personal, institutional and structural racism",
+    "Individual actions: self-reflection on bias, listening, respectful communication, speaking up",
+    "System actions: training, data monitoring, Māori leadership",
+    "Commitment to ongoing learning",
+    "Honest, respectful discussion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "whanau-centred",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "Caring for the whole whānau",
+   "scenario": "Whānau-centred approaches support whole families rather than individuals, often working across health, housing, education and income.",
+   "question": "What are your thoughts on whānau-centred approaches compared with care focused on the individual?",
+   "keyPoints": [
+    "Recognises whānau as a key unit of wellbeing in te ao Māori",
+    "Benefits: addresses root causes and shared challenges",
+    "Challenges: privacy, funding across agencies, measuring outcomes",
+    "Respecting individual wishes within whānau",
+    "Relevance for other cultures too",
+    "Reasoned comparison"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "iwi-response",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Iwi-led responses",
+   "scenario": "During the COVID-19 pandemic, many iwi and Māori health providers ran their own vaccination clinics and support programmes.",
+   "question": "What can the wider health system learn from responses like these?",
+   "keyPoints": [
+    "Strengths: trust, local knowledge, flexible delivery, reaching whānau others missed",
+    "Tino rangatiratanga and partnership under Te Tiriti",
+    "Need for adequate, timely funding and data access",
+    "Building on these models beyond emergencies",
+    "Respectful, strengths-based framing",
+    "Practical lessons"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "marae-kai",
+   "style": "core",
+   "domain": "Hauora Māori",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Kai and community",
+   "scenario": "Some marae and iwi run community gardens and kai programmes to improve whānau health.",
+   "question": "How might programmes like these support health beyond nutrition?",
+   "keyPoints": [
+    "Benefits beyond food: connection, belonging, physical activity, skills, intergenerational learning",
+    "Links to whenua and cultural identity",
+    "Food security and cost of living",
+    "Community-led and strengths-based",
+    "How health services could support rather than control",
+    "Creative thinking"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "waiting-room",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "ethics",
+    "comm",
+    "flex"
+   ],
+   "title": "The waiting room",
+   "scenario": "You volunteer on reception at a busy GP clinic. An older man has waited ninety minutes. He's upset and says he's leaving. As he stands up, he says his chest has felt tight all morning, \"but it's probably nothing.\"",
+   "question": "Talk us through how you would handle this situation.",
+   "keyPoints": [
+    "Safety first: chest tightness is a possible emergency, so tell a nurse or doctor immediately rather than diagnose",
+    "Acknowledge his frustration sincerely; stay calm and kind",
+    "Encourage him to stay, and respect his autonomy if he insists",
+    "Explain the delay honestly; do not promise what you cannot deliver",
+    "Stay with him or keep him in sight until clinical staff take over",
+    "Know the limits of a volunteer role; follow up and report the wait-time issue"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "group-project",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "team",
+    "ethics",
+    "comm"
+   ],
+   "title": "The silent group member",
+   "scenario": "You're in a four-person group assignment in your first year at university. One member, Tama, hasn't contributed anything and isn't answering messages. The deadline is in three days. The other two want to submit with Tama's name left off.",
+   "question": "What would you do, and why?",
+   "keyPoints": [
+    "Avoid assumptions; there may be reasons (health, whānau, work, wellbeing)",
+    "Contact Tama privately and supportively before acting",
+    "Get the work done: redistribute tasks fairly so the group meets the deadline",
+    "Be honest about contributions; involve the tutor or course coordinator if it is not resolved",
+    "Do not act unilaterally or behind his back",
+    "Reflect on team processes, e.g. setting roles and check-ins early next time"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "pharmacy-gossip",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "ethics",
+    "equity",
+    "comm"
+   ],
+   "title": "Overheard at a party",
+   "scenario": "A friend works part-time at a pharmacy. At a party, they tell a group of people that a well-known teacher from your old school collects a medication used to treat HIV.",
+   "question": "How would you respond in the moment and afterwards? What are the issues here?",
+   "keyPoints": [
+    "Serious breach of confidentiality and health privacy (Health Information Privacy Code)",
+    "Harm: stigma, discrimination, damage to the teacher, loss of public trust in health services",
+    "Respond in the moment: calmly discourage further sharing, do not spread it",
+    "Talk to the friend privately and non-judgementally afterwards about why it matters",
+    "Friend may need to tell their pharmacist manager; consequences are possible",
+    "Link to medicine: confidentiality underpins trust between patients and health workers"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "failed-test",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "flex"
+   ],
+   "title": "The first fail",
+   "scenario": "You studied hard for your first chemistry test at university and scored 38 percent. Most of your friends passed. You feel embarrassed and are starting to doubt whether you belong in a health programme.",
+   "question": "How would you respond? Tell us about a real setback you have faced and what you learned.",
+   "keyPoints": [
+    "Acknowledge feelings honestly without catastrophising",
+    "Analyse the cause: study method, understanding gaps, exam technique, workload",
+    "Seek help early: lecturer, tutor, study groups, student support services",
+    "Look after wellbeing; keep perspective (one test, not a verdict)",
+    "A specific real example of a setback with actions and outcome",
+    "Shows growth: what they now do differently; links to resilience in medicine"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "kidneys-child",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "comm",
+    "cultural",
+    "flex"
+   ],
+   "title": "Explaining dialysis",
+   "scenario": "You are helping a family friend. Her 10-year-old daughter, Mele, is worried because her grandmother is starting dialysis next week. Mele asks you what kidneys do and why her nana needs a machine.",
+   "question": "Speak to Mele as if she is in front of you now.",
+   "keyPoints": [
+    "Speaks directly to the child, warmly, in simple words without jargon",
+    "Clear analogy: kidneys clean the blood like a filter; dialysis does that job when they cannot",
+    "Honest without frightening; no false promises",
+    "Checks how Mele feels and what she already knows; invites questions",
+    "Offers practical reassurance: nana will be looked after; Mele can still visit and help",
+    "Suggests asking nana's nurse or doctor and involving family"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "vaccine-parent",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "comm",
+    "ethics",
+    "cultural"
+   ],
+   "title": "The worried parent",
+   "scenario": "A parent at your sports club tells you she won't vaccinate her new baby because of a video she watched online. She knows you want to study medicine and asks what you think.",
+   "question": "How would you respond?",
+   "keyPoints": [
+    "Listen first; ask what worries her and what she saw",
+    "Respect and empathy; avoid lecturing, ridicule or arguing",
+    "Share balanced, reliable information within the limits of a student's knowledge",
+    "Suggest talking with her GP, practice nurse or Plunket nurse; offer trustworthy sources",
+    "Respect her right to decide while being clear about the evidence",
+    "Keep the relationship open; link to community health and herd immunity"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "team-captain",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "team",
+    "equity",
+    "cultural"
+   ],
+   "title": "The captain's call",
+   "scenario": "You captain your school's volleyball team. Two senior players keep making jokes about a younger player's accent. He has recently moved from Samoa. The coach hasn't noticed, and the younger player has gone quiet at training.",
+   "question": "What would you do as captain?",
+   "keyPoints": [
+    "Act promptly; this is racist bullying and harms wellbeing",
+    "Check in privately and supportively with the younger player first",
+    "Speak to the two players privately and clearly about impact and team values",
+    "Involve the coach or school staff; follow school processes",
+    "Build an inclusive team culture; follow up over time",
+    "Reflects on the responsibilities of leadership"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "lab-data",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "ethics",
+    "team",
+    "critical"
+   ],
+   "title": "The neat graph",
+   "scenario": "Your lab partner changes one data point in your shared report so the graph looks cleaner. They say everyone does it and it will not change the conclusion. The report is worth 10 percent of your grade.",
+   "question": "What would you do?",
+   "keyPoints": [
+    "Recognise it as fabrication, academic misconduct regardless of size",
+    "Talk to the partner calmly; understand the pressure they feel",
+    "Correct the data, or report the result honestly with explanation of the error",
+    "Escalate to the demonstrator or lecturer if the partner refuses; shared responsibility",
+    "Link to medicine: research integrity and patient safety depend on honest data",
+    "Avoid self-righteousness; offer support (time, help with analysis)"
+   ],
+   "status": "staging"
+  }
+ ]
+}

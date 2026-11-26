@@ -142,6 +142,64 @@ export const challenges = pgTable('challenges', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
+// ---------------------------------------------------------------------------
+// MMI practice (see db/migrations/0003_mmi.sql). Station content lives in
+// lib/mmi/data/*.json; these tables hold attempts, responses and marks.
+export type MmiFeedback = {
+  scores: Record<string, number>;
+  band: 'Strong' | 'Competent' | 'Developing' | 'Limited';
+  summary: string;
+  strengths: string[];
+  improvements: Array<{ issue: string; quote: string; tryInstead: string }>;
+  missed: string[];
+  outline: string[];
+  model?: string;
+  error?: string;
+};
+
+export const mmiAttempts = pgTable('mmi_attempts', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('user_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  edition: text('edition', { enum: ['nz', 'au'] }).notNull(),
+  preset: text('preset').notNull(),
+  kind: text('kind', { enum: ['mock', 'single'] }).notNull(),
+  stationIds: text('station_ids').array().notNull(),
+  recordMode: text('record_mode', { enum: ['video', 'audio', 'none'] }).notNull().default('video'),
+  startedAt: timestamp('started_at', { withTimezone: true }).notNull().defaultNow(),
+  completedAt: timestamp('completed_at', { withTimezone: true }),
+});
+
+export const mmiResponses = pgTable('mmi_responses', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  attemptId: uuid('attempt_id').notNull().references(() => mmiAttempts.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  stationId: text('station_id').notNull(),
+  position: integer('position').notNull(),
+  mediaPath: text('media_path'),
+  mediaKind: text('media_kind', { enum: ['video', 'audio'] }),
+  mime: text('mime'),
+  mediaBytes: integer('media_bytes'),
+  durationS: integer('duration_s'),
+  allowedS: integer('allowed_s').notNull(),
+  transcript: text('transcript'),
+  wordCount: integer('word_count').notNull().default(0),
+  notes: text('notes'),
+  answerMode: text('answer_mode', { enum: ['speak', 'type'] }).notNull(),
+  aiStatus: text('ai_status', { enum: ['pending', 'done', 'error', 'skipped'] }).notNull().default('pending'),
+  aiFeedback: jsonb('ai_feedback').$type<MmiFeedback>(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const mmiMarks = pgTable('mmi_marks', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  responseId: uuid('response_id').notNull().references(() => mmiResponses.id, { onDelete: 'cascade' }),
+  markerId: uuid('marker_id').notNull().references(() => profiles.id, { onDelete: 'cascade' }),
+  markerType: text('marker_type', { enum: ['self', 'peer', 'teacher'] }).notNull(),
+  scores: jsonb('scores').$type<Record<string, number>>().notNull().default(sql`'{}'::jsonb`),
+  comment: text('comment'),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
 export type Question = typeof questions.$inferSelect;
 export type NewQuestion = typeof questions.$inferInsert;
 export type Profile = typeof profiles.$inferSelect;
@@ -155,3 +213,6 @@ export type NewXpEvent = typeof xpEvents.$inferInsert;
 export type Challenge = typeof challenges.$inferSelect;
 export type SpeedReadingSession = typeof speedReadingSessions.$inferSelect;
 export type NewSpeedReadingSession = typeof speedReadingSessions.$inferInsert;
+export type MmiAttempt = typeof mmiAttempts.$inferSelect;
+export type MmiResponse = typeof mmiResponses.$inferSelect;
+export type MmiMark = typeof mmiMarks.$inferSelect;
