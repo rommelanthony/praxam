@@ -18,6 +18,19 @@ export function transcriptionConfigured(): boolean {
   return !!process.env.OPENAI_API_KEY;
 }
 
+/**
+ * MMI_TRANSCRIBE: 'auto' (default) transcribes only when the browser's live
+ * transcript is missing or clearly incomplete (Safari, Firefox, mic glitches);
+ * 'always' transcribes every spoken answer; 'off' never does.
+ */
+export function needsServerTranscript(browserWords: number, durationS: number): boolean {
+  const mode = process.env.MMI_TRANSCRIBE || 'auto';
+  if (mode === 'off') return false;
+  if (mode === 'always') return true;
+  const expected = (durationS / 60) * 110; // a slow but steady speaker
+  return browserWords < Math.max(12, expected * 0.4);
+}
+
 export function transcriptionModel(): string {
   return process.env.MMI_TRANSCRIBE_MODEL || DEFAULT_MODEL;
 }

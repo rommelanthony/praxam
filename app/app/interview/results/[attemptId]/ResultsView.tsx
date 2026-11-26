@@ -138,7 +138,7 @@ export default function ResultsView({ attemptId, edition, kind, expected, starte
                 <audio src={it.mediaUrl} controls preload="metadata" className="w-full max-w-[560px] mb-4" />
               )
             ) : (
-              <p className="text-[14px] text-ink-muted mb-4">No recording for this station.</p>
+              <p className="text-[14px] text-ink-muted mb-4">{it.mediaKind ? 'This recording has been deleted (recordings are kept for 30 days).' : 'No recording for this station.'}</p>
             )}
 
             <Feedback item={it} />

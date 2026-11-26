@@ -7,7 +7,7 @@ import { currentUser } from '@/lib/mmi/server';
 import { getBank, getStation } from '@/lib/mmi/content';
 import { generateFeedback } from '@/lib/mmi/feedback';
 import { countWords } from '@/lib/mmi/content';
-import { transcribe, transcriptionConfigured, transcriptionModel } from '@/lib/mmi/transcribe';
+import { needsServerTranscript, transcribe, transcriptionConfigured, transcriptionModel } from '@/lib/mmi/transcribe';
 
 export const maxDuration = 60;
 
@@ -36,11 +36,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ status: 'error' }, { status: 500 });
   }
 
-  // Spoken answers with a recording: transcribe on the server (works in every
-  // browser, and is more accurate than the live browser transcript). Saved
-  // before feedback so a retry after a timeout doesn't transcribe twice.
+  // Spoken answers with a recording: transcribe on the server when the browser
+  // couldn't (Safari/Firefox) or its transcript looks incomplete. Saved before
+  // feedback so a retry after a timeout doesn't transcribe twice.
   let transcribedBy = r.aiFeedback?.transcribedBy;
-  if (r.answerMode === 'speak' && r.mediaPath && !transcribedBy && transcriptionConfigured()) {
+  if (r.answerMode === 'speak' && r.mediaPath && !transcribedBy && transcriptionConfigured() && needsServerTranscript(r.wordCount, r.durationS ?? 0)) {
     try {
       const { data: media, error } = await supabase.storage.from('mmi-recordings').download(r.mediaPath);
       if (error || !media) throw new Error('download_failed');

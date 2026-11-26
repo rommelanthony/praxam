@@ -5,7 +5,9 @@ import type { MmiFeedback } from '@/db/schema';
 import { bandOf, countWords, type Bank, type Station } from './content';
 
 const API_URL = 'https://api.anthropic.com/v1/messages';
-const DEFAULT_MODEL = 'claude-sonnet-5-5';
+// Haiku 5.5 is ~20x cheaper than Sonnet 5.5 and is plenty for rubric marking.
+// Set MMI_FEEDBACK_MODEL=claude-sonnet-5-5 for richer feedback.
+const DEFAULT_MODEL = 'claude-haiku-5-5';
 
 export function buildPrompt(bank: Bank, st: Station, r: { transcript: string; durationS: number; allowedS: number; answerMode: 'speak' | 'type' }): string {
   const n = countWords(r.transcript);
@@ -40,8 +42,8 @@ Time allowed: ${r.allowedS} seconds. Time used: ${r.durationS} seconds. Words: $
 SCORE THESE ${st.attributes.length} ATTRIBUTES (integers 1-5; 3 = adequate, 5 = outstanding for an applicant):
 ${attrs}
 Return ONLY JSON with exactly these keys:
-{"scores":{${st.attributes.map((k) => `"${k}":n`).join(',')}},"summary":"2 sentences","strengths":["2 specific strengths"],"improvements":[{"issue":"what to fix","quote":"exact short words from the answer it relates to, or empty string","try_instead":"a concrete better line or move"}],"missed_points":["important points not covered"],"model_outline":["4-6 bullet outline of a strong answer"]}
-Give 2-3 improvements. Quotes must be copied from the answer exactly.`;
+{"scores":{${st.attributes.map((k) => `"${k}":n`).join(',')}},"summary":"2 sentences","strengths":["2 specific strengths"],"improvements":[{"issue":"what to fix","quote":"exact short words from the answer it relates to, or empty string","try_instead":"a concrete better line or move"}],"missed_points":["important points not covered"],"model_outline":["4-5 short bullets outlining a strong answer"]}
+Give 2-3 improvements. Keep every item to one sentence. Quotes must be copied from the answer exactly.`;
 }
 
 function str(x: unknown): string {
@@ -94,7 +96,7 @@ export async function generateFeedback(bank: Bank, st: Station, r: { transcript:
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model, max_tokens: 1500, messages: [{ role: 'user', content: buildPrompt(bank, st, r) }] }),
+      body: JSON.stringify({ model, max_tokens: 1000, messages: [{ role: 'user', content: buildPrompt(bank, st, r) }] }),
     });
     if (!res.ok) throw new Error(`anthropic_${res.status}`);
     const data = (await res.json()) as { content?: Array<{ type: string; text?: string }> };

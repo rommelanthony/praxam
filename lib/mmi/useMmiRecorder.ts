@@ -100,7 +100,7 @@ export function useMmiRecorder() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia(
           next === 'video'
-            ? { video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' }, audio: { echoCancellation: true, noiseSuppression: true } }
+            ? { video: { width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 15 }, facingMode: 'user' }, audio: { echoCancellation: true, noiseSuppression: true } }
             : { audio: { echoCancellation: true, noiseSuppression: true } },
         );
         streamRef.current = stream;
@@ -120,11 +120,12 @@ export function useMmiRecorder() {
     try {
       const mimeType = pickMime(mode);
       chunksRef.current = [];
-      // Keep a 3-minute answer around 15 MB so uploads stay quick.
+      // ~3 min answer ≈ 7–8 MB video (15 fps, 300 kbps) or ~1 MB audio: keeps
+      // storage, playback bandwidth and upload time low. Faces stay clear at this rate.
       const rec = new MediaRecorder(stream, {
         ...(mimeType ? { mimeType } : {}),
-        ...(mode === 'video' ? { videoBitsPerSecond: 600_000 } : {}),
-        audioBitsPerSecond: 64_000,
+        ...(mode === 'video' ? { videoBitsPerSecond: 300_000 } : {}),
+        audioBitsPerSecond: 48_000,
       });
       rec.ondataavailable = (e) => {
         if (e.data && e.data.size) chunksRef.current.push(e.data);
