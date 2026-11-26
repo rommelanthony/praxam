@@ -155,6 +155,8 @@ export type MmiFeedback = {
   outline: string[];
   model?: string;
   error?: string;
+  /** Set once the server has transcribed the recording (skips re-transcribing on retry). */
+  transcribedBy?: string;
 };
 
 export const mmiAttempts = pgTable('mmi_attempts', {

@@ -19,6 +19,8 @@ type Props = {
   preset: Preset;
   stations: Station[];
   attributeLabels: Record<string, string>;
+  /** Server can transcribe recordings, so feedback doesn't need browser speech recognition. */
+  serverTranscribe: boolean;
 };
 
 const fmt = (s: number) => {
@@ -26,7 +28,7 @@ const fmt = (s: number) => {
   return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
 };
 
-export default function MmiRunner({ userId, edition, lang, kind, preset, stations, attributeLabels }: Props) {
+export default function MmiRunner({ userId, edition, lang, kind, preset, stations, attributeLabels, serverTranscribe }: Props) {
   const router = useRouter();
   const rec = useMmiRecorder();
   const [phase, setPhase] = useState<Phase>('intro');
@@ -274,7 +276,7 @@ export default function MmiRunner({ userId, edition, lang, kind, preset, station
           <fieldset className="mb-5">
             <legend className="font-semibold text-navy mb-2">How will you answer?</legend>
             <div className="flex flex-wrap gap-3">
-              <Choice checked={answerMode === 'speak'} onChange={() => setAnswerMode('speak')} title="Speak (recommended)" body={srSupported ? 'Your answer is recorded and transcribed for feedback.' : 'Your answer is recorded. Live transcripts need Chrome or Edge, so AI feedback may be limited.'} />
+              <Choice checked={answerMode === 'speak'} onChange={() => setAnswerMode('speak')} title="Speak (recommended)" body={srSupported || serverTranscribe ? 'Your answer is recorded and transcribed for feedback.' : 'Your answer is recorded. Live transcripts need Chrome or Edge, so AI feedback may be limited.'} />
               <Choice checked={answerMode === 'type'} onChange={() => setAnswerMode('type')} title="Type" body="Type your answer while being recorded. Useful if you cannot speak aloud right now." />
             </div>
           </fieldset>
@@ -294,6 +296,7 @@ export default function MmiRunner({ userId, edition, lang, kind, preset, station
   if (phase === 'check') {
     const ready = rec.state === 'ready';
     const noFeedbackPath = rec.mode === 'none' && answerMode === 'speak' && !srSupported;
+    const noTranscript = answerMode === 'speak' && !srSupported && !serverTranscribe;
     return (
       <Shell>
         <div className="max-w-[900px] mx-auto">
@@ -324,7 +327,7 @@ export default function MmiRunner({ userId, edition, lang, kind, preset, station
                 </>
               )}
               {rec.error && <p className="rounded-md p-3 mb-4 text-[14px]" style={{ background: 'var(--violet-soft)', color: 'var(--violet)' }}>{rec.error}</p>}
-              {answerMode === 'speak' && !srSupported && (
+              {noTranscript && rec.mode !== 'none' && (
                 <p className="rounded-md p-3 mb-4 text-[14px] bg-surface-cool text-ink-soft">Live transcripts are not available in this browser, so AI feedback needs Chrome or Edge. You can still watch your recordings and mark yourself.</p>
               )}
               {noFeedbackPath && <p className="rounded-md p-3 mb-4 text-[14px] bg-surface-cool text-ink-soft">Without recording or a transcript there will be nothing to review. Choose a recording option or answer by typing.</p>}
@@ -384,6 +387,9 @@ export default function MmiRunner({ userId, edition, lang, kind, preset, station
               <span className="text-[13px] text-ink-muted">Your answer</span>
               <textarea autoFocus value={typed} onChange={(e) => setTyped(e.target.value)} rows={8} className="mt-1 w-full rounded-md border-2 border-teal p-3 text-[16px] focus:outline-none" />
             </label>
+          )}
+          {phase === 'resp' && answerMode === 'speak' && !srSupported && serverTranscribe && rec.mode !== 'none' && (
+            <p className="text-[14px] text-ink-muted">Your answer will be transcribed after the station for feedback.</p>
           )}
           {phase === 'resp' && answerMode === 'speak' && srSupported && (
             <div className="text-[14px] text-ink-muted">

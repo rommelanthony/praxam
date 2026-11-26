@@ -18,10 +18,13 @@ Realistic asynchronous MMI practice (Auckland/Kira-style): read-aloud scenario ‚
 2. Env vars (Vercel):
    - `ANTHROPIC_API_KEY`: required for AI feedback (without it responses show "feedback could not be generated" and self-marking still works)
    - `MMI_FEEDBACK_MODEL`: optional, defaults to `claude-sonnet-5-5`
+   - `OPENAI_API_KEY`: server-side transcription of recordings, so AI feedback works in every browser (Safari, Firefox). Without it, only Chrome/Edge live transcripts or typed answers get AI feedback.
+   - `MMI_TRANSCRIBE_MODEL`: optional, defaults to `gpt-transcribe`
    - `MMI_INCLUDE_STAGING`: optional, `1` to show staging stations in production
 
 ## Known limits / follow-ups
-- Transcripts come from the browser's live speech recognition (Chrome/Edge). Other browsers still record; AI feedback needs a transcript or a typed answer. Server-side transcription is a follow-up.
+- Transcripts: with `OPENAI_API_KEY` set, spoken answers are transcribed on the server from the recording (all browsers; te reo MƒÅori / Australian health terms passed as keywords). The live browser transcript (Chrome/Edge) is the fallback. Recordings over 25 MB are not transcribed (a 3-minute video is ~15 MB).
+- Feedback route runs transcription then feedback within 60 s; if it times out, the transcript is already saved and the results page retries the feedback.
 - 30-day recording deletion: needs a scheduled job (the UI already says 30 days).
 - Teacher review (classes, review queue, `marker_type = 'teacher'`) is in the schema but has no UI yet.
 - No paywall gating yet.

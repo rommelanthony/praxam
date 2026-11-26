@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { currentUser, getSeenStationIds } from '@/lib/mmi/server';
 import { getBank, getPreset, isEdition, practicePreset, type Edition } from '@/lib/mmi/content';
 import { pickStations } from '@/lib/mmi/select';
+import { transcriptionConfigured } from '@/lib/mmi/transcribe';
 import MmiRunner from './MmiRunner';
 
 export const metadata = { title: 'MMI — PracXAM' };
@@ -41,6 +42,7 @@ export default async function SessionPage({ searchParams }: { searchParams: Prom
       preset={preset}
       stations={stations}
       attributeLabels={Object.fromEntries(Object.entries(bank.attributes).map(([k, a]) => [k, a.label]))}
+      serverTranscribe={transcriptionConfigured()}
     />
   );
 }
