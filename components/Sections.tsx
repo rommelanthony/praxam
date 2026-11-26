@@ -9,7 +9,7 @@ export function Stats() {
     <div className="border-y border-line bg-surface-cool">
       <div className="container-px grid grid-cols-2 sm:grid-cols-4 py-9">
         {[
-          { num: '2,500+', label: 'Practice questions', accent: true },
+          { num: '4,000+', label: 'Practice questions', accent: true },
           { num: '5', label: 'UCAT subtests covered' },
           { num: '15+', label: 'Full mock exams' },
           { num: '£0', label: 'To get started', accent: true },
@@ -124,7 +124,7 @@ export function Pricing() {
             <div className="text-[2.6rem] font-extrabold tracking-tight leading-none text-white">£9<span className="text-[0.95rem] font-medium text-white/65"> / month</span></div>
             <p className="text-[14.5px] text-white/80 mt-3 mb-7 min-h-[40px]">Everything you need to get the score you actually want.</p>
             <ul className="flex-grow mb-7 list-none">
-              {['Full library — 2,500+ questions across all 5 subtests', '15+ full-length mock exams under exam conditions', 'Per-topic analytics with weak-spot drills', 'Strategy guides for each subtest', 'Cancel anytime — no minimum term'].map((t) => (
+              {['Full library — 4,000+ questions across all 5 subtests', '15+ full-length mock exams under exam conditions', 'Per-topic analytics with weak-spot drills', 'Strategy guides for each subtest', 'Cancel anytime — no minimum term'].map((t) => (
                 <li key={t} className="flex gap-2.5 items-start py-2 text-[14.5px] text-white/95">
                   <span className="flex-shrink-0 mt-0.5">{tierCheck('white')}</span>
                   {t}
