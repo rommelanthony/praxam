@@ -1,4 +1,5 @@
 ﻿"use client";
+import ChartPassage from '@/components/practice/ChartPassage';
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import type { Question } from "@/db/schema";
@@ -105,7 +106,7 @@ export default function ChallengePage() {
       </header>
       <div className="flex-1 max-w-2xl mx-auto w-full px-4 py-8">
         {q && (<>
-          {q.passage && (<div className="bg-surface border border-line rounded-xl p-5 mb-5 text-[15px] text-ink leading-relaxed">{q.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{q.passageTitle}</p>}<p className="whitespace-pre-line">{q.passage}</p></div>)}
+          {q.passage && (<div className="bg-surface border border-line rounded-xl p-5 mb-5 text-[15px] text-ink leading-relaxed">{q.passageTitle && <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted mb-2">{q.passageTitle}</p>}<ChartPassage passage={q.passage} /></div>)}
           <p className="text-[17px] font-semibold text-navy leading-snug mb-5">{q.stem}</p>
           <div className="flex flex-col gap-2.5">
             {choices.map(c => {
