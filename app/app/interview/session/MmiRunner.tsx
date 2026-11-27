@@ -361,7 +361,7 @@ export default function MmiRunner({ userId, edition, lang, kind, preset, station
   const total = phase === 'prep' ? preset.prepS : phase === 'resp' ? preset.responseS : phase === 'trans' ? preset.transitionS : 1;
   const left = endAt ? Math.max(0, (endAt - now) / 1000) : total;
   const frac = phase === 'read' ? 1 : left / total;
-  const label = phase === 'read' ? 'Reading scenario' : phase === 'prep' ? 'Preparation' : phase === 'resp' ? 'Recording your answer' : 'Next station';
+  const label = phase === 'read' ? 'Reading scenario' : phase === 'prep' ? 'Preparation' : phase === 'resp' ? (recording ? 'Recording your answer' : 'Answer time') : 'Next station';
   const words = (live.text + ' ' + live.interim).trim().split(/\s+/).filter(Boolean).length;
 
   return (
@@ -414,7 +414,7 @@ export default function MmiRunner({ userId, edition, lang, kind, preset, station
             {phase === 'resp' && <button className="btn" style={{ background: 'rgba(255,255,255,.12)', color: 'white' }} onClick={() => void endResp()}>Finish answer</button>}
             {phase === 'trans' && <button className="btn" style={{ background: 'rgba(255,255,255,.12)', color: 'white' }} onClick={next}>Go to next station</button>}
           </div>
-          {phase === 'prep' && <p className="text-[13px] text-white/70 text-center max-w-[30ch]">Your answer time starts automatically. Start speaking straight away.</p>}
+          {phase === 'prep' && <p className="text-[13px] text-white/70 text-center max-w-[30ch]">Your answer time starts automatically. {answerMode === 'type' ? 'Start typing' : 'Start speaking'} straight away.</p>}
           {saved.failed > 0 && <p className="text-[13px] text-amber-soft text-center">{saved.failed} recording{saved.failed === 1 ? '' : 's'} could not be uploaded. Your other answers are still being saved.</p>}
         </div>
       </div>

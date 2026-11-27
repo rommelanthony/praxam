@@ -51,7 +51,7 @@ export default async function InterviewHome({ searchParams }: { searchParams: Pr
             <div className="text-[1.4rem] font-extrabold mb-1">{p.label}</div>
             <p className={`mb-5 ${i === 0 ? 'text-white/80' : 'text-ink-soft'}`}>{p.description}</p>
             <Link href={`/app/interview/session?edition=${edition}&preset=${p.key}`} className={`btn ${i === 0 ? 'btn-teal' : 'btn-navy'}`}>
-              Start {p.label.toLowerCase()}
+              Start {p.label}
             </Link>
           </div>
         ))}
