@@ -1,0 +1,1524 @@
+{
+ "edition": "au",
+ "place": "Australia",
+ "lang": "en-AU",
+ "attributes": {
+  "comm": {
+   "label": "Communication",
+   "description": "speaks clearly and fluently at a steady pace, with confidence and good structure",
+   "levels": {
+    "1": "Hard to follow: disorganised, very short or rambling, little sense of the listener.",
+    "3": "Clear enough with some structure; mostly relevant; uses a reasonable share of the time.",
+    "5": "Clear, well organised and engaging from start to finish; signposts points, adapts language to the listener and finishes on time."
+   }
+  },
+  "equity": {
+   "label": "Equity and social justice",
+   "description": "aware of fairness, social justice and human rights in health; can explain how discrimination and social determinants create and maintain inequities",
+   "levels": {
+    "1": "Does not notice unfairness, or blames individuals for structural problems.",
+    "3": "Recognises that some groups are affected more and names one or two causes.",
+    "5": "Explains several structural causes (discrimination, social determinants, access), who is affected and why, and suggests fair, practical responses."
+   }
+  },
+  "ethics": {
+   "label": "Ethical reasoning",
+   "description": "sees more than one side of an issue and applies ethical principles with integrity to reach a fair, reasoned position",
+   "levels": {
+    "1": "Gives a one-sided or unreasoned view; misses the dilemma.",
+    "3": "Identifies the main dilemma and considers more than one side.",
+    "5": "Weighs competing principles and stakeholders fairly, reaches a reasoned position and acknowledges its limits."
+   }
+  },
+  "critical": {
+   "label": "Critical thinking",
+   "description": "identifies the real issue, analyses it, draws logical unbiased conclusions and builds a structured, persuasive argument",
+   "levels": {
+    "1": "Restates the question or makes assertions without reasons.",
+    "3": "Identifies the main issue and gives some reasons and examples.",
+    "5": "Analyses the issue in depth, weighs evidence and trade-offs, and builds a logical, persuasive argument."
+   }
+  },
+  "cultural": {
+   "label": "Cultural safety and self-reflection",
+   "description": "recognises how their own culture and background shape their view, respects other perspectives and is willing to learn from them",
+   "levels": {
+    "1": "Shows little awareness of their own perspective or of other cultures; may stereotype.",
+    "3": "Shows some awareness that culture and background shape views; respectful.",
+    "5": "Reflects honestly on their own culturally shaped perspective, shows genuine respect and curiosity about others, and links this to safe care."
+   }
+  },
+  "team": {
+   "label": "Teamwork and leadership",
+   "description": "draws on real experience of diverse teams: taking initiative, building trust, handling conflict, shared accountability",
+   "levels": {
+    "1": "No concrete example, or describes teamwork only in general terms.",
+    "3": "Gives a relevant example with a clear role and some reflection.",
+    "5": "Gives a specific example showing initiative, trust-building, handling conflict and shared accountability, with clear lessons learned."
+   }
+  },
+  "resilience": {
+   "label": "Resilience and motivation",
+   "description": "handles setbacks constructively, shows realistic motivation for a health career, a growth mindset and deliberate self-care",
+   "levels": {
+    "1": "Little evidence of coping or motivation; vague or unrealistic.",
+    "3": "Describes a real challenge and reasonable coping or motivation.",
+    "5": "Shows realistic understanding of challenges, specific coping and self-care strategies already used, growth from setbacks and well-grounded motivation."
+   }
+  },
+  "flex": {
+   "label": "Flexible problem solving",
+   "description": "thinks fluently, combines ideas in new ways and suggests creative, practical solutions",
+   "levels": {
+    "1": "No solutions, or only one obvious idea.",
+    "3": "Offers a few sensible ideas.",
+    "5": "Generates several creative, practical ideas, adapts when considering new angles and is open to changing their mind."
+   }
+  }
+ },
+ "domains": [
+  "Equity and social justice",
+  "Ethics",
+  "Healthcare issue",
+  "Motivation and insight",
+  "Teamwork and experience",
+  "Communication",
+  "Aboriginal and Torres Strait Islander health",
+  "Situational"
+ ],
+ "anchors": {
+  "Equity and social justice": [
+   "equity"
+  ],
+  "Ethics": [
+   "ethics"
+  ],
+  "Healthcare issue": [
+   "critical",
+   "flex"
+  ],
+  "Motivation and insight": [
+   "resilience"
+  ],
+  "Teamwork and experience": [
+   "team"
+  ],
+  "Communication": [
+   "comm"
+  ],
+  "Aboriginal and Torres Strait Islander health": [
+   "cultural",
+   "equity"
+  ]
+ },
+ "stations": [
+  {
+   "id": "au-adult-dental",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "ethics",
+    "critical"
+   ],
+   "title": "Should Medicare cover teeth?",
+   "scenario": "In Australia, public dental care for adults is generally only available to concession card holders, and waiting lists can be long. Most adults pay for dental care themselves.",
+   "question": "Should Medicare cover dental care for all adults? What are the arguments on each side?",
+   "keyPoints": [
+    "Links oral health to general health, pain, nutrition, work and self-esteem",
+    "Equity: cost barriers fall hardest on lower-income, rural and remote, and Aboriginal and Torres Strait Islander communities",
+    "Arguments for: prevention, fewer emergency and hospital admissions, fairness",
+    "Arguments against or limits: cost, workforce, competing priorities",
+    "Middle options: expanding concession eligibility, prevention in schools, community clinics, staged rollout",
+    "Reasoned conclusion that acknowledges trade-offs"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-rural-gap",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "flex",
+    "critical"
+   ],
+   "title": "The city–country divide",
+   "scenario": "People living in rural and remote Australia generally have lower life expectancy and less access to health services than people in major cities.",
+   "question": "What causes this gap, and what could help close it?",
+   "keyPoints": [
+    "Causes: distance, workforce shortages, fewer specialists, cost of travel, higher-risk jobs, ageing populations",
+    "Higher proportion of Aboriginal and Torres Strait Islander people in remote areas",
+    "Solutions: rural training pathways, incentives, telehealth, outreach, Royal Flying Doctor Service-style models, nurse practitioners",
+    "Community-led and local solutions",
+    "Recognises no single fix; long-term investment",
+    "Clear, structured argument"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-ndis",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "flex",
+    "cultural"
+   ],
+   "title": "Navigating the NDIS",
+   "scenario": "The National Disability Insurance Scheme (NDIS) supports hundreds of thousands of Australians with disability, but many people find it hard to apply for and use.",
+   "question": "Who might miss out, and how could access be made fairer?",
+   "keyPoints": [
+    "Groups at risk: people with complex needs, low literacy, limited English, rural and remote residents, Aboriginal and Torres Strait Islander people, people without advocates",
+    "Barriers: paperwork, evidence requirements, cost of assessments, digital access",
+    "Ideas: navigators and advocates, simpler processes, outreach, culturally safe services",
+    "Co-design with people with disability",
+    "Balances sustainability of the scheme with fairness",
+    "Respectful, non-deficit language"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-refugee-health",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "cultural",
+    "flex"
+   ],
+   "title": "Starting again",
+   "scenario": "People who come to Australia as refugees may face language barriers, past trauma and a health system that works very differently from the one they knew.",
+   "question": "What challenges might they face, and how could health services help?",
+   "keyPoints": [
+    "Challenges: language, unfamiliar system, cost, transport, trauma, mistrust, cultural expectations",
+    "Health needs: untreated conditions, mental health, vaccinations, dental care",
+    "Trauma-informed and culturally safe care",
+    "Practical help: free interpreters, refugee health services, community health workers, longer appointments",
+    "Partnership with settlement services and communities",
+    "Recognises strengths and resilience"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-languages",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "cultural",
+    "flex"
+   ],
+   "title": "Many languages",
+   "scenario": "More than one in five Australians speak a language other than English at home.",
+   "question": "What does this mean for health care, and what should health services do?",
+   "keyPoints": [
+    "Risks: misunderstanding, poor informed consent, medicine errors, missed follow-up",
+    "Problems with using family members, especially children, as interpreters",
+    "Professional interpreters (phone, video, in person), translated materials, bilingual staff",
+    "Cultural beliefs about health and illness",
+    "Health literacy and teach-back",
+    "Practical and respectful suggestions"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-gp-costs",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "critical",
+    "flex"
+   ],
+   "title": "The cost of seeing a GP",
+   "scenario": "From November 2025, the federal government extended bulk billing incentives to all Medicare-eligible patients, but many people still pay out-of-pocket costs for some health care.",
+   "question": "Who is most affected by out-of-pocket costs, and what else could improve access?",
+   "keyPoints": [
+    "Groups affected: low-income households, people with chronic conditions, rural residents, young adults, people needing specialists or allied health",
+    "Effects: delayed care, more emergency department visits, worse chronic disease control",
+    "Recognises bulk billing alone does not fix workforce shortages or specialist costs",
+    "Other levers: nurse practitioners, community health centres, telehealth, urgent care clinics",
+    "Trade-offs: cost to government, GP viability",
+    "Reasoned opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-homelessness",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "flex",
+    "ethics"
+   ],
+   "title": "No fixed address",
+   "scenario": "People experiencing homelessness often have serious health problems and frequently rely on emergency departments for care.",
+   "question": "Why might this happen, and what would a better approach look like?",
+   "keyPoints": [
+    "Barriers: no Medicare card or ID, cost, no phone, mistrust, competing survival needs",
+    "Health issues: chronic illness, mental health, injuries, substance use",
+    "Better approaches: outreach clinics, street health teams, housing-first, integrated services",
+    "Dignity and non-judgemental care",
+    "Cost-effectiveness of prevention versus emergency care",
+    "Practical, compassionate answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-endometriosis",
+   "style": "core",
+   "domain": "Equity and social justice",
+   "attributes": [
+    "equity",
+    "critical",
+    "cultural"
+   ],
+   "title": "Years to a diagnosis",
+   "scenario": "Endometriosis is common, yet many women in Australia report waiting years for a diagnosis, and say their pain was dismissed.",
+   "question": "Why might this happen, and what could be done?",
+   "keyPoints": [
+    "Bias: normalising period pain, gender stereotypes, historic research based on men",
+    "Intersecting factors: cultural background, rurality, cost of specialists",
+    "Impacts: suffering, missed school and work, fertility concerns, loss of trust",
+    "Solutions: education, listening and believing patients, clearer pathways, specialist clinics",
+    "Self-reflection on how their own assumptions could affect how they listen",
+    "Structured argument"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-vad-objection",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "cultural",
+    "critical"
+   ],
+   "title": "A matter of conscience",
+   "scenario": "Voluntary assisted dying is now legal in every Australian state and the ACT, but not the Northern Territory. Health practitioners can choose not to take part because of their beliefs.",
+   "question": "What are your thoughts on health professionals being able to opt out of some kinds of care for personal reasons?",
+   "keyPoints": [
+    "Respects practitioner conscience and moral integrity",
+    "Weighs patient rights to lawful care and timely access",
+    "Access problems if many opt out, especially in rural areas or faith-based facilities",
+    "Duty to give patients information on where to get help (required in most jurisdictions)",
+    "Acknowledges diverse religious, cultural and personal views",
+    "Reasoned position; not judged on which view they hold"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-opt-out-organ",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Opt-in or opt-out?",
+   "scenario": "Australia uses an opt-in organ donor register, and families are always asked before donation goes ahead. Only about a third of Australians aged 16 and over are registered.",
+   "question": "Should Australia move to an opt-out system?",
+   "keyPoints": [
+    "Dilemma: saving lives versus autonomy and genuine consent",
+    "Evidence: family consent rates and conversations matter as much as the law",
+    "Families are still asked in most opt-out countries",
+    "Cultural and religious perspectives, including Aboriginal and Torres Strait Islander views",
+    "Alternatives: more registration, family conversations, trained donation specialists",
+    "Balanced, reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-paid-plasma",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "Paying plasma donors",
+   "scenario": "Australian blood and plasma donors are unpaid volunteers, but Australia imports a large and growing share of its plasma products from countries that pay donors.",
+   "question": "Should Australia pay people to donate plasma?",
+   "keyPoints": [
+    "Dilemma: supply and self-sufficiency versus altruism and possible exploitation",
+    "Payment could target people on low incomes",
+    "Safety concerns about people hiding risk factors",
+    "Inconsistency: we already rely on paid donors overseas",
+    "Middle options: expenses, time-off schemes, recognition, better access to donor centres",
+    "Reasoned conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-teen-gp",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Should parents be told?",
+   "scenario": "In Australia, young people can often consent to their own health care if they understand it, and from age 15 they can get their own Medicare card.",
+   "question": "Should parents always be told when their 15-year-old sees a GP?",
+   "keyPoints": [
+    "Tension: young person's privacy and autonomy versus parents' role and protection",
+    "Confidentiality encourages young people to seek help early",
+    "Limits: serious risk of harm may justify sharing",
+    "Encourage involving family where safe",
+    "Different family and cultural expectations",
+    "Nuanced position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-doctor-strikes",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "equity",
+    "critical"
+   ],
+   "title": "Doctors on strike",
+   "scenario": "In April 2025, thousands of NSW public hospital doctors went on a three-day strike over pay and conditions, the first statewide doctors' strike in decades. Earlier that year, many public psychiatrists resigned.",
+   "question": "Should doctors be allowed to strike?",
+   "keyPoints": [
+    "Workers' rights and the link between staffing, fatigue and patient safety",
+    "Duty of care and risk to patients during action",
+    "Emergency and life-preserving cover",
+    "Long-term effects on retention if conditions do not improve",
+    "Who is most affected by disruption",
+    "Balanced position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-patient-gift",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "cultural",
+    "comm"
+   ],
+   "title": "A gift of thanks",
+   "scenario": "A grateful patient offers their GP an expensive gift after treatment.",
+   "question": "Should health professionals accept gifts from patients?",
+   "keyPoints": [
+    "Value and timing matter",
+    "Risks: favouritism, pressure, conflict of interest, vulnerable patients",
+    "Cultural meaning of gifts; refusing can offend",
+    "Professional guidance and declaring gifts",
+    "Options: decline graciously, share with team, donate",
+    "Balanced answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-covert-meds",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "comm",
+    "cultural"
+   ],
+   "title": "Hidden in the food",
+   "scenario": "A woman with advanced dementia in an aged care home often refuses her medicines. A staff member suggests hiding them in her food.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Tension between wellbeing and autonomy and dignity",
+    "Capacity and who decides (substitute decision-maker)",
+    "Explore why she refuses",
+    "Proper process: assessment, family or guardian involvement, documented plan",
+    "Alternatives and medication review first",
+    "Links to concerns about quality of aged care"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-genetic-family",
+   "style": "core",
+   "domain": "Ethics",
+   "attributes": [
+    "ethics",
+    "critical",
+    "comm"
+   ],
+   "title": "Should the family know?",
+   "scenario": "A genetic test shows a patient carries a gene variant that greatly raises the risk of a serious but often preventable cancer. Their siblings may carry it too. The patient does not want them told.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Confidentiality and autonomy versus preventing serious harm to relatives",
+    "Explore the patient's reasons",
+    "Support the patient to tell family",
+    "Disclosure without consent needs strong justification and senior advice",
+    "Trust in the health system",
+    "Balanced conclusion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-ramping",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Ambulance ramping",
+   "scenario": "Ambulance ramping, where patients wait in ambulances outside crowded emergency departments, has been reported in several Australian states.",
+   "question": "What causes this, and what could help?",
+   "keyPoints": [
+    "Whole-system causes: bed shortages, delayed discharges, aged care and NDIS placement delays, GP access",
+    "Impacts: delayed care, ambulances unavailable for new calls, staff burnout",
+    "Solutions: urgent care clinics, hospital-in-the-home, faster discharge, more beds and staff, virtual EDs",
+    "Equity: effects on rural and older patients",
+    "Trade-offs and cost",
+    "Clear opinion without needing statistics"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-vapes",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Vapes behind the counter",
+   "scenario": "Since July 2024, vapes can only be legally sold in Australian pharmacies, and people under 18 need a prescription. Many young people still vape.",
+   "question": "What are your thoughts on this approach?",
+   "keyPoints": [
+    "Aims: stop youth uptake while supporting adults quitting smoking",
+    "Challenges: illegal supply, enforcement, nicotine addiction already present",
+    "Role of pharmacists and GPs in quit support",
+    "Education young people trust; involving young people",
+    "Equity: uneven effects across communities",
+    "Forms and justifies a view"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-social-media-16",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "cultural"
+   ],
+   "title": "Under 16, no account",
+   "scenario": "Since 10 December 2025, major social media platforms must take reasonable steps to stop Australians under 16 from having accounts.",
+   "question": "What are your thoughts on this law?",
+   "keyPoints": [
+    "Recognises harms (cyberbullying, comparison, sleep) and benefits (connection, identity, support, especially for isolated young people)",
+    "Practical questions: age checks, privacy, workarounds",
+    "Effects on rural, disabled and minority young people who rely on online communities",
+    "Alternatives or complements: platform safety design, education, parent tools",
+    "Evidence still developing; review planned",
+    "Balanced, reasoned position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-fluoride",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "ethics"
+   ],
+   "title": "Fluoride in the water",
+   "scenario": "About 90% of Australians drink fluoridated water, but several Queensland councils have recently voted to stop adding fluoride.",
+   "question": "What are your thoughts?",
+   "keyPoints": [
+    "Evidence that fluoridation reduces tooth decay, especially for children and lower-income communities",
+    "Concerns raised: choice, consent, safety worries, misinformation",
+    "Who should decide: councils or state government",
+    "Equity: regional areas lose more",
+    "How to communicate evidence respectfully",
+    "Forms a view while acknowledging the debate"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-sugar-tax",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Taxing sugary drinks",
+   "scenario": "Many countries tax sugary drinks to reduce obesity and tooth decay. Australia does not have a tax like this.",
+   "question": "Should Australia introduce one?",
+   "keyPoints": [
+    "Arguments for: overseas evidence of lower consumption, revenue for health",
+    "Arguments against: regressive cost, personal freedom, industry impact",
+    "Equity: benefits greatest where consumption is highest",
+    "Complementary measures: labelling, marketing limits, water in schools",
+    "One tax is not a complete solution",
+    "Justified view"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-img-doctors",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "ethics"
+   ],
+   "title": "Doctors from overseas",
+   "scenario": "Australia relies heavily on doctors trained overseas, especially in rural areas, and has introduced faster registration pathways for some of them.",
+   "question": "What are your thoughts on how Australia should meet its need for doctors?",
+   "keyPoints": [
+    "Benefits of overseas-trained doctors; support they need to settle and practise safely",
+    "Ethics of recruiting from countries with their own shortages",
+    "Training more locally, rural and Indigenous pathways",
+    "Retention: conditions, burnout, distribution",
+    "Short-term versus long-term solutions",
+    "Reasoned opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-ai-scribes",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "ethics"
+   ],
+   "title": "AI in the consulting room",
+   "scenario": "Many Australian GPs now use AI tools that listen to the consultation and write the clinical notes.",
+   "question": "What are your thoughts on using AI in this way?",
+   "keyPoints": [
+    "Benefits: more time with patients, less paperwork burnout",
+    "Risks: errors, privacy, data storage",
+    "Patient consent and the right to say no",
+    "Equity: accents, languages, cultural data",
+    "Clinician remains accountable",
+    "Balanced opinion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-heatwaves",
+   "style": "core",
+   "domain": "Healthcare issue",
+   "attributes": [
+    "critical",
+    "flex",
+    "equity"
+   ],
+   "title": "Hotter summers",
+   "scenario": "Heatwaves cause more deaths in Australia than any other natural hazard, and they are becoming more frequent.",
+   "question": "How should the health system prepare?",
+   "keyPoints": [
+    "Who is most at risk: older people, people living alone, outdoor workers, people with chronic illness, those without cooling, remote communities",
+    "Health system actions: early warnings, checking on vulnerable people, cooling centres, hospital surge plans",
+    "Links between climate and health equity",
+    "Health sector's own emissions",
+    "Practical, creative ideas",
+    "Structured answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-why-medicine",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "comm",
+    "team"
+   ],
+   "title": "Why this profession?",
+   "scenario": "Health care relies on many professions working together, including nurses, pharmacists, physiotherapists, paramedics, Aboriginal and Torres Strait Islander health workers and doctors.",
+   "question": "Why have you chosen this profession over the others, and what do you know about what it is really like?",
+   "keyPoints": [
+    "Specific reasons drawn from real experience",
+    "Understands day-to-day reality, not only highlights",
+    "Respects other professions",
+    "Realistic about demands",
+    "Evidence of testing the choice",
+    "Genuine, structured answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-rural-career",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "equity",
+    "comm"
+   ],
+   "title": "Going bush",
+   "scenario": "Many Australian medical schools have rural training pathways, and rural and remote areas are short of doctors.",
+   "question": "Would you consider a career in a rural or remote area? Why or why not?",
+   "keyPoints": [
+    "Honest answer with real reasons",
+    "Understands rural health needs and rewards (variety, community)",
+    "Considers challenges: isolation, family, professional support",
+    "Open-minded about how interests may change",
+    "Awareness of equity impact of shortages",
+    "Clear reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-after-mistake",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "ethics",
+    "comm"
+   ],
+   "title": "After a mistake",
+   "scenario": "Every health professional will make mistakes, and some will affect patients.",
+   "question": "How do you think you would cope after a mistake that affected a patient?",
+   "keyPoints": [
+    "Honesty and open disclosure",
+    "Patient safety first; report it",
+    "Learn from it; systems thinking",
+    "Seek support",
+    "Recognises emotional impact",
+    "Link to how they handle their own errors now"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-not-selected",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "flex",
+    "comm"
+   ],
+   "title": "If it's not this year",
+   "scenario": "Each year, many applicants who would make good doctors do not receive an offer.",
+   "question": "If you are not offered a place this year, what will you do?",
+   "keyPoints": [
+    "Honest about disappointment",
+    "Concrete plan: reflect, strengthen, reapply, consider other pathways such as graduate entry",
+    "Open to related careers",
+    "Keeps wellbeing in mind",
+    "Commitment without making it their whole identity",
+    "Composed communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-balance",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "comm"
+   ],
+   "title": "Switching off",
+   "scenario": "Burnout is common among doctors, and many find it hard to switch off from work.",
+   "question": "How will you balance your career with the rest of your life?",
+   "keyPoints": [
+    "Specific strategies already used",
+    "Recognises their own warning signs",
+    "Willing to ask for help",
+    "Values relationships and identity outside work",
+    "Realistic about training demands",
+    "Self-aware communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-role-model",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "comm"
+   ],
+   "title": "A role model",
+   "scenario": "Most people who choose a health career can point to someone who influenced them.",
+   "question": "Think of a health professional you have met or learned about. What do you admire in them, and how does it connect to the career you want?",
+   "keyPoints": [
+    "Specific person and details",
+    "Qualities shown through behaviour",
+    "Reflection on own strengths and gaps",
+    "Links to own motivation",
+    "Avoids idealising",
+    "Clear structure"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-hardest-trait",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "team"
+   ],
+   "title": "Your hardest trait",
+   "scenario": "Everyone has qualities that others can find difficult to work with.",
+   "question": "Describe one of yours. How do you manage it, and how might it affect you as a health professional?",
+   "keyPoints": [
+    "Genuine trait, not a disguised strength",
+    "Specific example",
+    "Concrete management strategies",
+    "Where it can also be a strength",
+    "Link to teamwork and patient care",
+    "Honest without being self-critical"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-shaped-you",
+   "style": "core",
+   "domain": "Motivation and insight",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "comm"
+   ],
+   "title": "What shaped you",
+   "scenario": "Our families, cultures, communities and experiences shape how we see the world.",
+   "question": "What has most shaped the person you are today, and how might it influence the way you care for patients?",
+   "keyPoints": [
+    "Specific influence with examples",
+    "Reflects on own background",
+    "Recognises blind spots",
+    "Links to caring for diverse patients",
+    "Respect for other perspectives",
+    "Authentic story"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-disagreed",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "comm"
+   ],
+   "title": "A respectful disagreement",
+   "scenario": "In health care, team members sometimes disagree about the right course of action.",
+   "question": "Describe a time you disagreed with someone you respected. What happened, and what did you learn?",
+   "keyPoints": [
+    "Real, specific situation",
+    "Tried to understand the other view",
+    "Respectful communication",
+    "Outcome, including compromise or changing their mind",
+    "Lessons about teamwork",
+    "Fair to the other person"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-struggling-group",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "flex",
+    "comm"
+   ],
+   "title": "Turning a group around",
+   "scenario": "Sometimes a group or team is not working well together.",
+   "question": "Describe a time you helped a group that was struggling. What did you do, and what happened?",
+   "keyPoints": [
+    "Specific situation and causes",
+    "Their actions: listening, clarifying goals, sharing tasks",
+    "Handled conflict respectfully",
+    "Honest outcome",
+    "Leadership lessons",
+    "Clear story"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-let-down",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "resilience",
+    "cultural"
+   ],
+   "title": "Letting the team down",
+   "scenario": "Everyone lets people down at some point.",
+   "question": "Tell us about a time you let a team down. How did you handle it?",
+   "keyPoints": [
+    "Takes responsibility",
+    "Impact on others",
+    "Actions to put it right",
+    "What they changed",
+    "Rebuilt trust",
+    "Self-aware"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-diverse-team",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "cultural",
+    "comm"
+   ],
+   "title": "Working across cultures",
+   "scenario": "Health care teams bring together people from many cultures and backgrounds.",
+   "question": "Describe a time you worked closely with people from a background very different from your own. What did you learn?",
+   "keyPoints": [
+    "Specific example",
+    "Differences noticed",
+    "Adapted communication",
+    "Learned from others",
+    "Respect, not stereotypes",
+    "Link to health teams and patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-spotted-problem",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "critical",
+    "ethics"
+   ],
+   "title": "Something wasn't right",
+   "scenario": "Sometimes you notice a problem others have missed.",
+   "question": "Describe a time you noticed a mistake or problem others had missed. What did you do?",
+   "keyPoints": [
+    "Specific situation",
+    "Checked they were right",
+    "Raised it respectfully",
+    "Outcome",
+    "Lessons about speaking up",
+    "Link to patient safety"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-responsibility",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "resilience",
+    "comm"
+   ],
+   "title": "Real responsibility",
+   "scenario": "Health professionals carry responsibility for other people.",
+   "question": "Tell us about a time you had real responsibility for others, for example in a job, sport, family, faith community or volunteering. What did it teach you?",
+   "keyPoints": [
+    "Specific responsibility",
+    "Challenges and how handled",
+    "Asked for help when needed",
+    "Reliability and accountability",
+    "Self-knowledge gained",
+    "Link to health care"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-stood-up",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "ethics",
+    "equity"
+   ],
+   "title": "Standing up",
+   "scenario": "Doing the right thing is not always easy or popular.",
+   "question": "Describe a time you stood up for someone or for something you believed was right.",
+   "keyPoints": [
+    "Specific situation",
+    "Courage with respect",
+    "Involved others or authority appropriately",
+    "Outcome",
+    "What they learned",
+    "Link to advocacy in health"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-difficult-person",
+   "style": "core",
+   "domain": "Teamwork and experience",
+   "attributes": [
+    "team",
+    "comm",
+    "cultural"
+   ],
+   "title": "Someone you clashed with",
+   "scenario": "We do not always get on with everyone we work with.",
+   "question": "Describe a time you had to work with someone you found difficult. How did you make it work?",
+   "keyPoints": [
+    "Fairly described example",
+    "Tried to understand them",
+    "Communication strategies",
+    "Focus on shared goals",
+    "Outcome and lessons",
+    "Avoids blaming"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-asthma-child",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "cultural",
+    "flex"
+   ],
+   "title": "Explaining asthma",
+   "scenario": "Your 9-year-old neighbour, Ava, has just been diagnosed with asthma. She is scared to use her puffer at school because the other kids might stare.",
+   "question": "Speak to Ava now. Explain what asthma is and why her puffer helps.",
+   "keyPoints": [
+    "Speaks directly to the child in simple, warm language",
+    "Clear analogy: airways get narrow and tight; the puffer helps open them",
+    "Acknowledges her worry about other kids",
+    "Practical ideas: telling a teacher, friends, school asthma plan",
+    "Checks understanding and invites questions",
+    "Honest and reassuring without false promises"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-telehealth-gran",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "flex",
+    "cultural"
+   ],
+   "title": "Teaching Nan",
+   "scenario": "Your grandmother rarely uses computers. Her GP has offered her a video appointment next week.",
+   "question": "Talk her through what will happen and how to get ready.",
+   "keyPoints": [
+    "Patient, respectful tone; no jargon",
+    "Breaks steps into small, clear pieces",
+    "Checks what she already knows and her worries",
+    "Offers practical help (practice call, written steps, being there)",
+    "Respects her choice to ask for a phone or face-to-face appointment instead",
+    "Checks understanding"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-apology",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "ethics",
+    "cultural"
+   ],
+   "title": "Making it right",
+   "scenario": "You promised to pick up your 10-year-old brother from school but forgot. He waited for an hour and is upset. Your parent is too.",
+   "question": "Speak to them now.",
+   "keyPoints": [
+    "Genuine apology without excuses",
+    "Acknowledges feelings of both",
+    "Explains what happened honestly",
+    "Checks the brother is okay",
+    "Plan to prevent it happening again",
+    "Calm, sincere tone"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-say-no",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "ethics",
+    "team"
+   ],
+   "title": "Saying no to a friend",
+   "scenario": "A close friend asks you to write part of their university assignment because they are overwhelmed. They say no one will find out.",
+   "question": "Respond to your friend now.",
+   "keyPoints": [
+    "Clear, kind refusal",
+    "Explains why (integrity, consequences for both)",
+    "Acknowledges their stress and asks what is going on",
+    "Offers real help: study together, extension, student support",
+    "Keeps the friendship",
+    "Firm but warm tone"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-blood-drive",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "flex",
+    "team"
+   ],
+   "title": "Rallying the group",
+   "scenario": "You are organising a group from your school or university to donate blood together, but most people seem uninterested or nervous about needles.",
+   "question": "Speak to the group now and try to persuade them.",
+   "keyPoints": [
+    "Engaging opening",
+    "Clear reasons and impact",
+    "Addresses fears respectfully",
+    "Practical details and making it easy",
+    "Respects people who cannot or choose not to donate",
+    "Positive call to action"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-angry-customer",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "flex",
+    "resilience"
+   ],
+   "title": "The wrong order",
+   "scenario": "You work at a busy café. A customer is angry because their order is wrong and they are now late for work. They raise their voice at you.",
+   "question": "Respond to the customer now.",
+   "keyPoints": [
+    "Stays calm and does not take it personally",
+    "Acknowledges frustration and apologises",
+    "Offers a fast, practical fix",
+    "Clear, respectful language",
+    "Knows when to involve a manager",
+    "Link to staying calm with distressed patients"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-antibiotics-cold",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "critical",
+    "flex"
+   ],
+   "title": "Why not antibiotics?",
+   "scenario": "Your 12-year-old cousin has a bad cold and asks why the doctor will not give them antibiotics like last time they had an ear infection.",
+   "question": "Explain it to them now.",
+   "keyPoints": [
+    "Simple explanation: colds are caused by viruses; antibiotics work on bacteria",
+    "Mentions side effects and resistance in age-appropriate terms",
+    "What helps instead: rest, fluids, time",
+    "When to go back to the doctor",
+    "Checks understanding",
+    "Friendly, clear tone"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-overwhelmed-friend",
+   "style": "core",
+   "domain": "Communication",
+   "attributes": [
+    "comm",
+    "cultural",
+    "team"
+   ],
+   "title": "A friend who is struggling",
+   "scenario": "A classmate tells you they have been feeling overwhelmed with study and work and cannot keep up.",
+   "question": "Respond to them now.",
+   "keyPoints": [
+    "Listens and lets them talk; reflects feelings",
+    "Non-judgemental and warm",
+    "Asks open questions about what is going on",
+    "Practical next steps: talk to a tutor, counsellor or GP; break tasks down",
+    "Offers ongoing support without taking over",
+    "Knows the limits of a friend's role"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-life-gap",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "Closing the Gap",
+   "scenario": "In 2020–22, life expectancy for Aboriginal and Torres Strait Islander people was about 8 to 9 years lower than for non-Indigenous Australians. The national Closing the Gap target is to close it by 2031.",
+   "question": "What factors contribute to this gap?",
+   "keyPoints": [
+    "Colonisation, dispossession from Country, past government policies and intergenerational trauma",
+    "Social determinants: income, housing, education, employment, remoteness",
+    "Racism in health care and wider society",
+    "Access barriers and culturally unsafe services",
+    "Strengths: culture, community control, Aboriginal Community Controlled Health Organisations",
+    "Avoids blaming individuals"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-rhd",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "A preventable disease",
+   "scenario": "Rates of rheumatic heart disease among Aboriginal and Torres Strait Islander people in the Northern Territory are among the highest in the world, though the disease is rare elsewhere in Australia.",
+   "question": "Why might this be, and how could it be prevented?",
+   "keyPoints": [
+    "Basic understanding: follows untreated strep infections of the throat or skin; damages heart valves",
+    "Structural causes: crowded housing, poverty, access to primary care in remote areas",
+    "Colonisation and racism as underlying determinants",
+    "Prevention: healthy homes, skin and throat infection care, screening, regular penicillin for those affected",
+    "Community-led programs and Aboriginal health workers",
+    "Avoids blaming families"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-acchos",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Community control",
+   "scenario": "Aboriginal Community Controlled Health Organisations (ACCHOs) are primary health services run by local Aboriginal communities.",
+   "question": "How might community control improve health outcomes?",
+   "keyPoints": [
+    "Self-determination and trust",
+    "Holistic, culturally safe care including social and emotional wellbeing",
+    "Local knowledge and Aboriginal staff",
+    "Wraparound services beyond the clinic",
+    "Challenges: funding, workforce, mainstream services also need to change",
+    "Reflects on own position"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-indigenous-doctors",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Who is doing the caring?",
+   "scenario": "Aboriginal and Torres Strait Islander people are under-represented among doctors in Australia.",
+   "question": "Why does this matter, and what could help change it?",
+   "keyPoints": [
+    "Effects on trust, cultural safety and outcomes",
+    "Barriers: schooling, cost, distance, racism, lack of role models",
+    "Solutions: entry pathways, mentoring, scholarships, Indigenous student support units, AIDA-style networks",
+    "Benefits for the whole health system",
+    "Recognises the burden placed on Indigenous staff",
+    "Reflects on own role as a future colleague"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-racism-health",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "Racism in health care",
+   "scenario": "In a national survey of doctors in training, Aboriginal and Torres Strait Islander trainees reported experiencing or witnessing racism at more than double the rate of other trainees.",
+   "question": "How might racism affect patients and staff, and what can individual health professionals do?",
+   "keyPoints": [
+    "Effects: avoiding care, delayed treatment, stress, staff leaving",
+    "Personal, institutional and structural racism",
+    "Individual actions: reflect on bias, listen, speak up, report",
+    "System actions: training, Aboriginal leadership, accountability",
+    "Commitment to ongoing learning",
+    "Honest, respectful discussion"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-remote-care",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "flex"
+   ],
+   "title": "Far from a hospital",
+   "scenario": "Many Aboriginal and Torres Strait Islander people live in remote communities, where life expectancy is lower than in cities and specialist care can be hundreds of kilometres away.",
+   "question": "How could access to care be improved?",
+   "keyPoints": [
+    "Barriers: distance, cost, workforce turnover, leaving Country and family for treatment",
+    "Ideas: outreach specialists, telehealth, local Aboriginal health workers and practitioners, dialysis on Country",
+    "Partnership with communities and ACCHOs",
+    "Supporting family to travel with patients",
+    "Remote workforce retention",
+    "Practical, creative answer"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-holistic-health",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "critical"
+   ],
+   "title": "Health beyond the body",
+   "scenario": "Aboriginal and Torres Strait Islander concepts of health often include social, emotional, cultural and spiritual wellbeing, and connection to Country, family and community.",
+   "question": "How should this shape the way health services provide care?",
+   "keyPoints": [
+    "Understands social and emotional wellbeing as holistic",
+    "Connection to Country, culture and kin as protective factors",
+    "Practical changes: involving family, longer appointments, Aboriginal liaison officers, flexible services",
+    "Avoids treating culture as a barrier",
+    "Equity and self-determination",
+    "Thoughtful reasoning"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-cultural-safety",
+   "style": "core",
+   "domain": "Aboriginal and Torres Strait Islander health",
+   "attributes": [
+    "cultural",
+    "equity",
+    "comm"
+   ],
+   "title": "Cultural safety in practice",
+   "scenario": "Health practitioners in Australia are expected to provide culturally safe care to Aboriginal and Torres Strait Islander people.",
+   "question": "What does cultural safety mean to you, and how would you practise it?",
+   "keyPoints": [
+    "Cultural safety is judged by the patient, not the practitioner",
+    "Reflecting on own culture, power and bias",
+    "Practical examples: asking, listening, involving family, Aboriginal liaison officers",
+    "Addressing racism and inequity",
+    "Ongoing learning",
+    "Genuine, clear communication"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-waiting-room",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "ethics",
+    "comm",
+    "flex"
+   ],
+   "title": "The waiting room",
+   "scenario": "You volunteer on reception at a busy GP clinic. An older man has waited ninety minutes. He is upset and says he is leaving. As he stands up, he says his chest has felt tight all morning, \"but it's probably nothing.\"",
+   "question": "Talk us through how you would handle this situation.",
+   "keyPoints": [
+    "Safety first: tell a nurse or doctor immediately; possible emergency",
+    "Acknowledge his frustration",
+    "Encourage him to stay; respect autonomy if he insists",
+    "Honest about the delay",
+    "Stay with him until clinical staff take over",
+    "Know the limits of a volunteer role"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-group-project",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "team",
+    "ethics",
+    "comm"
+   ],
+   "title": "The silent group member",
+   "scenario": "You are in a four-person group assignment at university. One member, Josh, has not contributed and is not answering messages. The deadline is in three days. The others want to submit without his name.",
+   "question": "What would you do, and why?",
+   "keyPoints": [
+    "Avoid assumptions",
+    "Contact Josh privately and supportively",
+    "Redistribute work to meet the deadline",
+    "Honesty about contributions; involve the tutor if needed",
+    "Do not act behind his back",
+    "Set roles and check-ins earlier next time"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-pharmacy-gossip",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "ethics",
+    "equity",
+    "comm"
+   ],
+   "title": "Overheard at a party",
+   "scenario": "A friend who works part-time at a pharmacy tells a group at a party that a well-known teacher from your old school collects a medication used to treat HIV.",
+   "question": "How would you respond in the moment and afterwards? What are the issues?",
+   "keyPoints": [
+    "Serious breach of confidentiality and privacy law",
+    "Harm: stigma, discrimination, loss of trust",
+    "Discourage further sharing in the moment",
+    "Talk to the friend privately afterwards",
+    "Friend may need to tell their manager",
+    "Confidentiality underpins trust in health care"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-first-fail",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "resilience",
+    "cultural",
+    "flex"
+   ],
+   "title": "The first fail",
+   "scenario": "You studied hard for your first chemistry exam at university and scored 38 percent. Most of your friends passed, and you are starting to doubt whether you belong.",
+   "question": "How would you respond? Tell us about a real setback you have faced.",
+   "keyPoints": [
+    "Acknowledge feelings without catastrophising",
+    "Analyse the cause",
+    "Seek help early",
+    "Look after wellbeing; keep perspective",
+    "Real example of a setback",
+    "Growth and what they do differently"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-dialysis-child",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "comm",
+    "cultural",
+    "flex"
+   ],
+   "title": "Explaining dialysis",
+   "scenario": "A family friend's 10-year-old daughter, Mia, is worried because her grandmother is starting dialysis next week. Mia asks you what kidneys do and why her nan needs a machine.",
+   "question": "Speak to Mia as if she is in front of you now.",
+   "keyPoints": [
+    "Warm, simple language",
+    "Filter analogy",
+    "Honest without frightening",
+    "Checks feelings and invites questions",
+    "Practical reassurance",
+    "Suggests asking nan's nurse or doctor"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-vaccine-parent",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "comm",
+    "ethics",
+    "cultural"
+   ],
+   "title": "The worried parent",
+   "scenario": "A parent at your sports club says she will not vaccinate her new baby because of a video she watched online. She knows you want to study medicine and asks what you think.",
+   "question": "How would you respond?",
+   "keyPoints": [
+    "Listen first; ask what worries her",
+    "Respect; no lecturing or ridicule",
+    "Balanced information within a student's limits",
+    "Suggest her GP or maternal and child health nurse; trustworthy sources",
+    "Respect her right to decide while being clear about evidence",
+    "Keep the relationship open"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-team-captain",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "team",
+    "equity",
+    "cultural"
+   ],
+   "title": "The captain's call",
+   "scenario": "You captain your school basketball team. Two senior players keep making jokes about a younger player's accent. He recently moved to Australia, the coach has not noticed, and he has gone quiet at training.",
+   "question": "What would you do as captain?",
+   "keyPoints": [
+    "Act promptly; this is racist bullying",
+    "Check in privately with the younger player",
+    "Speak privately and clearly to the two players",
+    "Involve the coach or school staff",
+    "Build an inclusive team culture",
+    "Reflect on leadership responsibility"
+   ],
+   "status": "staging"
+  },
+  {
+   "id": "au-lab-data",
+   "style": "situational",
+   "domain": "Situational",
+   "attributes": [
+    "ethics",
+    "team",
+    "critical"
+   ],
+   "title": "The neat graph",
+   "scenario": "Your lab partner changes one data point in your shared report so the graph looks cleaner. They say everyone does it and it will not change the conclusion.",
+   "question": "What would you do?",
+   "keyPoints": [
+    "Recognise fabrication as misconduct",
+    "Talk calmly; understand their pressure",
+    "Correct the data or report honestly",
+    "Escalate if they refuse; shared responsibility",
+    "Link to research integrity and patient safety",
+    "Offer support rather than judgement"
+   ],
+   "status": "staging"
+  }
+ ]
+}

@@ -21,6 +21,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <Link href="/app" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Dashboard</Link>
             <Link href="/app/practice" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Practice</Link>
             <Link href="/app/training/speed-reading" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Training</Link>
+            <Link href="/app/interview" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Interview</Link>
             <Link href="/app/account" className="text-[14.5px] font-medium text-ink-soft hover:text-navy">Account</Link>
           </div>
           <div className="flex gap-3 items-center">
