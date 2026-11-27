@@ -132,11 +132,7 @@ export default function ResultsView({ attemptId, edition, kind, expected, starte
             </div>
 
             {it.mediaUrl ? (
-              it.mediaKind === 'video' ? (
-                <video src={it.mediaUrl} controls playsInline preload="metadata" className="w-full max-w-[560px] rounded-md bg-black mb-4" />
-              ) : (
-                <audio src={it.mediaUrl} controls preload="metadata" className="w-full max-w-[560px] mb-4" />
-              )
+              <Recording src={it.mediaUrl} kind={it.mediaKind === 'audio' ? 'audio' : 'video'} />
             ) : (
               <p className="text-[14px] text-ink-muted mb-4">{it.mediaKind ? 'This recording has been deleted (recordings are kept for 30 days).' : 'No recording for this station.'}</p>
             )}
@@ -187,6 +183,33 @@ export default function ResultsView({ attemptId, edition, kind, expected, starte
         ))}
       </div>
     </div>
+  );
+}
+
+/**
+ * Browser-recorded WebM files have no duration in their header, so Chrome
+ * shows an endless timeline and the seek bar doesn't work. Jumping to the end
+ * once makes the browser work out the real length, then we rewind.
+ */
+function Recording({ src, kind }: { src: string; kind: 'video' | 'audio' }) {
+  const ref = useRef<HTMLVideoElement & HTMLAudioElement>(null);
+  const fixDuration = () => {
+    const m = ref.current;
+    if (!m || Number.isFinite(m.duration)) return;
+    const done = () => {
+      if (!Number.isFinite(m.duration)) return;
+      m.removeEventListener('durationchange', done);
+      m.removeEventListener('timeupdate', done);
+      m.currentTime = 0;
+    };
+    m.addEventListener('durationchange', done);
+    m.addEventListener('timeupdate', done);
+    m.currentTime = 1e101;
+  };
+  return kind === 'video' ? (
+    <video ref={ref} src={src} controls playsInline preload="metadata" onLoadedMetadata={fixDuration} className="w-full max-w-[560px] rounded-md bg-black mb-4" />
+  ) : (
+    <audio ref={ref} src={src} controls preload="metadata" onLoadedMetadata={fixDuration} className="w-full max-w-[560px] mb-4" />
   );
 }
 
